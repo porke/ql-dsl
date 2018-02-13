@@ -1,6 +1,6 @@
 ﻿namespace QL.Core
 {
-    public class Class1
+    public partial class SpeakLexer
     {
     }
 }
