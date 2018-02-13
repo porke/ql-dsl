@@ -6,7 +6,12 @@
         xmlns:resx="clr-namespace:QL.Presentation.Properties"
         mc:Ignorable="d"
         Title="{Binding AppTitle}" Height="400" Width="800">
-    <StackPanel Orientation="Horizontal">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="9*"/>
@@ -18,8 +23,8 @@
             <Button Command="{Binding RebuildQuestionnaireCommand}" Grid.Row="1" Content="{x:Static resx:Resources.ShowQuestionnaire}"/>
             <TextBox Grid.Row="2" Text="{Binding QuestionnaireValidation}"/>
         </Grid>
-        <StackPanel Orientation="Vertical">
-            <TextBlock Text="{Binding QuestionnaireOutput}"/>
-        </StackPanel>
-    </StackPanel>
+        <Border Grid.Column="0" BorderBrush="Black" BorderThickness="1"/>
+        <Border Grid.Column="1" BorderBrush="Black" BorderThickness="1"/>
+        <StackPanel Grid.Column="1" Name="QuestionnaireHost"/>
+    </Grid>
 </Window>

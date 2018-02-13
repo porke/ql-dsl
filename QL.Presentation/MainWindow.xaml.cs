@@ -10,7 +10,7 @@ namespace QL.Presentation
         {
             InitializeComponent();
 
-            var viewModel = new MainViewModel();
+            var viewModel = new MainViewModel(this.QuestionnaireHost);
             DataContext = viewModel;
             _controller = new MainController(viewModel);
         }

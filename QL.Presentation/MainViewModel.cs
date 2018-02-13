@@ -1,17 +1,23 @@
 ﻿using QL.Presentation.Properties;
 using ReactiveUI;
+using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace QL.Presentation
 {
     internal class MainViewModel : ReactiveObject
     {
-        private string _questionnaireContent;
-        private string _questionnaireOutput;
+        private string _questionnaireContent;        
         private string _questionnaireInput;
         private string _questionnaireValidation;
+        private StackPanel _questionnaireHost;
 
         public string AppTitle => Resources.MainTitle;
+
+        internal MainViewModel(StackPanel questionnaireHost)
+        {
+            _questionnaireHost = questionnaireHost;
+        }
 
         public string QuestionnaireContent
         {
@@ -19,10 +25,9 @@ namespace QL.Presentation
             set { this.RaiseAndSetIfChanged(ref _questionnaireContent, value); }
         }
 
-        public string QuestionnaireOutput
+        public StackPanel QuestionnaireHost
         {
-            get { return _questionnaireOutput; }
-            set { this.RaiseAndSetIfChanged(ref _questionnaireOutput, value); }
+            get { return _questionnaireHost; }            
         }
 
         public string QuestionnaireInput

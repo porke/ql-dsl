@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Windows.Controls;
 
 namespace QL.Presentation
 {
@@ -15,7 +16,7 @@ namespace QL.Presentation
 
         private void RebuildQuestionnaireCommand_Execute(object target)
         {
-            throw new NotImplementedException();
+            _mainViewModel.QuestionnaireHost.Children.Add(new Label { Content = "So, yeah, this is our questionnaire..."});
         }
     }
 }
