@@ -1,6 +1,6 @@
 ﻿namespace QL.Core
 {
-    public partial class SpeakLexer
+    partial class QLParser
     {
     }
 }

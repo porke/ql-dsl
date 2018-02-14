@@ -48,29 +48,22 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Speak.g4.lexer.cs">
-      <DependentUpon>Speak.g4</DependentUpon>
+    <Compile Include="QL.g4.lexer.cs">
+      <DependentUpon>QL.g4</DependentUpon>
     </Compile>
-    <Compile Include="Speak.g4.parser.cs">
-      <DependentUpon>Speak.g4</DependentUpon>
+    <Compile Include="QL.g4.parser.cs">
+      <DependentUpon>QL.g4</DependentUpon>
     </Compile>
-    <Compile Include="SpeakLine.cs" />
-    <Compile Include="SpeakVisitor.cs" />
+    <Compile Include="QLForm.cs" />
+    <Compile Include="QLVisitor.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Antlr4 Include="Speak.g4">
-      <Generator>MSBuild:Compile</Generator>
-      <CustomToolNamespace>QL.Core</CustomToolNamespace>
-      <Listener>True</Listener>
-      <Visitor>True</Visitor>
-      <TargetLanguage>CSharp</TargetLanguage>
-    </Antlr4>
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Resources\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="packages.config" />
+    <Antlr4 Include="QL.g4">
+      <Generator>MSBuild:Compile</Generator>
+      <CustomToolNamespace>QL.Core</CustomToolNamespace>
+    </Antlr4>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

@@ -6,25 +6,33 @@ namespace QL.Core.Test
     [TestClass]
     public class BasicQlTests
     {
-        private SpeakParser Setup(string text)
+        private QLParser Setup(string text)
         {
             var inputStream = new AntlrInputStream(text);
-            var speakLexer = new SpeakLexer(inputStream);
+            var speakLexer = new QLLexer(inputStream);
             var commonTokenStream = new CommonTokenStream(speakLexer);
 
-            return new SpeakParser(commonTokenStream);
+            return new QLParser(commonTokenStream);
         }
 
         [TestMethod]
-        public void WillSucceed()
+        public void EmptyFormWithConstantLabelParsesSuccessfully()
         {
-            SpeakParser parser = Setup("john says hello \n michael says world \n");
+            QLParser parser = Setup("form test {}");
+            QLParser.FormContext context = parser.form();
+            var visitor = new QLVisitor();
 
-            SpeakParser.ChatContext context = parser.chat();
-            SpeakVisitor visitor = new SpeakVisitor();
-            visitor.Visit(context);
+            Assert.IsTrue((bool)visitor.Visit(context));
+        }
 
-            Assert.AreEqual(2, visitor.Lines.Count);
+        [TestMethod]
+        public void EmptyFormWithConstantLabelFailedParsing()
+        {
+            QLParser parser = Setup("form tets {}");
+            QLParser.FormContext context = parser.form();
+            var visitor = new QLVisitor();
+
+            Assert.IsFalse((bool)visitor.Visit(context));
         }
     }
 }
