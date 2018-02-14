@@ -6,8 +6,8 @@ grammar QL;
 
 form: FORM LABEL BEGIN (statements)? END;
 
-statements: question statements
-		  | IF expresion BEGIN statements END (ELSE BEGIN statements END)?;
+statements: question (statements)?
+		  | IF expresion BEGIN (statements)? END (ELSE BEGIN (statements)? END)?;
 
 
 question: description name type (ASSIGNMENT expresion)?;

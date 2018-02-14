@@ -1,11 +1,12 @@
 ﻿using System.Linq;
 using Antlr4.Runtime;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using QL.Core.Parsing;
 
 namespace QL.Core.Test
 {
     [TestClass]
-    public class BasicQlTests
+    public class QLFormParseTests
     {
         private QLParser Setup(string text)
         {
@@ -22,7 +23,7 @@ namespace QL.Core.Test
             QLParser parser = Setup("form test {}");
             QLParser.FormContext context = parser.form();
 
-            var visitor = new QLVisitor();
+            var visitor = new QLFormVisitor();
             visitor.Visit(context);
 
             Assert.AreEqual(1, visitor.Forms.Count);
