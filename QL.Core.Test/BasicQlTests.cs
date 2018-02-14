@@ -1,4 +1,5 @@
-﻿using Antlr4.Runtime;
+﻿using System.Linq;
+using Antlr4.Runtime;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace QL.Core.Test
@@ -16,23 +17,17 @@ namespace QL.Core.Test
         }
 
         [TestMethod]
-        public void EmptyFormWithConstantLabelParsesSuccessfully()
+        public void ParseEmptyFormWithNoStatements_WillSucceed()
         {
             QLParser parser = Setup("form test {}");
             QLParser.FormContext context = parser.form();
+
             var visitor = new QLVisitor();
+            visitor.Visit(context);
 
-            Assert.IsTrue((bool)visitor.Visit(context));
-        }
-
-        [TestMethod]
-        public void EmptyFormWithConstantLabelFailedParsing()
-        {
-            QLParser parser = Setup("form tets {}");
-            QLParser.FormContext context = parser.form();
-            var visitor = new QLVisitor();
-
-            Assert.IsFalse((bool)visitor.Visit(context));
+            Assert.AreEqual(1, visitor.Forms.Count);
+            Assert.AreEqual("test", visitor.Forms[0].Label);
+            Assert.IsFalse(visitor.Forms[0].Statements.Any());
         }
     }
 }
