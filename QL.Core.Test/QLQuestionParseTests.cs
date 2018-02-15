@@ -41,7 +41,7 @@ namespace QL.Core.Test
         [TestMethod]
         public void Test()
         {
-            var parser = Setup(LoadTestFile("BasicQuestion.ql"));
+            var parser = Setup(LoadTestFile("singleQuestion.ql"));
             QuestionContext context = parser.question();
             var visitor = new QLQuestionVisitor();
 
