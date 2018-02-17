@@ -1,7 +1,4 @@
-﻿using System;
-using System.Windows.Controls;
-
-namespace QL.Presentation
+﻿namespace QL.Presentation
 {
     internal class MainController
     {

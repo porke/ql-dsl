@@ -9,8 +9,7 @@ form: FORM LABEL LCB (statements)? RCB;
 statements: question (statements)?
 		  | IF expresion LCB (statements)? RCB (ELSE LCB (statements)? RCB)?;
 
-question: description name type;
-//question: description name type (ASSIGNMENT expresion)?;
+question: description name type (ASSIGNMENT expresion)?;
 
 expresion: LB expresion RB
          | LABEL
@@ -79,7 +78,7 @@ fragment NUMBER:	('0'..'9');
 BOOL: ('true'|'false'); 
 INT:  NUMBER+;
 DEC:  INT '.' (NUMBER (NUMBER)?)?;
-STR:  '#' .*? '#';
+STR:  '"' .*? '"';
 DATE: INT '-' INT '-' INT;
 MONEY: INT '.' NUMBER NUMBER;
 
