@@ -19,7 +19,7 @@
                 <RowDefinition Height="3*"/>
             </Grid.RowDefinitions>
 
-            <TextBox Text="{Binding QuestionnaireInput}"/>
+            <TextBox AcceptsReturn="True" TextWrapping="NoWrap" AcceptsTab="True" Text="{Binding QuestionnaireInput}"/>
             <Button Command="{Binding RebuildQuestionnaireCommand}" Grid.Row="1" Content="{x:Static resx:Resources.ShowQuestionnaire}"/>
             <TextBox Grid.Row="2" Text="{Binding QuestionnaireValidation}"/>
         </Grid>

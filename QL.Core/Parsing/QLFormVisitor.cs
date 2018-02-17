@@ -10,7 +10,7 @@ namespace QL.Core.Parsing
 
         public override string VisitForm(FormContext form)
         {
-            Forms.Add(new QLForm { Label = form.GetChild(1).ToString() });
+            Forms.Add(new QLForm { Label = form.LABEL().GetText() });
 
             return string.Empty;
         }

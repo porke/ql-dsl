@@ -39,13 +39,18 @@ namespace QL.Core.Test
         }
 
         [TestMethod]
-        public void Test()
+        public void ParseOneQuestionWithALabelNoStatements_WillSucceed()
         {
             var parser = Setup(LoadTestFile("BasicQuestion.ql"));
             QuestionContext context = parser.question();
             var visitor = new QLQuestionVisitor();
 
             visitor.Visit(context);
+            
+            Assert.AreEqual(1, visitor.Questions.Count);
+            Assert.AreEqual("whatIsMeaning", visitor.Questions[0].Label);
+            Assert.AreEqual("What is the meaning of life?", visitor.Questions[0].Description);
+            //Assert.AreEqual("money", visitor.Questions[0].Type);
         }
     }
 }

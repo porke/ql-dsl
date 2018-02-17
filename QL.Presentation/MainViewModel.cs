@@ -7,7 +7,6 @@ namespace QL.Presentation
 {
     internal class MainViewModel : ReactiveObject
     {
-        private string _questionnaireContent;        
         private string _questionnaireInput;
         private string _questionnaireValidation;
         private StackPanel _questionnaireHost;
@@ -17,12 +16,6 @@ namespace QL.Presentation
         internal MainViewModel(StackPanel questionnaireHost)
         {
             _questionnaireHost = questionnaireHost;
-        }
-
-        public string QuestionnaireContent
-        {
-            get { return _questionnaireContent; }
-            set { this.RaiseAndSetIfChanged(ref _questionnaireContent, value); }
         }
 
         public StackPanel QuestionnaireHost

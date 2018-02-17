@@ -1,4 +1,2 @@
-﻿form basicQuestion {
-	"What is meaning?"
-	whatIsMeaning: money
-}
+﻿"What is the meaning of life?"
+whatIsMeaning: money

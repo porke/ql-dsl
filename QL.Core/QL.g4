@@ -4,13 +4,13 @@ grammar QL;
 *  Parser Rules
 */
 
-form: FORM LABEL BEGIN (statements)? END;
+form: FORM LABEL BEGIN (question)? END;
 
 statements: question (statements)?
 		  | IF expresion BEGIN (statements)? END (ELSE BEGIN (statements)? END)?;
 
-
-question: description name type (ASSIGNMENT expresion)?;
+question: description name type;
+//question: description name type (ASSIGNMENT expresion)?;
 
 expresion: LB expresion RB
          | LABEL
@@ -19,15 +19,10 @@ expresion: LB expresion RB
 		 | expresion binOp expresion;
 
 description: STR;
-
 name: LABEL COLON;
-
 type: TYPEBOOL | TYPEINT | TYPEDEC | TYPESTR | TYPEDATE | TYPEMONEY;
-
 literal: BOOL | INT | DEC | STRING | MONEY; // | DATE
-
 binOp: GT | ST | GE | SE | NE | AND | OR | EQ | PLUS | MINUS | DIVIDE | MULTIPLY;
-
 unOp: MINUS | PLUS | NOT;
 
 /* 
@@ -83,6 +78,6 @@ STR:  '"' .*? '"';
 MONEY: ('0'..'9')+ '.' ('0'..'9') ('0'..'9');
 
 // Hidden
-WHITESPACE:	    (' ' | '\t' | '\n' | '\r') -> skip;
+WHITESPACE:	    (' ' | '\t' | '\n' | '\r' |) -> skip;
 //MULTICOMMENT:   '/*' .* '*/' -> skip;
 SINGLECOMMENT:  '//' ~[\r\n]* -> skip;

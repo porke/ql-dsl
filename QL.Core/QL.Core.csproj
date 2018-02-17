@@ -47,8 +47,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AST\QLLabel.cs" />
+    <Compile Include="Api\IQLParsingService.cs" />
+    <Compile Include="AST\QLOperator.cs" />
     <Compile Include="AST\QLStatement.cs" />
+    <Compile Include="Parsing\QLParsingService.cs" />
     <Compile Include="Parsing\QLQuestionVisitor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="QL.g4.lexer.cs">
