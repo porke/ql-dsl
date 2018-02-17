@@ -13,7 +13,7 @@ namespace QL.Presentation
 
             var viewModel = new MainViewModel(this.QuestionnaireHost);
             DataContext = viewModel;
-            _controller = new MainController(viewModel, new FormConstructor(new QLParsingService()));
+            _controller = new MainController(viewModel, new FormFactory(new QLParsingService()));
         }
     }
 }

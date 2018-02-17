@@ -1,56 +1,47 @@
-﻿using System.Linq;
-using Antlr4.Runtime;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using QL.Core.Parsing;
-using System.IO;
-using System.Reflection;
-using static QL.Core.QLParser;
+using QL.Core.Api;
 
 namespace QL.Core.Test
 {
     [TestClass]
     public class QLQuestionParseTests
     {
-        private QLParser Setup(string text)
+        private readonly IQLParsingService _parsingService;
+
+        public QLQuestionParseTests()
         {
-            var inputStream = new AntlrInputStream(text);
-            var speakLexer = new QLLexer(inputStream);
-            var commonTokenStream = new CommonTokenStream(speakLexer);
-
-            return new QLParser(commonTokenStream);
-        }
-
-        private string LoadTestFile(string resourceName)
-        {
-            var assembly = Assembly.GetExecutingAssembly();
-            string resourceId = assembly.GetManifestResourceNames().FirstOrDefault(x => x.EndsWith(resourceName));
-            if (string.IsNullOrEmpty(resourceId))
-            {
-                return string.Empty;
-            }
-
-            using (Stream stream = assembly.GetManifestResourceStream(resourceId))
-            {
-                using (StreamReader reader = new StreamReader(stream))
-                {
-                    return reader.ReadToEnd();
-                }
-            }            
+            _parsingService = new QLParsingService();
         }
 
         [TestMethod]
         public void ParseOneQuestionWithALabelNoStatements_WillSucceed()
         {
-            var parser = Setup(LoadTestFile("singleQuestion.ql"));
-            QuestionContext context = parser.question();
-            var visitor = new QLQuestionVisitor();
+            var parsedSymbols = _parsingService.ParseQLInput(TestDataResolver.LoadTestFile("singleQuestion.ql"));
 
-            visitor.Visit(context);
+            Assert.AreEqual(1, parsedSymbols.Questions.Count);
+            Assert.AreEqual("whatIsMeaning", parsedSymbols.Questions[0].Label);
+            Assert.AreEqual("What is the meaning of life?", parsedSymbols.Questions[0].Description);
+            Assert.AreEqual("money", parsedSymbols.Questions[0].Type);
+        }
+
+        [TestMethod]
+        public void ParseMultipleQuestionsWithALabelNoStatements_WillSucceed()
+        {
+            var parsedSymbols = _parsingService.ParseQLInput(TestDataResolver.LoadTestFile("multipleQuestions.ql"));
             
-            Assert.AreEqual(1, visitor.Questions.Count);
-            Assert.AreEqual("whatIsMeaning", visitor.Questions[0].Label);
-            Assert.AreEqual("What is the meaning of life?", visitor.Questions[0].Description);
-            //Assert.AreEqual("money", visitor.Questions[0].Type);
+            Assert.AreEqual(6, parsedSymbols.Questions.Count);
+            Assert.AreEqual("whatIsMeaning", parsedSymbols.Questions[0].Label);
+            Assert.AreEqual("What is the meaning of life?", parsedSymbols.Questions[0].Description);
+            Assert.AreEqual("money", parsedSymbols.Questions[0].Type);
+        }
+
+        [TestMethod]
+        public void ParseMultipleQuestionsWithASimpleAssignment_WillSucceed()
+        {
+            var parsedSymbols = _parsingService.ParseQLInput(TestDataResolver.LoadTestFile("questionWithSimpleAssignment.ql"));
+
+            Assert.AreEqual(3, parsedSymbols.Questions.Count);
         }
     }
 }

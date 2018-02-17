@@ -5,6 +5,5 @@
       marketRate: int
 
     "Value house:"
-      valueResidue: money = 
-        (money * int)
+      valueResidue: money = sellingPrice
 }

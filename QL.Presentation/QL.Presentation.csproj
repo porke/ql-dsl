@@ -75,8 +75,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="FormConstructor.cs" />
-    <Compile Include="IFormConstructor.cs" />
+    <Compile Include="FormFactory.cs" />
+    <Compile Include="IFormFactory.cs" />
     <Compile Include="MainController.cs" />
     <Compile Include="RelayCommand.cs" />
     <Page Include="MainWindow.xaml">

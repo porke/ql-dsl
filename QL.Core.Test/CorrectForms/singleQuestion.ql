@@ -1,2 +1,4 @@
-﻿"What is the meaning of life?"
-whatIsMeaning: money
+﻿form test {
+"What is the meaning of life?"
+	whatIsMeaning: money
+}

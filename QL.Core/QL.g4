@@ -7,15 +7,15 @@ grammar QL;
 form: FORM LABEL LCB (statements)? RCB;
 
 statements: question (statements)?
-		  | IF expresion LCB (statements)? RCB (ELSE LCB (statements)? RCB)?;
+		  | IF expression LCB (statements)? RCB (ELSE LCB (statements)? RCB)?;
 
-question: description name type (ASSIGNMENT expresion)?;
+question: description name type (ASSIGNMENT expression)?;
 
-expresion: LB expresion RB
+expression: LB expression RB
          | LABEL
 		 | literal
-		 | unOp expresion
-		 | expresion binOp expresion;
+		 | unOp expression
+		 | expression binOp expression;
 
 description: STR;
 name: LABEL COLON;

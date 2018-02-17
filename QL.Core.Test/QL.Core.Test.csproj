@@ -56,14 +56,15 @@
     <Compile Include="QLFormParseTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="QLQuestionParseTests.cs" />
+    <Compile Include="TestDataResolver.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="CorrectForms\EmptyForm.ql" />
+    <EmbeddedResource Include="CorrectForms\emptyForm.ql" />
     <EmbeddedResource Include="CorrectForms\expresions.ql" />
     <EmbeddedResource Include="CorrectForms\ifElseStatement.ql" />
     <EmbeddedResource Include="CorrectForms\ifStatement.ql" />
     <EmbeddedResource Include="CorrectForms\multipleQuestions.ql" />
-    <EmbeddedResource Include="CorrectForms\questionWithExpresion.ql" />
+    <EmbeddedResource Include="CorrectForms\questionWithSimpleAssignment.ql" />
     <EmbeddedResource Include="CorrectForms\singleQuestion.ql" />
     <None Include="packages.config" />
   </ItemGroup>
