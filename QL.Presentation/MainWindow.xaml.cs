@@ -1,4 +1,4 @@
-﻿using QL.Core.Parsing;
+﻿using QL.Core.Api;
 using System.Windows;
 
 namespace QL.Presentation
@@ -13,7 +13,7 @@ namespace QL.Presentation
 
             var viewModel = new MainViewModel(this.QuestionnaireHost);
             DataContext = viewModel;
-            _controller = new MainController(viewModel, new FormFactory(new QLParsingService()));
+            _controller = new MainController(viewModel, new FormFactory(ServiceRegistry.ParsingService));
         }
     }
 }

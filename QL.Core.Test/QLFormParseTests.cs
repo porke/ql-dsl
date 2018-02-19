@@ -1,7 +1,5 @@
 ﻿using System.Linq;
-using Antlr4.Runtime;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using QL.Core.Parsing;
 using QL.Core.Api;
 
 namespace QL.Core.Test
@@ -13,7 +11,7 @@ namespace QL.Core.Test
 
         public QLFormParseTests()
         {
-            _parsingService = new QLParsingService();
+            _parsingService = ServiceRegistry.ParsingService;
         }
 
         [TestMethod]

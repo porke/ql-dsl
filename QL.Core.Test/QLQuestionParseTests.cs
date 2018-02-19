@@ -1,5 +1,4 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using QL.Core.Parsing;
 using QL.Core.Api;
 
 namespace QL.Core.Test
@@ -11,7 +10,7 @@ namespace QL.Core.Test
 
         public QLQuestionParseTests()
         {
-            _parsingService = new QLParsingService();
+            _parsingService = ServiceRegistry.ParsingService;
         }
 
         [TestMethod]
