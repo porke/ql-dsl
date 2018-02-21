@@ -1,17 +1,18 @@
-﻿using System;
+﻿using Antlr4.Runtime;
 using QL.Core.Ast.Visitors;
 
 namespace QL.Core.Ast
 {
-    public sealed class NullNode : Node
+    public class EmptyNode : Node
     {
-        public NullNode() : base(null)
+        public EmptyNode(IToken token) : base(token)
         {
+            
         }
 
         protected override void VisitNode(IVisitor visitor)
         {
-            // Visiting a null node yields no result
+            visitor.Visit(this);
         }
     }
 }

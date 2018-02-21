@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using QL.Core.Api;
 
 namespace QL.Core.Test
@@ -17,9 +16,16 @@ namespace QL.Core.Test
         [TestMethod]
         public void ParseEmptyFormWithNoStatements_WillSucceed()
         {
+            // Arrange & Act
             var parsedSymbols = _parsingService.ParseQLInput(TestDataResolver.LoadTestFile("emptyForm.ql"));
 
-            Assert.AreEqual("test", parsedSymbols.Form.Label);            
+            // Assert
+            var formVisitor = new AssertVisitor();
+            formVisitor.EnqueueFormAssert(formNode =>
+            {
+                Assert.AreEqual("empty", formNode.Label);
+            });
+            parsedSymbols.Form.Accept(formVisitor);            
         }
     }
 }

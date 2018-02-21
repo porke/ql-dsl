@@ -1,6 +1,8 @@
-﻿using Antlr4.Runtime;
+﻿using System;
+using Antlr4.Runtime;
+using QL.Core.Ast.Visitors;
 
-namespace QL.Core.AST
+namespace QL.Core.Ast
 {
     public class LiteralNode : Node
     {
@@ -10,5 +12,10 @@ namespace QL.Core.AST
         }
 
         public string Value { get; }
+
+        protected override void VisitNode(IVisitor visitor)
+        {
+            // TODO: implement soon
+        }
     }
 }

@@ -53,6 +53,7 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AssertVisitor.cs" />
     <Compile Include="ConditionalParseTests.cs" />
     <Compile Include="FormParseTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

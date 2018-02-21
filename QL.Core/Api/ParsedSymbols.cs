@@ -1,4 +1,4 @@
-﻿using QL.Core.AST;
+﻿using QL.Core.Ast;
 
 namespace QL.Core.Api
 {

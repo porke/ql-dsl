@@ -1,6 +1,6 @@
 ﻿using QL.Core.Api;
 using Antlr4.Runtime;
-using QL.Core.AST;
+using QL.Core.Ast;
 
 namespace QL.Core.Parsing
 {

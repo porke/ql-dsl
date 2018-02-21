@@ -1,4 +1,4 @@
-﻿using QL.Core.AST;
+﻿using QL.Core.Ast;
 using static QL.Core.QLParser;
 using Antlr4.Runtime.Tree;
 
@@ -26,7 +26,7 @@ namespace QL.Core.Parsing
 
         public override Node VisitBlock(BlockContext context)
         {            
-            var blockNode = new Node(context.Start);
+            var blockNode = new EmptyNode(context.Start);
             foreach (StatementContext x in context.statement())
             {
                 blockNode.AddChild(Visit(x));

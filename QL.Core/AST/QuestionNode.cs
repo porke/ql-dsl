@@ -1,6 +1,7 @@
 ﻿using Antlr4.Runtime;
+using QL.Core.Ast.Visitors;
 
-namespace QL.Core.AST
+namespace QL.Core.Ast
 {
     public class QuestionNode : Node
     {
@@ -14,5 +15,10 @@ namespace QL.Core.AST
         public string Description { get; }        
         public string Type { get; }
         public string Label { get; }
+
+        protected override void VisitNode(IVisitor visitor)
+        {
+            visitor.Visit(this);
+        }
     }
 }

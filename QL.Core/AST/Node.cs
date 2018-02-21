@@ -1,41 +1,38 @@
 ﻿using Antlr4.Runtime;
+using QL.Core.Ast.Visitors;
 using System.Collections.Generic;
 
-namespace QL.Core.AST
-{
-    public class Node
+namespace QL.Core.Ast
+{ 
+    public abstract class Node
     {
-        private readonly IToken _token;
-        private readonly IList<Node> _childNodes = new List<Node>();
-
-        public Node(IToken token)
-        {
-            _token = token;
-        }
+        protected readonly IToken _token;
+        protected readonly IList<Node> _childNodes = new List<Node>();        
 
         public void AddChild(Node node)
         {
             _childNodes.Add(node);
         }
 
-        //public string ToStringTree()
-        //{
-        //    if (children == null || children.size() == 0) return this.toString();
-        //    var buf = new StringBuilder();
-        //    if (!isNil())
-        //    {
-        //        buf.append("(");
-        //        buf.append(this.toString());
-        //        buf.append(' ');
-        //    }
-        //    for (int i = 0; i < children.size(); i++)
-        //    {
-        //        AST t = (AST)children.get(i); // normalized (unnamed) children
-        //        if (i > 0) buf.append(' ');
-        //        buf.append(t.toStringTree());
-        //    }
-        //    if (!isNil()) buf.append(")");
-        //    return buf.toString();
-        //}
+        public void Accept(IVisitor visitor)
+        {
+            VisitNode(visitor);
+            VisitChildren(visitor);
+        }
+
+        protected Node(IToken token)
+        {
+            _token = token;
+        }
+
+        protected abstract void VisitNode(IVisitor visitor);
+
+        private void VisitChildren(IVisitor visitor)
+        {
+            foreach (Node child in _childNodes)
+            {
+                child.Accept(visitor);
+            }
+        }
     }
 }

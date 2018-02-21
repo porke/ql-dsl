@@ -50,11 +50,13 @@
     <Compile Include="Api\ParsedSymbols.cs" />
     <Compile Include="Api\IParsingService.cs" />
     <Compile Include="Api\ServiceRegistry.cs" />
-    <Compile Include="AST\LiteralNode.cs" />
-    <Compile Include="AST\Node.cs" />
-    <Compile Include="AST\NullNode.cs" />
-    <Compile Include="AST\QuestionNode.cs" />
-    <Compile Include="AST\ConditionalNode.cs" />
+    <Compile Include="Ast\LiteralNode.cs" />
+    <Compile Include="Ast\EmptyNode.cs" />
+    <Compile Include="Ast\Node.cs" />
+    <Compile Include="Ast\NullNode.cs" />
+    <Compile Include="Ast\QuestionNode.cs" />
+    <Compile Include="Ast\ConditionalNode.cs" />
+    <Compile Include="Ast\Visitors\IVisitor.cs" />
     <Compile Include="Parsing\ParsingService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="QL.g4.lexer.cs">
@@ -63,7 +65,7 @@
     <Compile Include="QL.g4.parser.cs">
       <DependentUpon>QL.g4</DependentUpon>
     </Compile>
-    <Compile Include="AST\FormNode.cs" />
+    <Compile Include="Ast\FormNode.cs" />
     <Compile Include="Parsing\ParseTreeVisitor.cs" />
   </ItemGroup>
   <ItemGroup />

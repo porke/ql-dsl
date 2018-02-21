@@ -17,13 +17,14 @@ namespace QL.Core.Test
         public void ParseIfConditionalOnly_WillSucceed()
         {
             var parsedSymbols = _parsingService.ParseQLInput(TestDataResolver.LoadTestFile("ifStatement.ql"));
-            //Assert.IsTrue(parsedSymbols.Form.Block.Statements[0] != null);
+            // TODO: Fix the test
         }
 
         [TestMethod]
         public void ParseIfElseConditional_WillSucceed()
         {
             var parsedSymbols = _parsingService.ParseQLInput(TestDataResolver.LoadTestFile("ifElseStatement.ql"));            
+            // TODO: Fix the test
         }
     }
 }
