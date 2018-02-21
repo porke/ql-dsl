@@ -22,13 +22,14 @@ namespace QL.Core.Test
             var parsedSymbols = _parsingService.ParseQLInput(TestDataResolver.LoadTestFile("singleQuestion.ql"));
 
             // Assert
-            _assertVisitor.EnqueueQuestionAssert(question =>
+            _assertVisitor.EnqueueQuestionNodeCallback(question =>
             {
                 Assert.AreEqual("whatIsMeaning", question.Label);
                 Assert.AreEqual("What is the meaning of life?", question.Description);
                 Assert.AreEqual("money", question.Type);
             });
-            parsedSymbols.Form.Accept(_assertVisitor);
+            parsedSymbols.FormNode.Accept(_assertVisitor);
+            _assertVisitor.VerifyAll();
         }
 
         [TestMethod]
@@ -38,25 +39,26 @@ namespace QL.Core.Test
             var parsedSymbols = _parsingService.ParseQLInput(TestDataResolver.LoadTestFile("multipleQuestions.ql"));
 
             // Assert
-            _assertVisitor.EnqueueQuestionAssert(question =>
+            _assertVisitor.EnqueueQuestionNodeCallback(question =>
             {
                 Assert.AreEqual("whatIsMeaning", question.Label);
                 Assert.AreEqual("What is the meaning of life?", question.Description);
                 Assert.AreEqual("money", question.Type);
             });
-            _assertVisitor.EnqueueQuestionAssert(question =>
+            _assertVisitor.EnqueueQuestionNodeCallback(question =>
             {
                 Assert.AreEqual("hasSoldHouse", question.Label);
                 Assert.AreEqual("Did you sell a house in 2010?", question.Description);
                 Assert.AreEqual("boolean", question.Type);
             });
-            _assertVisitor.EnqueueQuestionAssert(question =>
+            _assertVisitor.EnqueueQuestionNodeCallback(question =>
             {
                 Assert.AreEqual("dayToday", question.Label);
                 Assert.AreEqual("Which day is today?", question.Description);
                 Assert.AreEqual("date", question.Type);
             });
-            parsedSymbols.Form.Accept(_assertVisitor);
+            parsedSymbols.FormNode.Accept(_assertVisitor);
+            _assertVisitor.VerifyAll();
         }
 
         [TestMethod]

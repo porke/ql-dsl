@@ -15,9 +15,14 @@ namespace QL.Presentation
 
         public IList<Control> CreateControls(string question)
         {
-            var parsedSymbols = _parsingService.ParseQLInput(question);
+            var parsedSymbols = _parsingService.ParseQLInput(question);            
+            if (parsedSymbols.Errors.Count > 0)
+            {
+                throw new QuestionnaireParsingException(parsedSymbols.Errors);
+            }
+
             var formBuildingVisitor = new FormBuildingVisitor();
-            parsedSymbols.Form.Accept(formBuildingVisitor);
+            parsedSymbols.FormNode.Accept(formBuildingVisitor);
             return formBuildingVisitor.Controls;
         }
     }

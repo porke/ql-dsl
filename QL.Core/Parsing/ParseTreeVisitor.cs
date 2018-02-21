@@ -14,11 +14,12 @@ namespace QL.Core.Parsing
             }
 
             return base.Visit(tree);
-        }
+       } 
 
         public override Node VisitForm(FormContext context)
         {
-            var form = new FormNode(context.Start, context.LABEL().GetText());
+            ITerminalNode label = context.LABEL();
+            var form = new FormNode(context.Start, label?.GetText());
             form.AddChild(Visit(context.block()));
 
             return form;            

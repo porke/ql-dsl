@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 
 namespace QL.Presentation
 {
@@ -17,14 +18,22 @@ namespace QL.Presentation
 
         private void RebuildQuestionnaireCommand_Execute(object target)
         {
-            _mainViewModel.QuestionnaireHost.Children.Clear();
+            _mainViewModel.QuestionnaireHost.Children.Clear();            
 
-            _formFactory.CreateControls(_mainViewModel.QuestionnaireInput).ToList().ForEach(x =>
+            try
             {
-                _mainViewModel.QuestionnaireHost.Children.Add(x);
-            });
-            
-            _mainViewModel.QuestionnaireValidation = "Validation succeeded! Enjoy your form!";
+                _formFactory.CreateControls(_mainViewModel.QuestionnaireInput).ToList().ForEach(x =>
+                {
+                    _mainViewModel.QuestionnaireHost.Children.Add(x);
+                });
+                _mainViewModel.QuestionnaireValidation = "Validation succeeded! Enjoy your questionnaire";
+            }
+            catch (QuestionnaireParsingException e)
+            {
+                _mainViewModel.QuestionnaireValidation = e.Errors.Aggregate(
+                    $"Validation failed! There are {e.Errors.Count} error(s) in your questionnaire.",
+                    (err, acc) => err + Environment.NewLine + acc);
+            }            
         }
     }
 }
