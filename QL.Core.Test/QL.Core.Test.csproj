@@ -66,6 +66,7 @@
     <EmbeddedResource Include="CorrectForms\multipleQuestions.ql" />
     <EmbeddedResource Include="CorrectForms\questionWithSimpleAssignment.ql" />
     <EmbeddedResource Include="CorrectForms\singleQuestion.ql" />
+    <EmbeddedResource Include="CorrectForms\simpleExpression.ql" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

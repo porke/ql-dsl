@@ -5,7 +5,7 @@ namespace QL.Core.Api
 {
     public class ParsedSymbols
     {
-        public IList<QLForm> Forms { get; set; }
-        public IList<QLQuestion> Questions { get; set; }
+        public IList<Form> Forms { get; set; }
+        public IList<Question> Questions { get; set; }
     }
 }

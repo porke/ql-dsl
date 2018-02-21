@@ -50,8 +50,17 @@
     <Compile Include="Api\ParsedSymbols.cs" />
     <Compile Include="Api\IQLParsingService.cs" />
     <Compile Include="Api\ServiceRegistry.cs" />
-    <Compile Include="AST\QLOperator.cs" />
-    <Compile Include="AST\QLStatement.cs" />
+    <Compile Include="AST\Statements.cs" />
+    <Compile Include="AST\Literal.cs" />
+    <Compile Include="AST\Node.cs" />
+    <Compile Include="AST\TerminalNode.cs" />
+    <Compile Include="AST\VariableExpression.cs" />
+    <Compile Include="AST\Variable.cs" />
+    <Compile Include="AST\UnaryExpression.cs" />
+    <Compile Include="AST\BinaryExpression.cs" />
+    <Compile Include="AST\Question.cs" />
+    <Compile Include="AST\Conditional.cs" />
+    <Compile Include="AST\Statement.cs" />
     <Compile Include="Parsing\QLParsingService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="QL.g4.lexer.cs">
@@ -60,8 +69,8 @@
     <Compile Include="QL.g4.parser.cs">
       <DependentUpon>QL.g4</DependentUpon>
     </Compile>
-    <Compile Include="AST\QLExpression.cs" />
-    <Compile Include="AST\QLForm.cs" />
+    <Compile Include="AST\Expression.cs" />
+    <Compile Include="AST\Form.cs" />
     <Compile Include="Parsing\QLVisitor.cs" />
   </ItemGroup>
   <ItemGroup />

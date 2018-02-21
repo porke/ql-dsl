@@ -11,18 +11,18 @@ block: (statement)*;
 statement: question
 		 | conditional;
 
-question: description name type (ASSIGNMENT expression)?;
+question: description name COLON type (ASSIGNMENT expression)?;
 
 conditional: IF expression LCB block RCB (ELSE LCB block RCB)?;
 
-expression: LB expression RB
-         | LABEL
-		 | literal
-		 | unOp expression
-		 | expression binOp expression;
+expression: LB expression RB			#scopedExpresion
+         | name							#variableExpresion
+		 | literal						#literalExpresion
+		 | unOp expression				#unaryExpresion
+		 | expression binOp expression	#binaryExpresion;
 
 description: STR;
-name: LABEL COLON;
+name: LABEL;
 type: TYPEBOOL | TYPEINT | TYPEDEC | TYPESTR | TYPEDATE | TYPEMONEY;
 
 literal: BOOL | INT | DEC | STR | MONEY | DATE;

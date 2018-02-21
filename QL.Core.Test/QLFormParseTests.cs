@@ -21,7 +21,7 @@ namespace QL.Core.Test
             
             Assert.AreEqual(1, parsedSymbols.Forms.Count);
             Assert.AreEqual("empty", parsedSymbols.Forms[0].Label);
-            Assert.IsFalse(parsedSymbols.Forms[0].Statements.Any());
+            Assert.IsFalse(parsedSymbols.Forms[0].Statements.StatementList.Any());
         }
     }
 }

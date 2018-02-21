@@ -7,20 +7,19 @@ namespace QL.Core.Parsing
 {
     internal class QLVisitor : QLBaseVisitor<string>
     {
-        public IList<QLForm> AST { get; } = new List<QLForm>();
-        public Stack<List<QLStatement>> StatementListStack = new Stack<List<QLStatement>>();
-        public Stack<QLExpression> ExpresionStack = new Stack<QLExpression>();
+        public IList<Form> AST { get; } = new List<Form>();
+        public Stack<Node> ParentStack = new Stack<Node>();
 
         public override string VisitForm(FormContext context)
         {
-            QLForm form = new QLForm { Label = context.LABEL().GetText() };
+            Form form = new Form { Label = context.LABEL().GetText() };
 
             BlockContext block = context.block();
             if (block != null)
             {
-                StatementListStack.Push(form.Statements);
+                ParentStack.Push(form);
                 Visit(block);
-                StatementListStack.Pop();
+                ParentStack.Pop();
             }
 
             AST.Add(form);
@@ -29,13 +28,19 @@ namespace QL.Core.Parsing
 
         public override string VisitBlock(BlockContext context)
         {
-            List<StatementContext> statements = context.statement().ToList();
-            statements.ForEach(x => Visit(x));
+            Statements statements = new Statements();
+            List<StatementContext> statementList = context.statement().ToList();
 
+            foreach (StatementContext x in statementList)
+            {
+                ParentStack.Push(statements);
+                Visit(x);
+                ParentStack.Pop();
+            }
+
+            (ParentStack.Peek() as Form).Statements = statements;
             return string.Empty;
         }
-
-
 
         public override string VisitStatement(StatementContext context)
         {
@@ -52,9 +57,9 @@ namespace QL.Core.Parsing
 
         public override string VisitQuestion(QuestionContext context)
         {
-            var question = new QLQuestion
+            var question = new Question
             {
-                Label = context.name().LABEL().GetText(),
+                Variable = new Variable { Label = context.name().LABEL().GetText() },
                 Description = context.description().STR().GetText().Replace("\"", string.Empty),
                 Type = context.type().GetText()
             };
@@ -62,97 +67,53 @@ namespace QL.Core.Parsing
             ExpressionContext expression = context.expression();
             if (expression != null)
             {
-                ExpresionStack.Push(question.Expression);
+                ParentStack.Push(question.Expression);
                 Visit(expression);
-                ExpresionStack.Pop();
+                ParentStack.Pop();
             }
 
-            StatementListStack.Peek().Add(question);
+            (ParentStack.Peek() as Statements).StatementList.Add(question);
 
             return string.Empty;
         }
 
         public override string VisitConditional(ConditionalContext context)
         {
-            QLConditional conditional = new QLConditional();
+            Conditional conditional = new Conditional();
 
             ExpressionContext expression = context.expression();
             if (expression != null)
             {
-                ExpresionStack.Push(conditional.Expression);
+                ParentStack.Push(conditional.Expression);
                 Visit(expression);
-                ExpresionStack.Pop();
+                ParentStack.Pop();
             }
 
             BlockContext block = context.block(0);
             if (block != null)
             {
-                StatementListStack.Push(conditional.IfStatements);
+                ParentStack.Push(conditional);
                 Visit(block);
-                ExpresionStack.Pop();
+                ParentStack.Pop();
             }
 
             block = context.block(1);
             if (block != null)
             {
-                StatementListStack.Push(conditional.ElseStatements);
+                ParentStack.Push(conditional);
                 Visit(block);
-                ExpresionStack.Pop();
+                ParentStack.Pop();
             }
 
-            StatementListStack.Peek().Add(conditional);
+            // TODO: Fix for Statements, so far only works for forms
+            (ParentStack.Peek() as Statements).StatementList.Add(conditional);
             return string.Empty;
         }
 
         public override string VisitExpression(ExpressionContext context)
         {
-            UnOpContext unOp = context.unOp();
-            BinOpContext binOp = context.binOp();
-            LiteralContext literal = context.literal();
-            ExpressionContext subexpression = context.expression(0);
-            var label = context.LABEL();
-
-            if (unOp != null)
-            {
-                VisitUnExpresion(context);
-            }
-            else if (binOp != null)
-            {
-                VisitBinExpresion(context);
-            }
-            else if (literal != null)
-            {
-                VisitLitExpresion(context);
-            }
-            else if (subexpression != null)
-            {
-                Visit(subexpression);
-            }
-            else if (label != null)
-            {
-                VisitVarExpresion(context);
-            }
-
+       
             return string.Empty;
-        }
-
-        private void VisitUnExpresion(ExpressionContext context) {
-
-        }
-
-        private void VisitBinExpresion(ExpressionContext context)
-        {
-
-        }
-
-        private void VisitLitExpresion(ExpressionContext context)
-        {
-
-        }
-
-        private void VisitVarExpresion(ExpressionContext context)
-        {
-
         }
 
     }
