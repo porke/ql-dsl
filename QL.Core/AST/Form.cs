@@ -3,6 +3,6 @@
     public class Form : Node
     {
         public string Label { get; set; }
-        public Statements Statements { get; set; }
+        public Block Block { get; set; }
     }
 }

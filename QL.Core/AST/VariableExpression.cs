@@ -2,6 +2,6 @@
 {
     public class VariableExpression : Expression
     {
-        public Variable variable { get; set; }
+        public Variable Variable { get; set; }
     }
 }

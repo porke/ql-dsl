@@ -2,5 +2,6 @@
 {
     public sealed class TerminalNode : Node
     {
+
     }
 }

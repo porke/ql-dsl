@@ -1,11 +1,16 @@
-﻿using System.Collections.Generic;
-
-namespace QL.Core.AST
+﻿namespace QL.Core.AST
 {
     public class Conditional : Statement
     {
-        public Expression Expression { get; set; }
-        public IList<Statement> IfStatements { get; set; } = new List<Statement>();
-        public IList<Statement> ElseStatements { get; set; } = new List<Statement>();
+        public Conditional(Expression expression, Block ifBlock, Block elseBlock)
+        {
+            Expression = expression;
+            IfBlock = ifBlock;
+            ElseBlock = elseBlock;
+        }
+
+        public Expression Expression { get; }
+        public Block IfBlock { get; }
+        public Block ElseBlock { get; }
     }
 }

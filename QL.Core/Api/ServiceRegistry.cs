@@ -4,8 +4,8 @@ namespace QL.Core.Api
 {
     public static class ServiceRegistry
     {
-        private static IQLParsingService _parsingService = new QLParsingService();
+        private static IParsingService _parsingService = new ParsingService();
 
-        public static IQLParsingService ParsingService => _parsingService;
+        public static IParsingService ParsingService => _parsingService;
     }
 }

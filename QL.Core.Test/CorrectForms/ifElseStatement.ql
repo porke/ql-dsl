@@ -1,12 +1,8 @@
-﻿form test {
-  "Did you sell a house in 2010?"
-    hasSoldHouse: boolean
-
-  if (hasSoldHouse) {
-    "What was the selling price?"
-      sellingPrice: money
-  } else {
-	"Why?"
-      reason: string
+﻿form test {  
+  if (true) {
+    
+  }
+  else {
+	
   }
 }

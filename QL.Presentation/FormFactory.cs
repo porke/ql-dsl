@@ -8,9 +8,9 @@ namespace QL.Presentation
 {
     internal class FormFactory : IFormFactory
     {
-        private readonly IQLParsingService _parsingService;
+        private readonly IParsingService _parsingService;
 
-        internal FormFactory(IQLParsingService parsingService)
+        internal FormFactory(IParsingService parsingService)
         {
             _parsingService = parsingService;
         }
@@ -19,12 +19,8 @@ namespace QL.Presentation
         {
             var parsedSymbols = _parsingService.ParseQLInput(question);
 
-            IList<Control> createdControls = new List<Control>();
-
-            if (parsedSymbols.Forms.Count > 0)
-            {
-                createdControls.Add(new Label { Content = parsedSymbols.Forms[0].Label, FontWeight = FontWeights.Bold });
-            }
+            IList<Control> createdControls = new List<Control>();            
+            createdControls.Add(new Label { Content = parsedSymbols.Form.Label, FontWeight = FontWeights.Bold });            
 
             // Needs to be replaced.
             /*parsedSymbols.Questions.ToList().ForEach(x =>
