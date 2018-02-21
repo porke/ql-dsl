@@ -4,6 +4,6 @@ namespace QL.Core.Api
 {
     public class ParsedSymbols
     {
-        public Form Form { get; set; }
+        public FormNode Form { get; set; }
     }
 }

@@ -1,5 +1,4 @@
 ﻿using QL.Core.AST;
-using System.Collections.Generic;
 using static QL.Core.QLParser;
 using Antlr4.Runtime.Tree;
 
@@ -11,7 +10,7 @@ namespace QL.Core.Parsing
         {
             if (tree == null)
             {
-                return new TerminalNode();
+                return new NullNode();
             }
 
             return base.Visit(tree);
@@ -19,22 +18,21 @@ namespace QL.Core.Parsing
 
         public override Node VisitForm(FormContext context)
         {
-            return new Form
-            {
-                Label = context.LABEL().GetText(),
-                Block = Visit(context.block()) as Block
-            };
+            var form = new FormNode(context.Start, context.LABEL().GetText());
+            form.AddChild(Visit(context.block()));
+
+            return form;            
         }
 
         public override Node VisitBlock(BlockContext context)
-        {
-            var statementNodeList = new List<Statement>();
+        {            
+            var blockNode = new Node(context.Start);
             foreach (StatementContext x in context.statement())
             {
-                statementNodeList.Add(Visit(x) as Statement);
+                blockNode.AddChild(Visit(x));
             }
 
-            return new Block(new Statements(statementNodeList));
+            return blockNode;
         }
 
         public override Node VisitStatement(StatementContext context)
@@ -53,40 +51,43 @@ namespace QL.Core.Parsing
 
         public override Node VisitQuestion(QuestionContext context)
         {
-            return new Question
-            {
-                Variable = new Variable { Label = context.name().LABEL().GetText() },
-                Description = context.description().STR().GetText().Replace("\"", string.Empty),
-                Type = context.type().GetText(),
-                Expression = Visit(context.expression()) as Expression
-            };
+            var question = new QuestionNode(context.Start,
+                context.description().STR().GetText().Replace("\"", string.Empty),
+                context.name().LABEL().GetText(),
+                context.type().GetText());
+            question.AddChild(Visit(context.expression()));
+
+            return question;
         }
 
         public override Node VisitConditional(ConditionalContext context)
-        {            
-            return new Conditional(Visit(context.expression()) as Expression,
-                                   Visit(context.ifBlock()) as Block,
-                                   Visit(context.elseBlock()) as Block);
+        {
+            var conditional = new ConditionalNode(context.Start);
+            conditional.AddChild(Visit(context.expression()));
+            conditional.AddChild(Visit(context.ifBlock()));
+            conditional.AddChild(Visit(context.elseBlock()));
+
+            return conditional;
         }
 
         public override Node VisitIfBlock(IfBlockContext context)
         {
-            return new TerminalNode();
+            return Visit(context.block());
         }
 
         public override Node VisitElseBlock(ElseBlockContext context)
         {
-            return new TerminalNode();
+            return new NullNode();
         }
 
         public override Node VisitExpression(ExpressionContext context)
         {
-            return new TerminalNode();
+            return new NullNode();
         }
 
         public override Node VisitLiteralExpression(LiteralExpressionContext context)
         {
-            return new TerminalNode();
+            return new LiteralNode(context.Start, context.literal().GetText());
         }
     }
 }

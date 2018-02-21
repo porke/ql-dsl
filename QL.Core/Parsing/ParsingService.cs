@@ -20,7 +20,7 @@ namespace QL.Core.Parsing
             var visitor = new ParseTreeVisitor();
             return new ParsedSymbols
             {
-                Form = visitor.Visit(parser.form()) as Form
+                Form = visitor.Visit(parser.form()) as FormNode
             };
         }
     }
