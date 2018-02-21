@@ -25,8 +25,7 @@ namespace QL.Core.Parsing
 
             return new ParsedSymbols
             {
-                Forms = visitor.Forms,
-                Questions = visitor.Questions
+                Forms = visitor.AST
             };
         }
     }

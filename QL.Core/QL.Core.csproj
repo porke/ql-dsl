@@ -62,7 +62,6 @@
     </Compile>
     <Compile Include="AST\QLExpression.cs" />
     <Compile Include="AST\QLForm.cs" />
-    <Compile Include="AST\QLQuestion.cs" />
     <Compile Include="Parsing\QLVisitor.cs" />
   </ItemGroup>
   <ItemGroup />

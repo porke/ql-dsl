@@ -4,12 +4,16 @@ grammar QL;
 *  Parser Rules
 */
 
-form: FORM LABEL LCB (statements)? RCB;
+form: FORM LABEL LCB block RCB;
 
-statements: question (statements)?
-		  | IF expression LCB (statements)? RCB (ELSE LCB (statements)? RCB)?;
+block: (statement)*;
+
+statement: question
+		 | conditional;
 
 question: description name type (ASSIGNMENT expression)?;
+
+conditional: IF expression LCB block RCB (ELSE LCB block RCB)?;
 
 expression: LB expression RB
          | LABEL
@@ -86,6 +90,6 @@ MONEY: INT '.' NUMBER NUMBER;
 LABEL:	(LOWERCASE|UPPERCASE)(LOWERCASE|UPPERCASE|NUMBER|'_')*;
 
 // Hidden
-WHITESPACE:	    (' ' | '\t' | '\n' | '\r' |) -> skip;
+WHITESPACE:	    (' ' | '\t' | '\n' | '\r') -> skip;
 //MULTICOMMENT:   '/*' .* '*/' -> skip;
 SINGLECOMMENT:  '//' ~[\r\n]* -> skip;

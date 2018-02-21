@@ -26,10 +26,11 @@ namespace QL.Presentation
                 createdControls.Add(new Label { Content = parsedSymbols.Forms[0].Label, FontWeight = FontWeights.Bold });
             }
 
-            parsedSymbols.Questions.ToList().ForEach(x =>
+            // Needs to be replaced.
+            /*parsedSymbols.Questions.ToList().ForEach(x =>
             {
                 createdControls.Add(new Label { Content = x.Description });
-            });
+            });*/
 
             return createdControls;
         }
