@@ -47,12 +47,12 @@ namespace QL.Core.Test
 
         public void VerifyAll()
         {
-            Assert.AreEqual(0, _formNodeExpectations.Count);
-            Assert.AreEqual(0, _questionNodeExpectations.Count);
-            Assert.AreEqual(0, _conditionalNodeExpectations.Count);
-            Assert.AreEqual(0, _expressionNodeExpectations.Count);
-            Assert.AreEqual(0, _variableNodeExpectations.Count);
-            Assert.AreEqual(0, _literalNodeExpectations.Count);
+            Assert.AreEqual(0, _formNodeExpectations.Count, "Unmet expectation for a form node.");
+            Assert.AreEqual(0, _questionNodeExpectations.Count, "Unmet expectation for a question node.");
+            Assert.AreEqual(0, _conditionalNodeExpectations.Count, "Unmet expectation for a conditional node.");
+            Assert.AreEqual(0, _expressionNodeExpectations.Count, "Unmet expectation for an expression node.");
+            Assert.AreEqual(0, _variableNodeExpectations.Count, "Unmet expectation for a variable node.");
+            Assert.AreEqual(0, _literalNodeExpectations.Count, "Unmet expectation for a literal node."); ;
         }
 
         public void Visit(EmptyNode node)

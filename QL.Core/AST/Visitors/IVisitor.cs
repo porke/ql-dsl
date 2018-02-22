@@ -8,5 +8,6 @@
         void Visit(ExpressionNode node);
         void Visit(VariableNode node);
         void Visit(LiteralNode node);
+        void Visit(ConditionalNode node);
     }
 }

@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
-using System.Windows.Controls;
+using System.Windows;
 
 namespace QL.Presentation
 {
     public interface IFormFactory
     {
-        IList<Control> CreateControls(string question);
+        IList<UIElement> CreateControls(string question);
     }
 }

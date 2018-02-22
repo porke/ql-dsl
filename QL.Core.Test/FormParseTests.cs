@@ -7,10 +7,12 @@ namespace QL.Core.Test
     public sealed class FormParseTests
     {
         private readonly IParsingService _parsingService;
+        private readonly AssertVisitor _assertVisitor;
 
         public FormParseTests()
         {
             _parsingService = ServiceRegistry.ParsingService;
+            _assertVisitor = new AssertVisitor();
         }
 
         [TestMethod]
@@ -19,13 +21,12 @@ namespace QL.Core.Test
             // Arrange & Act
             var parsedSymbols = _parsingService.ParseQLInput(TestDataResolver.LoadTestFile("emptyForm.ql"));
 
-            // Assert
-            var formVisitor = new AssertVisitor();
-            formVisitor.EnqueueFormNodeCallback(formNode =>
+            // Assert            
+            _assertVisitor.EnqueueFormNodeCallback(formNode =>
             {
                 Assert.AreEqual("empty", formNode.Label);
             });
-            parsedSymbols.FormNode.Accept(formVisitor);
+            parsedSymbols.FormNode.Accept(_assertVisitor);
         }
 
         [TestMethod]
