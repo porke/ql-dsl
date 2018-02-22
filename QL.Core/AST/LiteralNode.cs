@@ -16,6 +16,7 @@ namespace QL.Core.Ast
         protected override void VisitNode(IVisitor visitor)
         {
             // TODO: implement soon
+            visitor.Visit(this);
         }
     }
 }

@@ -1,0 +1,20 @@
+﻿using Antlr4.Runtime;
+using QL.Core.Ast.Visitors;
+
+namespace QL.Core.Ast
+{
+    public class VariableNode : Node
+    {
+        public VariableNode(IToken token, string label) : base(token)
+        {
+            Label = label;
+        }
+
+        public string Label { get; }
+
+        protected override void VisitNode(IVisitor visitor)
+        {
+            visitor.Visit(this);
+        }
+    }
+}

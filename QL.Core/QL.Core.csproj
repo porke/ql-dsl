@@ -50,6 +50,8 @@
     <Compile Include="Api\ParsedSymbols.cs" />
     <Compile Include="Api\IParsingService.cs" />
     <Compile Include="Api\ServiceRegistry.cs" />
+    <Compile Include="Ast\VariableNode.cs" />
+    <Compile Include="Ast\ExpressionNode.cs" />
     <Compile Include="Ast\LiteralNode.cs" />
     <Compile Include="Ast\EmptyNode.cs" />
     <Compile Include="Ast\Node.cs" />

@@ -14,7 +14,7 @@ namespace QL.Core.Parsing
             }
 
             return base.Visit(tree);
-       } 
+        }
 
         public override Node VisitForm(FormContext context)
         {
@@ -22,11 +22,11 @@ namespace QL.Core.Parsing
             var form = new FormNode(context.Start, label?.GetText());
             form.AddChild(Visit(context.block()));
 
-            return form;            
+            return form;
         }
 
         public override Node VisitBlock(BlockContext context)
-        {            
+        {
             var blockNode = new EmptyNode(context.Start);
             foreach (StatementContext x in context.statement())
             {
@@ -81,14 +81,36 @@ namespace QL.Core.Parsing
             return Visit(context.block());
         }
 
-        public override Node VisitExpression(ExpressionContext context)
+        public override Node VisitVariableExpression(VariableExpressionContext context)
         {
-            return new NullNode();
+            var variable = new VariableNode(context.Start, context.LABEL().GetText());
+            return variable;
         }
 
         public override Node VisitLiteralExpression(LiteralExpressionContext context)
         {
-            return new LiteralNode(context.Start, context.literal().GetText());
+            var literal = new LiteralNode(context.Start, context.literal().GetText());
+            return literal;
+        }
+
+        public override Node VisitUnaryExpression(UnaryExpressionContext context)
+        {
+            var expression = new ExpressionNode(context.Start, context.unaryOperator().GetText());
+            expression.AddChild(Visit(context.expression()));
+            return expression;
+        }
+
+        public override Node VisitBinaryExpression(BinaryExpressionContext context)
+        {
+            var expression = new ExpressionNode(context.Start, context.binaryOperator().GetText());
+            expression.AddChild(Visit(context.expression(0)));
+            expression.AddChild(Visit(context.expression(1)));
+            return expression;
+        }
+
+        public override Node VisitScopedExpresion(ScopedExpresionContext context)
+        {
+            return Visit(context.expression());
         }
     }
 }
