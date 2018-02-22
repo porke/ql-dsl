@@ -25,7 +25,7 @@ namespace QL.Core.Test
             {
                 Assert.AreEqual("empty", formNode.Label);
             });
-            parsedSymbols.FormNode.Accept(formVisitor);            
+            parsedSymbols.FormNode.Accept(formVisitor);
         }
 
         [TestMethod]

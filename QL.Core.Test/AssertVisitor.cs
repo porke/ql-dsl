@@ -49,6 +49,10 @@ namespace QL.Core.Test
         {
             Assert.AreEqual(0, _formNodeExpectations.Count);
             Assert.AreEqual(0, _questionNodeExpectations.Count);
+            Assert.AreEqual(0, _conditionalNodeExpectations.Count);
+            Assert.AreEqual(0, _expressionNodeExpectations.Count);
+            Assert.AreEqual(0, _variableNodeExpectations.Count);
+            Assert.AreEqual(0, _literalNodeExpectations.Count);
         }
 
         public void Visit(EmptyNode node)
@@ -82,7 +86,7 @@ namespace QL.Core.Test
 
         public void Visit(ExpressionNode node)
         {
-            if (_conditionalNodeExpectations.Count > 0)
+            if (_expressionNodeExpectations.Count > 0)
             {
                 _expressionNodeExpectations.Dequeue().Invoke(node);
             }
@@ -90,7 +94,7 @@ namespace QL.Core.Test
 
         public void Visit(VariableNode node)
         {
-            if (_conditionalNodeExpectations.Count > 0)
+            if (_variableNodeExpectations.Count > 0)
             {
                 _variableNodeExpectations.Dequeue().Invoke(node);
             }
@@ -98,7 +102,7 @@ namespace QL.Core.Test
 
         public void Visit(LiteralNode node)
         {
-            if (_conditionalNodeExpectations.Count > 0)
+            if (_literalNodeExpectations.Count > 0)
             {
                 _literalNodeExpectations.Dequeue().Invoke(node);
             }
