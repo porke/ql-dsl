@@ -6,49 +6,72 @@ grammar QL;
 
 form: FORM LABEL block;
 
-block: LCB (statement)* RCB;
+block: LEFTCURLY (statement)* RIGHTCURLY;
 
 statement: question
 		 | conditional;
 
-question: description name COLON type (ASSIGNMENT expression)?;
+question: STRING LABEL COLON type (ASSIGNMENT expression)?;
 
-conditional: IF LB expression RB ifBlock (elseBlock)?;
+conditional: IF expression ifBlock (elseBlock)?;
 
 ifBlock: block;
+
 elseBlock: ELSE block;
 
-expression: LB expression RB			#scopedExpresion
-         | name							#variableExpression
-		 | literal						#literalExpression
-		 | unOp expression				#unaryExpression
-		 | expression binOp expression	#binaryExpression;
+expression: LEFTBRACKET expression RIGHTBRACKET		#scopedExpresion
+			| LABEL									#variableExpression
+			| literal								#literalExpression
+			| unaryOperator expression				#unaryExpression
+			| expression binaryOperator expression	#binaryExpression;
 
-description: STR;
-name: LABEL;
-type: TYPEBOOL | TYPEINT | TYPEDEC | TYPESTR | TYPEDATE | TYPEMONEY;
+type: TYPEBOOLEAN
+	| TYPEINTEGER
+	| TYPEDECIMAL
+	| TYPESTRING
+	| TYPEDATE 
+	| TYPEMONEY;
 
-literal: BOOL | INT | DEC | STR | MONEY | DATE;
+literal: BOOLEAN 
+		| INTEGER 
+		| DECIMAL 
+		| STRING 
+		| MONEY 
+		| DATE;
 
-binOp: GT | ST | GE | SE | NE | AND | OR | EQ | PLUS | MINUS | DIVIDE | MULTIPLY;
-unOp: MINUS | PLUS | NOT;
+binaryOperator: GREATERTHAN 
+				| SMALLERTHAN 
+				| GREATEREQUAL 
+				| SMALLEREQUAL 
+				| NOTEQUAL 
+				| AND 
+				| OR 
+				| EQUAL 
+				| PLUS 
+				| MINUS 
+				| DIVIDE	
+				| MULTIPLY;
+
+unaryOperator: MINUS 
+				| PLUS 
+				| NOT;
 
 /* 
 *  Lexer Rules
 */
 
 // Logical operators.
-AND:  '&&';
-OR:   '||';
-NOT:  '!';
-EQ:   '==';
+AND:	'&&';
+OR:		'||';
+NOT:	'!';
+EQUAL:	'==';
 
 // Operators for numerical comperison
-GT: '>';
-ST: '<';
-GE: '>=';
-SE: '<=';
-NE: '!=';
+GREATERTHAN:	'>';
+SMALLERTHAN:	'<';
+GREATEREQUAL:	'>=';
+SMALLEREQUAL:	'<=';
+NOTEQUAL:		'!=';
 
 // Operators for arithmetics
 PLUS:     '+';
@@ -62,19 +85,19 @@ IF:		'if';
 ELSE:	'else';
 
 // Types
-TYPEBOOL:   'boolean';
-TYPEINT:    'integer';
-TYPEDEC:    'decimal';
-TYPESTR:    'string';
-TYPEDATE:   'date';
-TYPEMONEY:  'money';
+TYPEBOOLEAN:	'boolean';
+TYPEINTEGER:    'integer';
+TYPEDECIMAL:    'decimal';
+TYPESTRING:		'string';
+TYPEDATE:		'date';
+TYPEMONEY:		'money';
 
-LCB:		'{';
-RCB:		'}';
-LB:			'(';
-RB:			')';
-COLON:		':';
-ASSIGNMENT: '=';
+LEFTCURLY:		'{';
+RIGHTCURLY:		'}';
+LEFTBRACKET:	'(';
+RIGHTBRACKET:	')';
+COLON:			':';
+ASSIGNMENT:		'=';
 
 // Fragments
 fragment UPPERCASE: ('A'..'Z');
@@ -82,17 +105,16 @@ fragment LOWERCASE: ('a'..'z');
 fragment NUMBER:	('0'..'9');
 
 // Literals
-BOOL: ('true'|'false'); 
-INT:  NUMBER+;
-DEC:  INT '.' (NUMBER (NUMBER)?)?;
-STR:  '"' .*? '"';
-DATE: INT '-' INT '-' INT;
-MONEY: INT '.' NUMBER NUMBER;
+BOOLEAN:	('true'|'false'); 
+INTEGER:	NUMBER+;
+DECIMAL:	INTEGER '.' (NUMBER (NUMBER)?)?;
+STRING:		'"' .*? '"';
+DATE:		INTEGER '-' INTEGER '-' INTEGER;
+MONEY:		INTEGER '.' NUMBER NUMBER;
 
 // Labels (Placed last, because it will match with other keywords)
 LABEL:	(LOWERCASE|UPPERCASE)(LOWERCASE|UPPERCASE|NUMBER|'_')*;
 
 // Hidden
 WHITESPACE:	    (' ' | '\t' | '\n' | '\r') -> skip;
-//MULTICOMMENT:   '/*' .* '*/' -> skip;
 SINGLECOMMENT:  '//' ~[\r\n]* -> skip;

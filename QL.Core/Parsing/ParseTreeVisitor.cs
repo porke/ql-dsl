@@ -53,8 +53,8 @@ namespace QL.Core.Parsing
         public override Node VisitQuestion(QuestionContext context)
         {
             var question = new QuestionNode(context.Start,
-                context.description().STR().GetText().Replace("\"", string.Empty),
-                context.name().LABEL().GetText(),
+                context.STRING().GetText().Replace("\"", string.Empty),
+                context.LABEL().GetText(),
                 context.type().GetText());
             question.AddChild(Visit(context.expression()));
 
@@ -78,7 +78,7 @@ namespace QL.Core.Parsing
 
         public override Node VisitElseBlock(ElseBlockContext context)
         {
-            return new NullNode();
+            return Visit(context.block());
         }
 
         public override Node VisitExpression(ExpressionContext context)
