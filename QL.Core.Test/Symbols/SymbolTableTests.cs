@@ -2,7 +2,7 @@
 using QL.Core.Api;
 using QL.Core.Symbols;
 
-namespace QL.Core.Test
+namespace QL.Core.Test.Symbols
 {
     [TestClass]
     public class SymbolTableTests

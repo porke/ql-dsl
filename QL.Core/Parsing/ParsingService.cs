@@ -3,7 +3,7 @@ using Antlr4.Runtime;
 using System.Collections.Generic;
 using QL.Core.Ast;
 using QL.Core.Symbols;
-using System;
+using System.Linq;
 
 namespace QL.Core.Parsing
 {
@@ -39,6 +39,13 @@ namespace QL.Core.Parsing
             return symbolTableVisitor.SymbolTable;
         }
 
+        private IReadOnlyList<string> HarvestDuplicateSymbolErrors(SymbolTable symbolTable)
+        {
+            var duplicateSymbolDetector = new DuplicateSymbolDetector();
+            IReadOnlyList<Symbol> duplicateSymbols = duplicateSymbolDetector.FindDuplicateSymbols(symbolTable);
+            return duplicateSymbols.Select(x => $"The symbol \"{x.Name}\" is duplicated.").ToList();
+        }
+
         public ParsedSymbols ParseQLInput(string input)
         {
             if (string.IsNullOrEmpty(input))
@@ -54,7 +61,9 @@ namespace QL.Core.Parsing
             {
                 Node ast = ExtractAst(parser);
                 SymbolTable symbols = ExtractSymbols(ast);
-                return new ParsedSymbols(ast, symbols, new List<string>());
+                var errors = HarvestDuplicateSymbolErrors(symbols);
+
+                return new ParsedSymbols(ast, symbols, errors);
             }
             catch (ParsingFailureException ex)
             {
