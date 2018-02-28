@@ -1,7 +1,4 @@
-﻿using System;
-using QL.Core.Ast.Visitors;
-
-namespace QL.Core.Ast
+﻿namespace QL.Core.Ast
 {
     public sealed class NullNode : Node
     {

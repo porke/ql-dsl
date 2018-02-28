@@ -1,9 +1,8 @@
 ﻿using Antlr4.Runtime;
-using QL.Core.Ast.Visitors;
 using System.Collections.Generic;
 
 namespace QL.Core.Ast
-{ 
+{
     public abstract class Node
     {
         protected readonly IToken _token;

@@ -1,7 +1,6 @@
 ﻿using QL.Core.Api;
 using System.Collections.Generic;
 using System.Windows;
-using System.Windows.Controls;
 
 namespace QL.Presentation
 {

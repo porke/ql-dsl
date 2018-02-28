@@ -2,7 +2,7 @@
 using QL.Core.Api;
 using QL.Core.Ast;
 
-namespace QL.Core.Test
+namespace QL.Core.Test.Parsing
 {
     [TestClass]
     public sealed class FormParseTests

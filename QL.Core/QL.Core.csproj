@@ -58,7 +58,7 @@
     <Compile Include="Ast\NullNode.cs" />
     <Compile Include="Ast\QuestionNode.cs" />
     <Compile Include="Ast\ConditionalNode.cs" />
-    <Compile Include="Ast\Visitors\IVisitor.cs" />
+    <Compile Include="Ast\IVisitor.cs" />
     <Compile Include="Parsing\ErrorListener.cs" />
     <Compile Include="Parsing\ParsingService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

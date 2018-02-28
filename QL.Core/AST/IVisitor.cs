@@ -1,4 +1,4 @@
-﻿namespace QL.Core.Ast.Visitors
+﻿namespace QL.Core.Ast
 {
     public interface IVisitor
     {
