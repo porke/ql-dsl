@@ -16,6 +16,11 @@ namespace QL.Presentation
 
         public IList<UIElement> CreateControls(string question)
         {
+            if (string.IsNullOrEmpty(question))
+            {
+                return new List<UIElement>();
+            }
+
             var parsedSymbols = _parsingService.ParseQLInput(question);            
             if (parsedSymbols.Errors.Count > 0)
             {
