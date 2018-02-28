@@ -124,5 +124,49 @@ namespace QL.Core.Test
             parsedSymbols.FormNode.Accept(_assertVisitor);
             _assertVisitor.VerifyAll();
         }
+
+        [TestMethod]
+        public void ParseQuestionWithIncorrectType_WillReportError()
+        {
+            // Arrange & Act
+            var parsedSymbols = _parsingService.ParseQLInput(TestDataResolver.LoadTestFile("wrongType.ql"));
+
+            // Assert
+            Assert.AreEqual("Syntax error in line 3, character 10: mismatched input 'cadeautje' expecting {'boolean', 'integer', 'decimal', 'string', 'date', 'money'}.",
+                parsedSymbols.Errors[0]);
+        }
+
+        [TestMethod]
+        public void ParseQuestionWithMissingLabel_WillReportError()
+        {
+            // Arrange & Act
+            var parsedSymbols = _parsingService.ParseQLInput(TestDataResolver.LoadTestFile("missingLabel.ql"));
+
+            // Assert
+            Assert.AreEqual("Syntax error in line 3, character 0: missing LABEL at ':'.",
+                parsedSymbols.Errors[0]);
+        }
+
+        [TestMethod]
+        public void ParseQuestionWithMissingText_WillReportError()
+        {
+            // Arrange & Act
+            var parsedSymbols = _parsingService.ParseQLInput(TestDataResolver.LoadTestFile("missingQuestionText.ql"));
+
+            // Assert
+            Assert.AreEqual("Syntax error in line 2, character 0: mismatched input 'whatIsThis' expecting {'if', '}', STRING}.",
+                parsedSymbols.Errors[0]);
+        }
+
+        [TestMethod]
+        public void ParseQuestionWithEmptyExpression_WillReportError()
+        {
+            // Arrange & Act
+            var parsedSymbols = _parsingService.ParseQLInput(TestDataResolver.LoadTestFile("emptyExpression.ql"));
+
+            // Assert
+            Assert.AreEqual("Syntax error in line 4, character 0: mismatched input '}' expecting {'!', '+', '-', '(', BOOLEAN, INTEGER, DECIMAL, STRING, DATE, MONEY, LABEL}.",
+                parsedSymbols.Errors[0]);
+        }
     }
 }

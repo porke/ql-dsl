@@ -1,5 +1,7 @@
 ﻿using QL.Core.Api;
 using Antlr4.Runtime;
+using System.Collections.Generic;
+using QL.Core.Ast;
 
 namespace QL.Core.Parsing
 {
@@ -15,6 +17,11 @@ namespace QL.Core.Parsing
 
         public ParsedSymbols ParseQLInput(string input)
         {
+            if (string.IsNullOrEmpty(input))
+            {
+                return new ParsedSymbols(new NullNode(), new List<string>());
+            }
+
             var parser = SetupParser(input);
             var errorListener = new ErrorListener();
             parser.AddErrorListener(errorListener);

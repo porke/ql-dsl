@@ -1,5 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using QL.Core.Api;
+using QL.Core.Ast;
 
 namespace QL.Core.Test
 {
@@ -36,6 +37,15 @@ namespace QL.Core.Test
             var parsedSymbols = _parsingService.ParseQLInput("form { test }");
 
             Assert.AreEqual("Syntax error in line 1, character 5: extraneous input '{' expecting LABEL.", parsedSymbols.Errors[0]);
+        }
+
+        [TestMethod]
+        public void ParseEmptyString_WillReturnEmptyNode()
+        {
+            // Arrange & Act
+            var parsedSymbols = _parsingService.ParseQLInput("");
+
+            Assert.IsTrue(parsedSymbols.FormNode is NullNode);
         }
     }
 }

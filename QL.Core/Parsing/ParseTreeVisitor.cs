@@ -83,14 +83,12 @@ namespace QL.Core.Parsing
 
         public override Node VisitVariableExpression(VariableExpressionContext context)
         {
-            var variable = new VariableNode(context.Start, context.LABEL().GetText());
-            return variable;
+            return new VariableNode(context.Start, context.LABEL().GetText());
         }
 
         public override Node VisitLiteralExpression(LiteralExpressionContext context)
         {
-            var literal = new LiteralNode(context.Start, context.literal().GetText());
-            return literal;
+            return new LiteralNode(context.Start, context.literal().GetText());
         }
 
         public override Node VisitUnaryExpression(UnaryExpressionContext context)
