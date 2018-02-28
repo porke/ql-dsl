@@ -2,14 +2,12 @@
 
 namespace QL.Core.Ast
 {
-    public class LiteralNode : Node
+    public class BlockNode : Node
     {
-        public LiteralNode(IToken token, string value) : base(token)
+        public BlockNode(IToken token) : base(token)
         {
-            Value = value;
+            
         }
-
-        public string Value { get; }
 
         protected override void VisitNode(IVisitor visitor)
         {

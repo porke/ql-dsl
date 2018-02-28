@@ -27,7 +27,7 @@ namespace QL.Core.Parsing
 
         public override Node VisitBlock(BlockContext context)
         {
-            var blockNode = new EmptyNode(context.Start);
+            var blockNode = new BlockNode(context.Start);
             foreach (StatementContext x in context.statement())
             {
                 blockNode.AddChild(Visit(x));

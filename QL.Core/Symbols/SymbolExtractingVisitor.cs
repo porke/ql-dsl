@@ -7,10 +7,10 @@ namespace QL.Core.Symbols
     {
         public SymbolTable SymbolTable = new SymbolTable();
 
-        public override void Visit(QuestionNode node)
+        public override void VisitEnter(QuestionNode node)
         {
             var type = (SymbolType)Enum.Parse(typeof(SymbolType), node.Type, ignoreCase: true);
-            SymbolTable.Add(new Symbol(node.Label, type));
+            SymbolTable.Add(new Symbol(node.Label, type, node.Token));
         }
     }
 }

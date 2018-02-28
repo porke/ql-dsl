@@ -1,6 +1,6 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace QL.Core.Symbols
 {
@@ -24,6 +24,14 @@ namespace QL.Core.Symbols
         }
 
         public int Count => _symbols.Count;
+
+        public Symbol this[string name]
+        {
+            get
+            {
+                return _symbols.FirstOrDefault(symbol => symbol.Name == name);
+            }
+        }
 
         public Symbol this[int index]
         {

@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace QL.Core.Test
 {
-    public sealed class AssertVisitor : IVisitor
+    public sealed class AssertVisitor : BaseVisitor
     {
         private Queue<Action<FormNode>> _formNodeExpectations = new Queue<Action<FormNode>>();
         private Queue<Action<QuestionNode>> _questionNodeExpectations = new Queue<Action<QuestionNode>>();
@@ -54,20 +54,20 @@ namespace QL.Core.Test
             Assert.AreEqual(0, _literalNodeExpectations.Count, "Unmet expectation for a literal node."); ;
         }
 
-        public void Visit(EmptyNode node)
+        override public void VisitEnter(BlockNode node)
         {
             // No action required
         }
 
-        public void Visit(FormNode node)
+        override public void VisitEnter(FormNode node)
         {
             if (_formNodeExpectations.Count > 0)
             {
                 _formNodeExpectations.Dequeue().Invoke(node);
             }
         }
-  
-        public void Visit(QuestionNode node)
+
+        override public void VisitEnter(QuestionNode node)
         {
             if (_questionNodeExpectations.Count > 0)
             {
@@ -75,7 +75,7 @@ namespace QL.Core.Test
             }
         }
 
-        public void Visit(ConditionalNode node)
+        override public void VisitEnter(ConditionalNode node)
         {
             if (_conditionalNodeExpectations.Count > 0)
             {
@@ -83,7 +83,7 @@ namespace QL.Core.Test
             }
         }
 
-        public void Visit(ExpressionNode node)
+        override public void VisitEnter(ExpressionNode node)
         {
             if (_expressionNodeExpectations.Count > 0)
             {
@@ -91,7 +91,7 @@ namespace QL.Core.Test
             }
         }
 
-        public void Visit(VariableNode node)
+        override public void VisitEnter(VariableNode node)
         {
             if (_variableNodeExpectations.Count > 0)
             {
@@ -99,7 +99,7 @@ namespace QL.Core.Test
             }
         }
 
-        public void Visit(LiteralNode node)
+        override public void VisitEnter(LiteralNode node)
         {
             if (_literalNodeExpectations.Count > 0)
             {

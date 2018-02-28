@@ -2,12 +2,19 @@
 {
     public interface IVisitor
     {
-        void Visit(EmptyNode node);
-        void Visit(QuestionNode node);
-        void Visit(FormNode node);
-        void Visit(ExpressionNode node);
-        void Visit(VariableNode node);
-        void Visit(LiteralNode node);
-        void Visit(ConditionalNode node);
+        void VisitEnter(BlockNode node);
+        void VisitEnter(QuestionNode node);
+        void VisitEnter(FormNode node);
+        void VisitEnter(ExpressionNode node);
+        void VisitEnter(VariableNode node);
+        void VisitEnter(LiteralNode node);
+        void VisitEnter(ConditionalNode node);
+        void VisitExit(BlockNode node);
+        void VisitExit(QuestionNode node);
+        void VisitExit(FormNode node);
+        void VisitExit(ExpressionNode node);
+        void VisitExit(VariableNode node);
+        void VisitExit(LiteralNode node);
+        void VisitExit(ConditionalNode node);
     }
 }

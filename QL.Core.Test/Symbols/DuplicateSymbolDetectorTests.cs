@@ -1,4 +1,5 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Antlr4.Runtime;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using QL.Core.Symbols;
 using System.Collections.Generic;
 
@@ -12,8 +13,8 @@ namespace QL.Core.Test.Symbols
         {
             // Arrange
             var symbolTable = new SymbolTable();
-            symbolTable.Add(new Symbol("a", SymbolType.Decimal));
-            symbolTable.Add(new Symbol("b", SymbolType.Date));
+            symbolTable.Add(new Symbol("a", SymbolType.Decimal, null));
+            symbolTable.Add(new Symbol("b", SymbolType.Date, null));
 
             // Act & Assert
             var duplicateDetector = new DuplicateSymbolDetector();
@@ -25,8 +26,8 @@ namespace QL.Core.Test.Symbols
         {
             // Arrange
             var symbolTable = new SymbolTable();
-            symbolTable.Add(new Symbol("a", SymbolType.Decimal));
-            symbolTable.Add(new Symbol("a", SymbolType.Decimal));
+            symbolTable.Add(new Symbol("a", SymbolType.Decimal, null));
+            symbolTable.Add(new Symbol("a", SymbolType.Decimal, null));
 
             // Act
             var duplicateDetector = new DuplicateSymbolDetector();
@@ -42,10 +43,10 @@ namespace QL.Core.Test.Symbols
         {
             // Arrange
             var symbolTable = new SymbolTable();
-            symbolTable.Add(new Symbol("a", SymbolType.Decimal));
-            symbolTable.Add(new Symbol("a", SymbolType.Decimal));
-            symbolTable.Add(new Symbol("a", SymbolType.Decimal));
-            symbolTable.Add(new Symbol("d", SymbolType.Boolean));
+            symbolTable.Add(new Symbol("a", SymbolType.Decimal, null));
+            symbolTable.Add(new Symbol("a", SymbolType.Decimal, null));
+            symbolTable.Add(new Symbol("a", SymbolType.Decimal, null));
+            symbolTable.Add(new Symbol("d", SymbolType.Boolean, null));
 
             // Act
             var duplicateDetector = new DuplicateSymbolDetector();
@@ -62,10 +63,10 @@ namespace QL.Core.Test.Symbols
         {
             // Arrange
             var symbolTable = new SymbolTable();
-            symbolTable.Add(new Symbol("a", SymbolType.Decimal));
-            symbolTable.Add(new Symbol("a", SymbolType.Decimal));
-            symbolTable.Add(new Symbol("d", SymbolType.Decimal));
-            symbolTable.Add(new Symbol("d", SymbolType.Boolean));
+            symbolTable.Add(new Symbol("a", SymbolType.Decimal, null));
+            symbolTable.Add(new Symbol("a", SymbolType.Decimal, null));
+            symbolTable.Add(new Symbol("d", SymbolType.Decimal, null));
+            symbolTable.Add(new Symbol("d", SymbolType.Boolean, null));
 
             // Act
             var duplicateDetector = new DuplicateSymbolDetector();

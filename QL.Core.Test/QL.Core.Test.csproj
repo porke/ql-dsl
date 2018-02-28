@@ -60,6 +60,8 @@
     <EmbeddedResource Include="IncorrectForms\wrongType.ql" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Parsing\QuestionParseTests.cs" />
+    <Compile Include="Scopes\ScopeTreeTests.cs" />
+    <Compile Include="Scopes\ScopeTreeValidatorTests.cs" />
     <Compile Include="Symbols\DuplicateSymbolDetectorTests.cs" />
     <Compile Include="Symbols\SymbolTableTests.cs" />
     <Compile Include="TestDataResolver.cs" />
@@ -77,6 +79,7 @@
     <EmbeddedResource Include="IncorrectForms\emptyExpression.ql" />
     <EmbeddedResource Include="IncorrectForms\unclosedBlock.ql" />
     <EmbeddedResource Include="IncorrectForms\binaryExpressionWithMissingOperand.ql" />
+    <EmbeddedResource Include="CorrectForms\threeNestedQuestions.ql" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

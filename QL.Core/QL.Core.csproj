@@ -54,7 +54,7 @@
     <Compile Include="Ast\VariableNode.cs" />
     <Compile Include="Ast\ExpressionNode.cs" />
     <Compile Include="Ast\LiteralNode.cs" />
-    <Compile Include="Ast\EmptyNode.cs" />
+    <Compile Include="Ast\BlockNode.cs" />
     <Compile Include="Ast\Node.cs" />
     <Compile Include="Ast\NullNode.cs" />
     <Compile Include="Ast\QuestionNode.cs" />
@@ -72,7 +72,10 @@
     </Compile>
     <Compile Include="Ast\FormNode.cs" />
     <Compile Include="Parsing\ParseTreeVisitor.cs" />
+    <Compile Include="Scopes\ScopeTreeValidator.cs" />
     <Compile Include="Symbols\DuplicateSymbolDetector.cs" />
+    <Compile Include="Scopes\Scope.cs" />
+    <Compile Include="Scopes\ScopeExtractingVisitor.cs" />
     <Compile Include="Symbols\Symbol.cs" />
     <Compile Include="Symbols\SymbolExtractingVisitor.cs" />
     <Compile Include="Symbols\SymbolTable.cs" />

@@ -7,6 +7,7 @@
         Date,
         Integer,
         Boolean,
-        Decimal
+        Decimal,
+        Undefined
     }
 }

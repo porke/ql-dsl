@@ -13,7 +13,9 @@ namespace QL.Core.Ast
 
         protected override void VisitNode(IVisitor visitor)
         {
-            visitor.Visit(this);
+            visitor.VisitEnter(this);
+            VisitChildren(visitor);
+            visitor.VisitExit(this);
         }
     }
 }
