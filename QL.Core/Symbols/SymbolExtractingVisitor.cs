@@ -1,12 +1,11 @@
 ﻿using QL.Core.Ast;
 using System;
-using System.Collections.Generic;
 
 namespace QL.Core.Symbols
 {
     public class SymbolExtractingVisitor : BaseVisitor
     {
-        public List<Symbol> SymbolTable = new List<Symbol>();
+        public SymbolTable SymbolTable = new SymbolTable();
 
         public override void Visit(QuestionNode node)
         {
