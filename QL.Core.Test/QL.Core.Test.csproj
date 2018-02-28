@@ -60,6 +60,7 @@
     <EmbeddedResource Include="IncorrectForms\wrongType.ql" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Parsing\QuestionParseTests.cs" />
+    <Compile Include="SymbolTableTest.cs" />
     <Compile Include="TestDataResolver.cs" />
   </ItemGroup>
   <ItemGroup>

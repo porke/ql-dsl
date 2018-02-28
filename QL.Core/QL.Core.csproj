@@ -71,9 +71,10 @@
     <Compile Include="Ast\FormNode.cs" />
     <Compile Include="Parsing\ParseTreeVisitor.cs" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
     <Antlr4 Include="QL.g4">
       <Generator>MSBuild:Compile</Generator>
       <CustomToolNamespace>QL.Core</CustomToolNamespace>
