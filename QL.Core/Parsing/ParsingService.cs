@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using QL.Core.Ast;
 using QL.Core.Symbols;
 using System.Linq;
+using QL.Core.Scopes;
 
 namespace QL.Core.Parsing
 {
@@ -43,7 +44,26 @@ namespace QL.Core.Parsing
         {
             var duplicateSymbolDetector = new DuplicateSymbolDetector();
             IReadOnlyList<Symbol> duplicateSymbols = duplicateSymbolDetector.FindDuplicateSymbols(symbolTable);
-            return duplicateSymbols.Select(x => $"The symbol \"{x.Name}\" is duplicated.").ToList();
+            return duplicateSymbols.Select(x => $"The variable \"{x.Name}\" in line {x.Token.Line} is already declared.").ToList();
+        }
+
+        private IReadOnlyList<string> HarvestDeclarationErrors(SymbolTable symbols, Node ast)
+        {
+            var scopeTreeVisitor = new ScopeExtractingVisitor(symbols);
+            ast.Accept(scopeTreeVisitor);
+            var Validator = new ScopeTreeValidator();
+            Validator.CheckReferencesScope(scopeTreeVisitor.ScopeTree);
+
+            List<Symbol> undecalredVariables = Validator.UndeclaredVariables;
+            IReadOnlyList<string> undecalredVariableErrors =
+                undecalredVariables.Select(x => $"The variable \"{x.Name}\" in line {x.Token.Line} in undeclared.").ToList();
+
+            List<Symbol> variablesDeclaredOutOfScope = Validator.VariablesDeclaredOutOfScope;
+            IReadOnlyList<string> variableDeclaredOutOfScopeErrors =
+                variablesDeclaredOutOfScope.Select(x => $"The variable \"{x.Name}\" in line {x.Token.Line} is declared in a different scope.").ToList();
+
+            return undecalredVariableErrors.Concat
+                     (variableDeclaredOutOfScopeErrors).ToList();
         }
 
         public ParsedSymbols ParseQLInput(string input)
@@ -61,7 +81,8 @@ namespace QL.Core.Parsing
             {
                 Node ast = ExtractAst(parser);
                 SymbolTable symbols = ExtractSymbols(ast);
-                var errors = HarvestDuplicateSymbolErrors(symbols);
+                var errors = HarvestDuplicateSymbolErrors(symbols).Concat
+                     (HarvestDeclarationErrors(symbols, ast)).ToList();
 
                 return new ParsedSymbols(ast, symbols, errors);
             }

@@ -17,8 +17,8 @@ namespace QL.Core.Test.Scopes
             var Validator = new ScopeTreeValidator();
             Validator.CheckReferencesScope(ScopeTree);
 
-            Assert.AreEqual(0, Validator.UnreferencedVariables.Count);
-            Assert.AreEqual(0, Validator.VariablesReferencedOutOfScope.Count);
+            Assert.AreEqual(0, Validator.UndeclaredVariables.Count);
+            Assert.AreEqual(0, Validator.VariablesDeclaredOutOfScope.Count);
         }
 
         [TestMethod]
@@ -30,8 +30,8 @@ namespace QL.Core.Test.Scopes
             var Validator = new ScopeTreeValidator();
             Validator.CheckReferencesScope(ScopeTree);
 
-            Assert.AreEqual(1, Validator.UnreferencedVariables.Count);
-            Assert.AreEqual(0, Validator.VariablesReferencedOutOfScope.Count);
+            Assert.AreEqual(1, Validator.UndeclaredVariables.Count);
+            Assert.AreEqual(0, Validator.VariablesDeclaredOutOfScope.Count);
         }
 
         [TestMethod]
@@ -46,8 +46,8 @@ namespace QL.Core.Test.Scopes
             var Validator = new ScopeTreeValidator();
             Validator.CheckReferencesScope(ScopeTree);
 
-            Assert.AreEqual(0, Validator.UnreferencedVariables.Count);
-            Assert.AreEqual(1, Validator.VariablesReferencedOutOfScope.Count);
+            Assert.AreEqual(0, Validator.UndeclaredVariables.Count);
+            Assert.AreEqual(1, Validator.VariablesDeclaredOutOfScope.Count);
         }
     }
 }

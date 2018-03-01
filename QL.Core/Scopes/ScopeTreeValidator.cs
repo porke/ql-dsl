@@ -5,8 +5,8 @@ namespace QL.Core.Scopes
 {
     class ScopeTreeValidator
     {
-        public List<Symbol> UnreferencedVariables = new List<Symbol>();
-        public List<Symbol> VariablesReferencedOutOfScope = new List<Symbol>();
+        public List<Symbol> UndeclaredVariables = new List<Symbol>();
+        public List<Symbol> VariablesDeclaredOutOfScope = new List<Symbol>();
 
         private bool FindReference(Scope scope, string referenceName)
         {
@@ -26,11 +26,11 @@ namespace QL.Core.Scopes
             {
                 if (reference.Type == SymbolType.Undefined)
                 {
-                    UnreferencedVariables.Add(reference);
+                    UndeclaredVariables.Add(reference);
                 }
                 else if (!FindReference(scope, reference.Name))
                 {
-                    VariablesReferencedOutOfScope.Add(reference);
+                    VariablesDeclaredOutOfScope.Add(reference);
                 }
             }
             foreach (Scope child in scope.Childeren)
