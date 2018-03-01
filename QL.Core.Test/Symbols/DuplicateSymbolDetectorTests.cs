@@ -1,5 +1,6 @@
 ﻿using Antlr4.Runtime;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using QL.Core.Errors;
 using QL.Core.Symbols;
 using System.Collections.Generic;
 
@@ -31,11 +32,10 @@ namespace QL.Core.Test.Symbols
 
             // Act
             var duplicateDetector = new DuplicateSymbolDetector();
-            IReadOnlyList<Symbol> duplicateSymbols = duplicateDetector.FindDuplicateSymbols(symbolTable);
+            IReadOnlyList<Error> duplicateSymbolErrors = duplicateDetector.FindDuplicateSymbols(symbolTable);
 
             // Assert
-            Assert.AreEqual(1, duplicateSymbols.Count);
-            Assert.AreEqual("a", duplicateSymbols[0].Name);
+            Assert.AreEqual(1, duplicateSymbolErrors.Count);
         }
 
         [TestMethod]
@@ -50,12 +50,10 @@ namespace QL.Core.Test.Symbols
 
             // Act
             var duplicateDetector = new DuplicateSymbolDetector();
-            IReadOnlyList<Symbol> duplicateSymbols = duplicateDetector.FindDuplicateSymbols(symbolTable);
+            IReadOnlyList<Error> duplicateSymbolErrors = duplicateDetector.FindDuplicateSymbols(symbolTable);
 
             // Assert
-            Assert.AreEqual(2, duplicateSymbols.Count);
-            Assert.AreEqual("a", duplicateSymbols[0].Name);
-            Assert.AreEqual("a", duplicateSymbols[1].Name);
+            Assert.AreEqual(2, duplicateSymbolErrors.Count);
         }
 
         [TestMethod]
@@ -70,12 +68,10 @@ namespace QL.Core.Test.Symbols
 
             // Act
             var duplicateDetector = new DuplicateSymbolDetector();
-            IReadOnlyList<Symbol> duplicateSymbols = duplicateDetector.FindDuplicateSymbols(symbolTable);
+            IReadOnlyList<Error> duplicateSymbolErrors = duplicateDetector.FindDuplicateSymbols(symbolTable);
 
             // Assert
-            Assert.AreEqual(2, duplicateSymbols.Count);
-            Assert.AreEqual("a", duplicateSymbols[0].Name);
-            Assert.AreEqual("d", duplicateSymbols[1].Name);
+            Assert.AreEqual(2, duplicateSymbolErrors.Count);
         }
     }
 }

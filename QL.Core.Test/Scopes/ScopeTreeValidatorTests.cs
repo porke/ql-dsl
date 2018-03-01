@@ -1,6 +1,8 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using QL.Core.Errors;
 using QL.Core.Scopes;
 using QL.Core.Symbols;
+using System.Collections.Generic;
 
 namespace QL.Core.Test.Scopes
 {
@@ -15,10 +17,9 @@ namespace QL.Core.Test.Scopes
             ScopeTree.AddReference(new Symbol("a", SymbolType.Integer, token: null));
 
             var Validator = new ScopeTreeValidator();
-            Validator.CheckReferencesScope(ScopeTree);
+            List<Error> Errors = Validator.CheckReferencesScope(ScopeTree);
 
-            Assert.AreEqual(0, Validator.UndeclaredVariables.Count);
-            Assert.AreEqual(0, Validator.VariablesDeclaredOutOfScope.Count);
+            Assert.AreEqual(0, Errors.Count);
         }
 
         [TestMethod]
@@ -28,10 +29,9 @@ namespace QL.Core.Test.Scopes
             ScopeTree.AddReference(new Symbol("a", SymbolType.Undefined, token: null));
 
             var Validator = new ScopeTreeValidator();
-            Validator.CheckReferencesScope(ScopeTree);
+            List<Error> Errors = Validator.CheckReferencesScope(ScopeTree);
 
-            Assert.AreEqual(1, Validator.UndeclaredVariables.Count);
-            Assert.AreEqual(0, Validator.VariablesDeclaredOutOfScope.Count);
+            Assert.AreEqual(1, Errors.Count);
         }
 
         [TestMethod]
@@ -44,10 +44,9 @@ namespace QL.Core.Test.Scopes
             ScopeTree.Childeren.Add(SecondScope);
 
             var Validator = new ScopeTreeValidator();
-            Validator.CheckReferencesScope(ScopeTree);
+            List<Error> Errors = Validator.CheckReferencesScope(ScopeTree);
 
-            Assert.AreEqual(0, Validator.UndeclaredVariables.Count);
-            Assert.AreEqual(1, Validator.VariablesDeclaredOutOfScope.Count);
+            Assert.AreEqual(1, Errors.Count);
         }
     }
 }

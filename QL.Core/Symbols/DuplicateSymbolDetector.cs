@@ -1,24 +1,25 @@
-﻿using System.Collections.Generic;
+﻿using QL.Core.Errors;
+using System.Collections.Generic;
 
 namespace QL.Core.Symbols
 {
     internal class DuplicateSymbolDetector
     {
-        internal IReadOnlyList<Symbol> FindDuplicateSymbols(SymbolTable symbolTable)
+        internal IReadOnlyList<Error> FindDuplicateSymbols(SymbolTable symbolTable)
         {
-            var duplicateSymbols = new List<Symbol>();
+            var errors = new List<Error>();
             var symbolNames = new HashSet<string>();
             foreach (var symbol in symbolTable)
             {
                 if (symbolNames.Contains(symbol.Name))
                 {
-                    duplicateSymbols.Add(symbol);
+                    errors.Add(new VariableDuplicate(symbol.Name, symbol.Token?.Line ?? 0));
                 }
 
                 symbolNames.Add(symbol.Name);
             }
 
-            return duplicateSymbols;
+            return errors;
         }
     }
 }

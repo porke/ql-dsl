@@ -64,14 +64,14 @@ unaryOperator: MINUS
 AND:	'&&';
 OR:		'||';
 NOT:	'!';
-EQUAL:	'==';
 
-// Operators for numerical comperison
+// Operators for comperison
 GREATERTHAN:	'>';
 SMALLERTHAN:	'<';
 GREATEREQUAL:	'>=';
 SMALLEREQUAL:	'<=';
 NOTEQUAL:		'!=';
+EQUAL:			'==';
 
 // Operators for arithmetics
 PLUS:     '+';

@@ -34,5 +34,6 @@ namespace QL.Core.Ast
         }
 
         public IToken Token => _token;
+        public IList<Node> ChildNodes => _childNodes;
     }
 }

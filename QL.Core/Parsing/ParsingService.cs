@@ -5,6 +5,7 @@ using QL.Core.Ast;
 using QL.Core.Symbols;
 using System.Linq;
 using QL.Core.Scopes;
+using QL.Core.Errors;
 
 namespace QL.Core.Parsing
 {
@@ -40,30 +41,24 @@ namespace QL.Core.Parsing
             return symbolTableVisitor.SymbolTable;
         }
 
-        private IReadOnlyList<string> HarvestDuplicateSymbolErrors(SymbolTable symbolTable)
+        private IReadOnlyList<string> HarvestParsingErrors(SymbolTable symbolTable, Node ast)
         {
             var duplicateSymbolDetector = new DuplicateSymbolDetector();
-            IReadOnlyList<Symbol> duplicateSymbols = duplicateSymbolDetector.FindDuplicateSymbols(symbolTable);
-            return duplicateSymbols.Select(x => $"The variable \"{x.Name}\" in line {x.Token.Line} is already declared.").ToList();
-        }
+            var errors = new List<Error>();
 
-        private IReadOnlyList<string> HarvestDeclarationErrors(SymbolTable symbols, Node ast)
-        {
-            var scopeTreeVisitor = new ScopeExtractingVisitor(symbols);
+            errors.AddRange(duplicateSymbolDetector.FindDuplicateSymbols(symbolTable));
+
+            var scopeTreeVisitor = new ScopeExtractingVisitor(symbolTable);
             ast.Accept(scopeTreeVisitor);
             var Validator = new ScopeTreeValidator();
-            Validator.CheckReferencesScope(scopeTreeVisitor.ScopeTree);
+            errors.AddRange(Validator.CheckReferencesScope(scopeTreeVisitor.ScopeTree));
 
-            List<Symbol> undecalredVariables = Validator.UndeclaredVariables;
-            IReadOnlyList<string> undecalredVariableErrors =
-                undecalredVariables.Select(x => $"The variable \"{x.Name}\" in line {x.Token.Line} in undeclared.").ToList();
-
-            List<Symbol> variablesDeclaredOutOfScope = Validator.VariablesDeclaredOutOfScope;
-            IReadOnlyList<string> variableDeclaredOutOfScopeErrors =
-                variablesDeclaredOutOfScope.Select(x => $"The variable \"{x.Name}\" in line {x.Token.Line} is declared in a different scope.").ToList();
-
-            return undecalredVariableErrors.Concat
-                     (variableDeclaredOutOfScopeErrors).ToList();
+            var textErrors = new List<string>();
+            foreach (Error error in errors)
+            {
+                textErrors.Add(error.ToString());
+            }
+            return textErrors;
         }
 
         public ParsedSymbols ParseQLInput(string input)
@@ -81,8 +76,7 @@ namespace QL.Core.Parsing
             {
                 Node ast = ExtractAst(parser);
                 SymbolTable symbols = ExtractSymbols(ast);
-                var errors = HarvestDuplicateSymbolErrors(symbols).Concat
-                     (HarvestDeclarationErrors(symbols, ast)).ToList();
+                var errors = HarvestParsingErrors(symbols, ast);
 
                 return new ParsedSymbols(ast, symbols, errors);
             }
