@@ -1,5 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using QL.Core.Api;
+using QL.Core.Types;
 
 namespace QL.Core.Test.Parsing
 {
@@ -26,7 +27,7 @@ namespace QL.Core.Test.Parsing
             {
                 Assert.AreEqual("whatIsMeaning", question.Label);
                 Assert.AreEqual("What is the meaning of life?", question.Description);
-                Assert.AreEqual("money", question.Type);
+                Assert.AreEqual(QLType.Money, question.Type);
             });
             parsedSymbols.FormNode.Accept(_assertVisitor);
             _assertVisitor.VerifyAll();
@@ -43,19 +44,19 @@ namespace QL.Core.Test.Parsing
             {
                 Assert.AreEqual("whatIsMeaning", question.Label);
                 Assert.AreEqual("What is the meaning of life?", question.Description);
-                Assert.AreEqual("money", question.Type);
+                Assert.AreEqual(QLType.Money, question.Type);
             });
             _assertVisitor.EnqueueQuestionNodeCallback(question =>
             {
                 Assert.AreEqual("hasSoldHouse", question.Label);
                 Assert.AreEqual("Did you sell a house in 2010?", question.Description);
-                Assert.AreEqual("boolean", question.Type);
+                Assert.AreEqual(QLType.Boolean, question.Type);
             });
             _assertVisitor.EnqueueQuestionNodeCallback(question =>
             {
                 Assert.AreEqual("dayToday", question.Label);
                 Assert.AreEqual("Which day is today?", question.Description);
-                Assert.AreEqual("date", question.Type);
+                Assert.AreEqual(QLType.Date, question.Type);
             });
             parsedSymbols.FormNode.Accept(_assertVisitor);
             _assertVisitor.VerifyAll();
@@ -72,13 +73,13 @@ namespace QL.Core.Test.Parsing
             {
                 Assert.AreEqual("sellingPrice", question.Label);
                 Assert.AreEqual("What was the selling price?", question.Description);
-                Assert.AreEqual("money", question.Type);
+                Assert.AreEqual(QLType.Money, question.Type);
             });
             _assertVisitor.EnqueueQuestionNodeCallback(question =>
             {
                 Assert.AreEqual("valueHouse", question.Label);
                 Assert.AreEqual("Value house:", question.Description);
-                Assert.AreEqual("money", question.Type);
+                Assert.AreEqual(QLType.Money, question.Type);
             });
             _assertVisitor.EnqueueVariableNodeCallback(variable =>
             {
@@ -99,7 +100,7 @@ namespace QL.Core.Test.Parsing
             {
                 Assert.AreEqual("howTo", question.Label);
                 Assert.AreEqual("Testtetstes?", question.Description);
-                Assert.AreEqual("integer", question.Type);
+                Assert.AreEqual(QLType.Integer, question.Type);
             });
             _assertVisitor.EnqueueExpressionNodeCallback(expression =>
             {

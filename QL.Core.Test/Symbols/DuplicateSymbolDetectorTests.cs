@@ -2,6 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using QL.Core.Errors;
 using QL.Core.Symbols;
+using QL.Core.Types;
 using System.Collections.Generic;
 
 namespace QL.Core.Test.Symbols
@@ -14,8 +15,8 @@ namespace QL.Core.Test.Symbols
         {
             // Arrange
             var symbolTable = new SymbolTable();
-            symbolTable.Add(new Symbol("a", SymbolType.Decimal, null));
-            symbolTable.Add(new Symbol("b", SymbolType.Date, null));
+            symbolTable.Add(new Symbol("a", QLType.Decimal, null));
+            symbolTable.Add(new Symbol("b", QLType.Date, null));
 
             // Act & Assert
             var duplicateDetector = new DuplicateSymbolDetector();
@@ -27,8 +28,8 @@ namespace QL.Core.Test.Symbols
         {
             // Arrange
             var symbolTable = new SymbolTable();
-            symbolTable.Add(new Symbol("a", SymbolType.Decimal, null));
-            symbolTable.Add(new Symbol("a", SymbolType.Decimal, null));
+            symbolTable.Add(new Symbol("a", QLType.Decimal, null));
+            symbolTable.Add(new Symbol("a", QLType.Decimal, null));
 
             // Act
             var duplicateDetector = new DuplicateSymbolDetector();
@@ -43,10 +44,10 @@ namespace QL.Core.Test.Symbols
         {
             // Arrange
             var symbolTable = new SymbolTable();
-            symbolTable.Add(new Symbol("a", SymbolType.Decimal, null));
-            symbolTable.Add(new Symbol("a", SymbolType.Decimal, null));
-            symbolTable.Add(new Symbol("a", SymbolType.Decimal, null));
-            symbolTable.Add(new Symbol("d", SymbolType.Boolean, null));
+            symbolTable.Add(new Symbol("a", QLType.Decimal, null));
+            symbolTable.Add(new Symbol("a", QLType.Decimal, null));
+            symbolTable.Add(new Symbol("a", QLType.Decimal, null));
+            symbolTable.Add(new Symbol("d", QLType.Boolean, null));
 
             // Act
             var duplicateDetector = new DuplicateSymbolDetector();
@@ -61,10 +62,10 @@ namespace QL.Core.Test.Symbols
         {
             // Arrange
             var symbolTable = new SymbolTable();
-            symbolTable.Add(new Symbol("a", SymbolType.Decimal, null));
-            symbolTable.Add(new Symbol("a", SymbolType.Decimal, null));
-            symbolTable.Add(new Symbol("d", SymbolType.Decimal, null));
-            symbolTable.Add(new Symbol("d", SymbolType.Boolean, null));
+            symbolTable.Add(new Symbol("a", QLType.Decimal, null));
+            symbolTable.Add(new Symbol("a", QLType.Decimal, null));
+            symbolTable.Add(new Symbol("d", QLType.Decimal, null));
+            symbolTable.Add(new Symbol("d", QLType.Boolean, null));
 
             // Act
             var duplicateDetector = new DuplicateSymbolDetector();

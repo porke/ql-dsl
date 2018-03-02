@@ -1,5 +1,6 @@
 ﻿using QL.Core.Errors;
 using QL.Core.Symbols;
+using QL.Core.Types;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -25,7 +26,7 @@ namespace QL.Core.Scopes
 
             foreach (Symbol reference in scope.References)
             {
-                if (reference.Type == SymbolType.Undefined)
+                if (reference.Type == QLType.Undefined)
                 {
                     ScopeErrors.Add(new VariableUndeclared(reference.Name, reference.Token?.Line ?? 0));
                 }
