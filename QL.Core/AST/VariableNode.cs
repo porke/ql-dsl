@@ -11,11 +11,11 @@ namespace QL.Core.Ast
 
         public string Label { get; }
 
-        protected override void VisitNode(IVisitor visitor)
+        protected override T VisitNode<T>(IVisitor<T> visitor)
         {
-            visitor.VisitEnter(this);
+            var returnValue = visitor.Visit(this);
             VisitChildren(visitor);
-            visitor.VisitExit(this);
+            return returnValue;
         }
     }
 }

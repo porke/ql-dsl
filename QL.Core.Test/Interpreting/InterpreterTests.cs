@@ -19,6 +19,7 @@ namespace QL.Core.Test.Interpreting
         {            
             var parsedSymbols = _parsingService.ParseQLInput(TestDataResolver.LoadTestFile("oneLiteralAssignment.ql"));
             var interpreter = new InterpreterVisitor();
+            var newAst = interpreter.EvaluateAst(parsedSymbols.FormNode);
 
             Assert.Fail();   
         }

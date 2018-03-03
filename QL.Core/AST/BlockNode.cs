@@ -4,16 +4,18 @@ namespace QL.Core.Ast
 {
     public class BlockNode : Node
     {
-        public BlockNode(IToken token) : base(token)
+        public BlockNode(IToken token, int depth) : base(token)
         {
-            
+            Depth = depth;
         }
 
-        protected override void VisitNode(IVisitor visitor)
+        public int Depth { get; private set; }
+
+        protected override T VisitNode<T>(IVisitor<T> visitor)
         {
-            visitor.VisitEnter(this);
+            var returnValue = visitor.Visit(this);
             VisitChildren(visitor);
-            visitor.VisitExit(this);
+            return returnValue;
         }
     }
 }

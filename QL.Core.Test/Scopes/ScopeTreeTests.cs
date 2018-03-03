@@ -26,7 +26,7 @@ namespace QL.Core.Test.Scopes
             var scopeExtractor = new ScopeExtractingVisitor(symbolExtractor.SymbolTable);
             parsedSymbols.FormNode.Accept(scopeExtractor);
 
-            Scope scope = scopeExtractor.ScopeTree;
+            Scope scope = scopeExtractor.GetTopLevelScope();
             Assert.AreEqual(1, scope.Variables.Count);
             Assert.AreEqual("whatIsMeaning", scope.Variables[0].Name);
             Assert.AreEqual(QLType.Money, scope.Variables[0].Type);

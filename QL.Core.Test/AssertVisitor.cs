@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace QL.Core.Test
 {
-    public sealed class AssertVisitor : BaseVisitor
+    public sealed class AssertVisitor : BaseVisitor<Node>
     {
         private Queue<Action<FormNode>> _formNodeExpectations = new Queue<Action<FormNode>>();
         private Queue<Action<QuestionNode>> _questionNodeExpectations = new Queue<Action<QuestionNode>>();
@@ -54,57 +54,64 @@ namespace QL.Core.Test
             Assert.AreEqual(0, _literalNodeExpectations.Count, "Unmet expectation for a literal node."); ;
         }
 
-        override public void VisitEnter(BlockNode node)
-        {
-            // No action required
-        }
-
-        override public void VisitEnter(FormNode node)
+        override public Node Visit(FormNode node)
         {
             if (_formNodeExpectations.Count > 0)
             {
                 _formNodeExpectations.Dequeue().Invoke(node);
             }
+
+            return new NullNode();
         }
 
-        override public void VisitEnter(QuestionNode node)
+        override public Node Visit(QuestionNode node)
         {
             if (_questionNodeExpectations.Count > 0)
             {
                 _questionNodeExpectations.Dequeue().Invoke(node);
             }
+
+            return new NullNode();
         }
 
-        override public void VisitEnter(ConditionalNode node)
+        override public Node Visit(ConditionalNode node)
         {
             if (_conditionalNodeExpectations.Count > 0)
             {
                 _conditionalNodeExpectations.Dequeue().Invoke(node);
             }
+
+            return new NullNode();
         }
 
-        override public void VisitEnter(ExpressionNode node)
+        override public Node Visit(ExpressionNode node)
         {
             if (_expressionNodeExpectations.Count > 0)
             {
                 _expressionNodeExpectations.Dequeue().Invoke(node);
             }
+
+            return new NullNode();
         }
 
-        override public void VisitEnter(VariableNode node)
+        override public Node Visit(VariableNode node)
         {
             if (_variableNodeExpectations.Count > 0)
             {
                 _variableNodeExpectations.Dequeue().Invoke(node);
             }
+
+            return new NullNode();
         }
 
-        override public void VisitEnter(LiteralNode node)
+        override public Node Visit(LiteralNode node)
         {
             if (_literalNodeExpectations.Count > 0)
             {
                 _literalNodeExpectations.Dequeue().Invoke(node);
             }
+
+            return new NullNode();
         }
     }
 }

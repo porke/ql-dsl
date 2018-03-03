@@ -6,9 +6,10 @@
         {
         }
 
-        protected override void VisitNode(IVisitor visitor)
+        protected override T VisitNode<T>(IVisitor<T> visitor)
         {
             // Visiting a null node yields no result
+            return default(T);
         }
     }
 }

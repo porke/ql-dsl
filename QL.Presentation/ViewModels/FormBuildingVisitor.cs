@@ -2,20 +2,21 @@
 
 namespace QL.Presentation.ViewModels
 {
-    internal class FormBuildingVisitor : BaseVisitor
+    internal class FormBuildingVisitor : BaseVisitor<object>
     {
         public FormViewModel Form { get; set; }
 
-        public override void VisitEnter(FormNode node)
+        public override object Visit(FormNode node)
         {
             Form = new FormViewModel(node.Label);
+            return Form;
         }
 
-        public override void VisitEnter(QuestionNode node)
+        public override object Visit(QuestionNode node)
         {
             if (Form == null)
             {
-                return;
+                return null;
             }
 
             if (node.Type == Core.Types.QLType.Boolean)
@@ -26,6 +27,8 @@ namespace QL.Presentation.ViewModels
             {
                 Form.Questions.Add(new TextQuestionViewModel(node.Description, node.Label, false, string.Empty, Form));
             }
+
+            return null;
         }
     }
 }

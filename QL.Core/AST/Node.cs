@@ -1,5 +1,6 @@
 ﻿using Antlr4.Runtime;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace QL.Core.Ast
 {
@@ -13,9 +14,9 @@ namespace QL.Core.Ast
             _childNodes.Add(node);
         }
 
-        public void Accept(IVisitor visitor)
+        public T Accept<T>(IVisitor<T> visitor)
         {
-            VisitNode(visitor);
+            return VisitNode(visitor);
         }
 
         protected Node(IToken token)
@@ -23,9 +24,9 @@ namespace QL.Core.Ast
             _token = token;
         }
 
-        protected abstract void VisitNode(IVisitor visitor);
+        protected abstract T VisitNode<T>(IVisitor<T> visitor);
 
-        protected void VisitChildren(IVisitor visitor)
+        protected void VisitChildren<T>(IVisitor<T> visitor)
         {
             foreach (Node child in _childNodes)
             {

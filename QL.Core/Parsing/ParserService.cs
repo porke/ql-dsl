@@ -58,7 +58,7 @@ namespace QL.Core.Parsing
         {
             var scopeExtractingVisitor = new ScopeExtractingVisitor(symbolTable);
             ast.Accept(scopeExtractingVisitor);
-            return scopeExtractingVisitor.ScopeTree;
+            return scopeExtractingVisitor.GetTopLevelScope();
         }
 
         public ParsedSymbols ParseQLInput(string input)
