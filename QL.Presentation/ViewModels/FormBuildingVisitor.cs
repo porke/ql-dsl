@@ -25,7 +25,7 @@ namespace QL.Presentation.ViewModels
             }
             else
             {
-                string evaluatedValue = node.ChildNodes[0].Accept(this).ToString();
+                string evaluatedValue = node.ChildNodes.Count > 0 ? node.ChildNodes[0].Accept(this).ToString() : string.Empty;
                 Form.Questions.Add(new TextQuestionViewModel(node.Description, node.Label, false, evaluatedValue, Form));
             }
 

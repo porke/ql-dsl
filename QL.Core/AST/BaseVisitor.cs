@@ -1,4 +1,6 @@
-﻿namespace QL.Core.Ast
+﻿using System;
+
+namespace QL.Core.Ast
 {
     public abstract class BaseVisitor<T> : IVisitor<T>
     {

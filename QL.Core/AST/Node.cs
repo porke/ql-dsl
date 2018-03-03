@@ -1,6 +1,5 @@
 ﻿using Antlr4.Runtime;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace QL.Core.Ast
 {
@@ -11,6 +10,11 @@ namespace QL.Core.Ast
 
         public void AddChild(Node node)
         {
+            if (node == null)
+            {
+                return;
+            }
+
             _childNodes.Add(node);
         }
 

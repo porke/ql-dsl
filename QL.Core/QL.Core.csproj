@@ -57,7 +57,6 @@
     <Compile Include="Ast\LiteralNode.cs" />
     <Compile Include="Ast\BlockNode.cs" />
     <Compile Include="Ast\Node.cs" />
-    <Compile Include="Ast\NullNode.cs" />
     <Compile Include="Ast\QuestionNode.cs" />
     <Compile Include="Ast\ConditionalNode.cs" />
     <Compile Include="Ast\IVisitor.cs" />

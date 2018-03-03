@@ -44,6 +44,24 @@ namespace QL.Core.Interpreting
             return questionNode;
         }
 
+        public override Node Visit(ConditionalNode conditional)
+        {
+            Node expressionNode = conditional.ChildNodes[0];
+            var evaluatedNodeValue = new Value((expressionNode.Accept(this) as LiteralNode).Value);
+            if (evaluatedNodeValue.ToBool())
+            {
+                var ifNode = conditional.ChildNodes[1];
+                return ifNode.Accept(this);
+            }
+            else if (conditional.ChildNodes.Count > 2)
+            {
+                var elseNode = conditional.ChildNodes[2];
+                return elseNode.Accept(this);
+            }
+
+            return null;
+        }
+
         public override Node Visit(ExpressionNode expression)
         {
             if (expression.IsBinary)
@@ -63,18 +81,18 @@ namespace QL.Core.Interpreting
                 }
             }
 
-            return new NullNode();
+            return null;
         }
 
-        public override Node Visit(LiteralNode expression)
+        public override Node Visit(LiteralNode literal)
         {
-            return new LiteralNode(expression.Token, expression.Value, expression.Type);
+            return new LiteralNode(literal.Token, literal.Value, literal.Type);
         }
 
-        public override Node Visit(VariableNode expression)
+        public override Node Visit(VariableNode variable)
         {
             // TODO: Fetch variable value from memory
-            return new LiteralNode(expression.Token, string.Empty, QLType.Undefined);
+            return new LiteralNode(variable.Token, string.Empty, QLType.Undefined);
         }
     }
 }

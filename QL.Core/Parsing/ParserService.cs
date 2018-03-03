@@ -65,7 +65,7 @@ namespace QL.Core.Parsing
         {
             if (string.IsNullOrEmpty(input))
             {
-                return new ParsedSymbols(new NullNode(),
+                return new ParsedSymbols(new FormNode(null, string.Empty),
                                          new SymbolTable(),
                                          new Scope(null),
                                          new List<string>());
@@ -83,7 +83,7 @@ namespace QL.Core.Parsing
             }
             catch (ParsingFailureException ex)
             {
-                return new ParsedSymbols(new NullNode(), new SymbolTable(), new Scope(null), ex.ParsingErrors);
+                return new ParsedSymbols(new FormNode(null, string.Empty), new SymbolTable(), new Scope(null), ex.ParsingErrors);
             }
         }
     }

@@ -11,7 +11,7 @@ namespace QL.Core.Parsing
         {
             if (tree == null)
             {
-                return new NullNode();
+                return null;
             }
 
             return base.Visit(tree);

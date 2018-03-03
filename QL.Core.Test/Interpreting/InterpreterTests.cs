@@ -18,7 +18,7 @@ namespace QL.Core.Test.Interpreting
         }
 
         [TestMethod]
-        public void OneLiteralAssignment_WillChangeTheMemorySpace()
+        public void OneLiteralAssignment_WillEvaluate()
         {            
             var parsedSymbols = _parsingService.ParseQLInput(TestDataResolver.LoadTestFile("oneLiteralAssignment.ql"));
 
@@ -28,7 +28,23 @@ namespace QL.Core.Test.Interpreting
             {
                 Assert.AreEqual("100", ln.Value);
             });
-            newAst.Accept<Node>(_assertVisitor);
+            newAst.Accept(_assertVisitor);
+
+            _assertVisitor.VerifyAll();
+        }
+
+        [TestMethod]
+        public void OneConditionalAssignment_WillRemoveTheIfBlock()
+        {
+            var parsedSymbols = _parsingService.ParseQLInput(TestDataResolver.LoadTestFile("oneConditional.ql"));
+
+            var interpreter = new InterpreterVisitor();
+            var newAst = interpreter.EvaluateAst(parsedSymbols.FormNode);
+            _assertVisitor.EnqueueQuestionNodeCallback(q =>
+            {
+                Assert.AreEqual("elseQuestion", q.Description);
+            });
+            newAst.Accept(_assertVisitor);
 
             _assertVisitor.VerifyAll();
         }
