@@ -4,16 +4,21 @@ namespace QL.Presentation.ViewModels
 {
     internal abstract class QuestionViewModel : ReactiveObject
     {
-        private string _label;
+        private string _description;
+        private string _id;
         private bool _isEvaluated;
+        protected FormViewModel _parentForm;
 
-        internal QuestionViewModel(string label, bool isEvaluated)
+        internal QuestionViewModel(string description, string id, bool isEvaluated, FormViewModel parentForm)
         {
-            _label = label;
+            _description = description;
             _isEvaluated = isEvaluated;
+            _parentForm = parentForm;
         }
 
-        public string Label => _label;
+        public string Description => _description;
+
+        public string Id => _id;
 
         public bool IsEvaluated => _isEvaluated;
     }

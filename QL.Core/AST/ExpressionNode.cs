@@ -4,12 +4,12 @@ namespace QL.Core.Ast
 {
     public class ExpressionNode : Node
     {
-        public ExpressionNode(IToken token, string opperator) : base(token)
+        public ExpressionNode(IToken token, string @operator) : base(token)
         {
-            Opperator = opperator;
+            Operator = @operator;
         }
 
-        public string Opperator { get; }
+        public string Operator { get; }
 
         protected override void VisitNode(IVisitor visitor)
         {

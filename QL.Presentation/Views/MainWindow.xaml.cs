@@ -15,7 +15,7 @@ namespace QL.Presentation
 
             var viewModel = new MainViewModel();
             DataContext = viewModel;
-            _controller = new MainController(viewModel, ServiceRegistry.ParsingService);
+            _controller = new MainController(viewModel, ServiceRegistry.ParsingService, ServiceRegistry.InterpretingService);
         }
     }
 }

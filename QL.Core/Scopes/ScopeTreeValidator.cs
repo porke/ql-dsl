@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace QL.Core.Scopes
 {
-    class ScopeTreeValidator
+    internal class ScopeTreeValidator
     {
         private bool FindReference(Scope scope, string referenceName)
         {

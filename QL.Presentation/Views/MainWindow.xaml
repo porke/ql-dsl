@@ -21,7 +21,7 @@
             </Grid.RowDefinitions>
 
             <TextBox AcceptsReturn="True" TextWrapping="NoWrap" AcceptsTab="True" Text="{Binding QuestionnaireInput}"/>
-            <Button Command="{Binding RebuildQuestionnaireCommand}" Grid.Row="1" Content="{x:Static resx:Resources.ShowQuestionnaire}"/>
+            <Button Command="{Binding RebuildQuestionnaireCommand}" CommandParameter="{Binding QuestionnaireInput}" Grid.Row="1" Content="{x:Static resx:Resources.ShowQuestionnaire}"/>
             <TextBox Grid.Row="2" Text="{Binding QuestionnaireValidation}"/>
         </Grid>
         <Border Grid.Column="0" BorderBrush="Black" BorderThickness="1"/>

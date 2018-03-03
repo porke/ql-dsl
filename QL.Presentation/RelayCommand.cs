@@ -4,17 +4,17 @@ using System.Windows.Input;
 
 namespace QL.Presentation
 {
-    public class RelayCommand : ICommand
+    public class RelayCommand<T> : ICommand where T: class
     {
-        private readonly Action<object> _execute;
-        private readonly Predicate<object> _canExecute;
+        private readonly Action<T> _execute;
+        private readonly Predicate<T> _canExecute;
 
-        public RelayCommand(Action<object> execute) : this(execute, null)
+        public RelayCommand(Action<T> execute) : this(execute, null)
         {
 
         }
 
-        public RelayCommand(Action<object> execute, Predicate<object> canExecute)
+        public RelayCommand(Action<T> execute, Predicate<T> canExecute)
         {
             if (execute == null)
             {
@@ -26,7 +26,7 @@ namespace QL.Presentation
         }
 
         [DebuggerStepThrough]
-        public bool CanExecute(object parameter)
+        public bool CanExecute(T parameter)
         {
             return _canExecute == null ? true : _canExecute(parameter);
         }
@@ -37,6 +37,19 @@ namespace QL.Presentation
             remove { CommandManager.RequerySuggested -= value; }
         }
 
-        public void Execute(object parameter) { _execute(parameter); }
+        public void Execute(T parameter)
+        {
+            _execute(parameter);
+        }
+
+        public bool CanExecute(object parameter)
+        {
+            return CanExecute(parameter as T);
+        }
+
+        public void Execute(object parameter)
+        {
+            Execute(parameter as T);
+        }
     }
 }

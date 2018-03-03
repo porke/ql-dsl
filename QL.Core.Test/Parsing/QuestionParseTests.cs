@@ -104,11 +104,11 @@ namespace QL.Core.Test.Parsing
             });
             _assertVisitor.EnqueueExpressionNodeCallback(expression =>
             {
-                Assert.AreEqual("-", expression.Opperator);
+                Assert.AreEqual("-", expression.Operator);
             });
             _assertVisitor.EnqueueExpressionNodeCallback(expression =>
             {
-                Assert.AreEqual("+", expression.Opperator);
+                Assert.AreEqual("+", expression.Operator);
             });
             _assertVisitor.EnqueueLiteralNodeCallback(literal =>
             {

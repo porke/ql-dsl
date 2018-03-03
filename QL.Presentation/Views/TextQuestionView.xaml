@@ -7,7 +7,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <StackPanel>
-        <TextBlock Text="{Binding Label}"/>
+        <TextBlock Text="{Binding Description}"/>
         <TextBox Text="{Binding Value}" IsReadOnly="{Binding IsEvaluated}"/>
     </StackPanel>
 </UserControl>

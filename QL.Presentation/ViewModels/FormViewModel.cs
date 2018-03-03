@@ -1,4 +1,5 @@
 ﻿using ReactiveUI;
+using System.Windows.Input;
 
 namespace QL.Presentation.ViewModels
 {
@@ -23,5 +24,7 @@ namespace QL.Presentation.ViewModels
         {
             get { return _questions; }
         }
+
+        public ICommand QuestionValueAssignedCommand { get; set; }
     }
 }

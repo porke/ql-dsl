@@ -1,4 +1,5 @@
 ﻿using ReactiveUI;
+using System;
 
 namespace QL.Presentation.ViewModels
 {
@@ -6,9 +7,13 @@ namespace QL.Presentation.ViewModels
     {
         private bool _value;
 
-        public BooleanQuestionViewModel(string label, bool isEvaluated, bool value) : base(label, isEvaluated)
+        public BooleanQuestionViewModel(string description, string id, bool isEvaluated, bool value, FormViewModel parentForm) 
+            : base(description, id, isEvaluated, parentForm)
         {
             _value = value;
+
+            this.ObservableForProperty(x => x.Value)
+                .Subscribe(x => parentForm.QuestionValueAssignedCommand.Execute(this));
         }
 
         public bool Value

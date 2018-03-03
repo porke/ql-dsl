@@ -10,5 +10,5 @@
     <UserControl.Resources>
         <converters:BooleanNegationConverter x:Key="BooleanNegationConverter"/>
     </UserControl.Resources>
-    <CheckBox IsChecked="{Binding Value}" IsEnabled="{Binding Path=IsEvaluated, Converter={StaticResource BooleanNegationConverter}}" Content="{Binding Label}"/>
+    <CheckBox IsChecked="{Binding Value}" IsEnabled="{Binding Path=IsEvaluated, Converter={StaticResource BooleanNegationConverter}}" Content="{Binding Description}"/>
 </UserControl>

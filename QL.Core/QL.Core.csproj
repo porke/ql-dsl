@@ -47,6 +47,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Api\InterpretingService.cs" />
     <Compile Include="Api\ParsedSymbols.cs" />
     <Compile Include="Api\IParsingService.cs" />
     <Compile Include="Api\ServiceRegistry.cs" />
@@ -70,6 +71,7 @@
     <Compile Include="Errors\NonBooleanInLogicalExpression.cs" />
     <Compile Include="Errors\VariableUndeclared.cs" />
     <Compile Include="Errors\Error.cs" />
+    <Compile Include="Interpreting\InterpretingService.cs" />
     <Compile Include="Parsing\ErrorListener.cs" />
     <Compile Include="Parsing\ParsingFailureException.cs" />
     <Compile Include="Parsing\ParsingService.cs" />
