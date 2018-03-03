@@ -7,7 +7,7 @@ namespace QL.Core.Test.Parsing
     [TestClass]
     public class QuestionParseTests
     {
-        private readonly IParsingService _parsingService;
+        private readonly IParserService _parsingService;
         private readonly AssertVisitor _assertVisitor;
 
         public QuestionParseTests()

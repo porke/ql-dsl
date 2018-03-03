@@ -7,39 +7,40 @@ namespace QL.Core.Scopes
     public class ScopeExtractingVisitor : BaseVisitor
     {
         public Scope ScopeTree;
-        private Scope CurrentScope;
-        public SymbolTable SymbolTable;
+
+        private Scope _currentScope;
+        private SymbolTable _symbolTable;
 
         public ScopeExtractingVisitor(SymbolTable symbolTable)
         {
-            SymbolTable = symbolTable;
+            _symbolTable = symbolTable;
         }
 
         public override void VisitExit(FormNode node)
         {
-            ScopeTree = CurrentScope;
+            ScopeTree = _currentScope;
         }
 
         public override void VisitEnter(BlockNode node)
         {
-            var newScope = new Scope(CurrentScope);
-            CurrentScope?.Childeren.Add(newScope);
-            CurrentScope = newScope;
+            var newScope = new Scope(_currentScope);
+            _currentScope?.Children.Add(newScope);
+            _currentScope = newScope;
         }
 
         public override void VisitExit(BlockNode node)
         {
-            CurrentScope = CurrentScope.Parent ?? CurrentScope;
+            _currentScope = _currentScope.Parent ?? _currentScope;
         }
 
         public override void VisitEnter(QuestionNode node)
         {
-            CurrentScope.AddVariable(SymbolTable[node.Label]);
+            _currentScope.AddVariable(_symbolTable[node.Label]);
         }
 
         public override void VisitEnter(VariableNode node)
         {
-            CurrentScope.AddReference(SymbolTable[node.Label] ?? new Symbol(node.Label, QLType.Undefined, node.Token));
+            _currentScope.AddReference(_symbolTable[node.Label] ?? new Symbol(node.Label, QLType.Undefined, node.Token));
         }
     }
 }

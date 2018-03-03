@@ -8,7 +8,7 @@ namespace QL.Core.Test.Symbols
     [TestClass]
     public class SymbolTableTests
     {
-        private readonly IParsingService _parsingService;
+        private readonly IParserService _parsingService;
 
         public SymbolTableTests()
         {

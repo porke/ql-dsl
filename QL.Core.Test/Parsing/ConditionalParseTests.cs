@@ -6,14 +6,14 @@ namespace QL.Core.Test.Parsing
     [TestClass]
     public class ConditionalParseTests
     {
-        private readonly IParsingService _parsingService;
+        private readonly IParserService _parsingService;
         private readonly AssertVisitor _assertVisitor;
 
         public ConditionalParseTests()
         {
             _parsingService = ServiceRegistry.ParsingService;
             _assertVisitor = new AssertVisitor();
-    }
+        }
 
         [TestMethod]
         public void ParseIfConditionalOnly_WillSucceed()

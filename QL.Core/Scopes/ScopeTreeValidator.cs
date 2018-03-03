@@ -22,8 +22,7 @@ namespace QL.Core.Scopes
 
         public List<Error> CheckReferencesScope(Scope scope)
         {
-            List<Error> ScopeErrors = new List<Error>();
-
+            var ScopeErrors = new List<Error>();
             foreach (Symbol reference in scope.References)
             {
                 if (reference.Type == QLType.Undefined)
@@ -36,7 +35,7 @@ namespace QL.Core.Scopes
                 }
             }
 
-            foreach (Scope child in scope.Childeren)
+            foreach (Scope child in scope.Children)
             {
                 ScopeErrors.Concat(CheckReferencesScope(child));
             }

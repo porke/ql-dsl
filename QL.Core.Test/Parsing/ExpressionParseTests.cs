@@ -6,7 +6,7 @@ namespace QL.Core.Test.Parsing
     [TestClass]
     public sealed class ExpressionParseTests
     {
-        private readonly IParsingService _parsingService;
+        private readonly IParserService _parsingService;
 
         public ExpressionParseTests()
         {

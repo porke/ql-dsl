@@ -1,6 +1,6 @@
 ﻿namespace QL.Core.Api
 {
-    public interface IParsingService
+    public interface IParserService
     {        
         ParsedSymbols ParseQLInput(string input);
     }

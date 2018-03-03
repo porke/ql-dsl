@@ -42,7 +42,7 @@ namespace QL.Core.Test.Scopes
             ScopeTree.AddReference(new Symbol("a", QLType.Integer, token: null));
             var SecondScope = new Scope(ScopeTree);
             SecondScope.AddVariable(new Symbol("a", QLType.Integer, token: null));
-            ScopeTree.Childeren.Add(SecondScope);
+            ScopeTree.Children.Add(SecondScope);
 
             var Validator = new ScopeTreeValidator();
             List<Error> Errors = Validator.CheckReferencesScope(ScopeTree);

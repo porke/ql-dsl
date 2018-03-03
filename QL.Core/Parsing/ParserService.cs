@@ -9,7 +9,7 @@ using QL.Core.Errors;
 
 namespace QL.Core.Parsing
 {
-    internal class ParsingService : IParsingService
+    internal class ParserService : IParserService
     {
         private QLParser SetupParser(string text)
         {
@@ -41,24 +41,24 @@ namespace QL.Core.Parsing
             return symbolTableVisitor.SymbolTable;
         }
 
-        private IReadOnlyList<string> HarvestParsingErrors(SymbolTable symbolTable, Node ast)
+        private IReadOnlyList<string> HarvestParsingErrors(SymbolTable symbolTable, Node ast, Scope scopeTree)
         {
-            var duplicateSymbolDetector = new DuplicateSymbolDetector();
             var errors = new List<Error>();
 
+            var duplicateSymbolDetector = new DuplicateSymbolDetector();
             errors.AddRange(duplicateSymbolDetector.FindDuplicateSymbols(symbolTable));
 
-            var scopeTreeVisitor = new ScopeExtractingVisitor(symbolTable);
-            ast.Accept(scopeTreeVisitor);
-            var Validator = new ScopeTreeValidator();
-            errors.AddRange(Validator.CheckReferencesScope(scopeTreeVisitor.ScopeTree));
+            var scopeTreeValidator = new ScopeTreeValidator();
+            errors.AddRange(scopeTreeValidator.CheckReferencesScope(scopeTree));
+           
+            return errors.Select(err => err.ToString()).ToList();
+        }
 
-            var textErrors = new List<string>();
-            foreach (Error error in errors)
-            {
-                textErrors.Add(error.ToString());
-            }
-            return textErrors;
+        private Scope DeriveScopeTree(SymbolTable symbolTable, Node ast)
+        {
+            var scopeExtractingVisitor = new ScopeExtractingVisitor(symbolTable);
+            ast.Accept(scopeExtractingVisitor);
+            return scopeExtractingVisitor.ScopeTree;
         }
 
         public ParsedSymbols ParseQLInput(string input)
@@ -67,22 +67,23 @@ namespace QL.Core.Parsing
             {
                 return new ParsedSymbols(new NullNode(),
                                          new SymbolTable(),
+                                         new Scope(null),
                                          new List<string>());
             }
 
             QLParser parser = SetupParser(input);
-
             try
             {
                 Node ast = ExtractAst(parser);
                 SymbolTable symbols = ExtractSymbols(ast);
-                var errors = HarvestParsingErrors(symbols, ast);
+                Scope scopeTree = DeriveScopeTree(symbols, ast);
+                var errors = HarvestParsingErrors(symbols, ast, scopeTree);
 
-                return new ParsedSymbols(ast, symbols, errors);
+                return new ParsedSymbols(ast, symbols, scopeTree, errors);
             }
             catch (ParsingFailureException ex)
             {
-                return new ParsedSymbols(new NullNode(), new SymbolTable(), ex.ParsingErrors);
+                return new ParsedSymbols(new NullNode(), new SymbolTable(), new Scope(null), ex.ParsingErrors);
             }
         }
     }

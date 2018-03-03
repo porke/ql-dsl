@@ -4,7 +4,7 @@ using System;
 
 namespace QL.Core.Interpreting
 {
-    internal class InterpretingService : IInterpretingService
+    internal class InterpreterService : IInterpreterService
     {
         public FormNode AssignValue<T>(string questionLabel, T value)
         {

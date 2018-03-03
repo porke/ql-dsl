@@ -47,9 +47,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Api\InterpretingService.cs" />
+    <Compile Include="Api\InterpreterService.cs" />
     <Compile Include="Api\ParsedSymbols.cs" />
-    <Compile Include="Api\IParsingService.cs" />
+    <Compile Include="Api\IParserService.cs" />
     <Compile Include="Api\ServiceRegistry.cs" />
     <Compile Include="Ast\BaseVisitor.cs" />
     <Compile Include="Ast\VariableNode.cs" />
@@ -71,12 +71,11 @@
     <Compile Include="Errors\NonBooleanInLogicalExpression.cs" />
     <Compile Include="Errors\VariableUndeclared.cs" />
     <Compile Include="Errors\Error.cs" />
-    <Compile Include="Interpreting\Interpreter.cs" />
-    <Compile Include="Interpreting\InterpretingService.cs" />
-    <Compile Include="Interpreting\InterpretingVisitor.cs" />
+    <Compile Include="Interpreting\InterpreterVisitor.cs" />
+    <Compile Include="Interpreting\InterpreterService.cs" />
     <Compile Include="Parsing\ErrorListener.cs" />
     <Compile Include="Parsing\ParsingFailureException.cs" />
-    <Compile Include="Parsing\ParsingService.cs" />
+    <Compile Include="Parsing\ParserService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="QL.g4.lexer.cs">
       <DependentUpon>QL.g4</DependentUpon>
@@ -94,6 +93,7 @@
     <Compile Include="Symbols\SymbolExtractingVisitor.cs" />
     <Compile Include="Symbols\SymbolTable.cs" />
     <Compile Include="Types\QLType.cs" />
+    <Compile Include="Types\Value.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

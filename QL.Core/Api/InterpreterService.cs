@@ -2,7 +2,7 @@
 
 namespace QL.Core.Api
 {
-    public interface IInterpretingService
+    public interface IInterpreterService
     {
         FormNode AssignValue<T>(string questionId, T value);
     }

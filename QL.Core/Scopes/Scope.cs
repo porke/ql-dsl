@@ -6,7 +6,7 @@ namespace QL.Core.Scopes
 {
     public class Scope
     {
-        public readonly IList<Scope> Childeren = new List<Scope>();
+        public readonly IList<Scope> Children = new List<Scope>();
         public readonly Scope Parent;
         public readonly IList<Symbol> Variables = new List<Symbol>();
         public readonly IList<Symbol> References = new List<Symbol>();

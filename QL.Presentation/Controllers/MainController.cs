@@ -7,11 +7,11 @@ namespace QL.Presentation.Controllers
 {
     internal class MainController
     {        
-        private readonly IParsingService _parsingService;
-        private readonly IInterpretingService _interpretingService;
+        private readonly IParserService _parsingService;
+        private readonly IInterpreterService _interpretingService;
         private MainViewModel _mainViewModel;
 
-        public MainController(MainViewModel viewModel, IParsingService parsingService, IInterpretingService interpretingService)
+        public MainController(MainViewModel viewModel, IParserService parsingService, IInterpreterService interpretingService)
         {
             _mainViewModel = viewModel;
             _parsingService = parsingService;
