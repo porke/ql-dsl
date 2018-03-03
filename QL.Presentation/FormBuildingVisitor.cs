@@ -10,12 +10,12 @@ namespace QL.Presentation
     {
         public IList<UIElement> Controls = new List<UIElement>();
 
-        public void Visit(FormNode node)
+        public override void VisitEnter(FormNode node)
         {
             Controls.Add(new Label { Content = node.Label, FontWeight = FontWeights.Bold });
         }
 
-        public void Visit(QuestionNode node)
+        public override void VisitEnter(QuestionNode node)
         {
             var border = new Border { BorderBrush = Brushes.Black };
             var stackPanel = new StackPanel { Orientation = Orientation.Vertical };
