@@ -10,7 +10,8 @@ namespace QL.Core.Test.Interpreting
         public void OneLiteralAssignment_WillChangeTheMemorySpace()
         {
             var interpreter = new Interpreter();
-            
+
+            Assert.Fail();   
         }
     }
 }

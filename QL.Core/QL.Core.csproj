@@ -71,7 +71,9 @@
     <Compile Include="Errors\NonBooleanInLogicalExpression.cs" />
     <Compile Include="Errors\VariableUndeclared.cs" />
     <Compile Include="Errors\Error.cs" />
+    <Compile Include="Interpreting\Interpreter.cs" />
     <Compile Include="Interpreting\InterpretingService.cs" />
+    <Compile Include="Interpreting\InterpretingVisitor.cs" />
     <Compile Include="Parsing\ErrorListener.cs" />
     <Compile Include="Parsing\ParsingFailureException.cs" />
     <Compile Include="Parsing\ParsingService.cs" />

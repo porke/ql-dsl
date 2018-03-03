@@ -18,6 +18,15 @@ namespace QL.Presentation.ViewModels
             _formName = formName;
         }
 
+        internal void Reconcile(FormViewModel form)
+        {
+            _formName = form._formName;
+            for (int i = 0; i < form._questions.Count; ++i)
+            {
+                _questions[i].Reconcile(form._questions[i]);
+            }
+        }
+
         public string FormName => _formName;
 
         public IReactiveList<QuestionViewModel> Questions

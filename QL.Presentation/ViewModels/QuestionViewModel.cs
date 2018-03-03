@@ -16,6 +16,12 @@ namespace QL.Presentation.ViewModels
             _parentForm = parentForm;
         }
 
+        public void Reconcile(QuestionViewModel question)
+        {
+            _description = question._description;
+            _isEvaluated = question._isEvaluated;
+        }
+
         public string Description => _description;
 
         public string Id => _id;

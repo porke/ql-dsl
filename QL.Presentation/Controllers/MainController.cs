@@ -42,12 +42,11 @@ namespace QL.Presentation.Controllers
         {
             var questionViewModel = target as QuestionViewModel;
 
-            _interpretingService.AssignValue(questionViewModel.Id, string.Empty);
+            var formBuildingVisitor = new FormBuildingVisitor();
+            var newForm = _interpretingService.AssignValue(questionViewModel.Id, string.Empty);
+            newForm.Accept(formBuildingVisitor);
 
-            // TODO: 
-            // 1. use the interpreter service to update the model
-            // 2. grab the data from the memory model
-            // 3. reconcile the view models
+            _mainViewModel.Form.Reconcile(formBuildingVisitor.Form);            
         }
     }
 }
