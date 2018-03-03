@@ -2,6 +2,7 @@
 using QL.Core.Errors;
 using QL.Core.Scopes;
 using QL.Core.Symbols;
+using QL.Core.Types;
 using System.Collections.Generic;
 
 namespace QL.Core.Test.Scopes
@@ -13,8 +14,8 @@ namespace QL.Core.Test.Scopes
         public void OneVariableOneReference_WillReturnTwoEmptyLists()
         {
             var ScopeTree = new Scope(parent: null);
-            ScopeTree.AddVariable(new Symbol("a", SymbolType.Integer, token: null));
-            ScopeTree.AddReference(new Symbol("a", SymbolType.Integer, token: null));
+            ScopeTree.AddVariable(new Symbol("a", QLType.Integer, token: null));
+            ScopeTree.AddReference(new Symbol("a", QLType.Integer, token: null));
 
             var Validator = new ScopeTreeValidator();
             List<Error> Errors = Validator.CheckReferencesScope(ScopeTree);
@@ -26,7 +27,7 @@ namespace QL.Core.Test.Scopes
         public void OneReferencesNoVariable_WillReturnOneUnreferencedVariable()
         {
             var ScopeTree = new Scope(parent: null);
-            ScopeTree.AddReference(new Symbol("a", SymbolType.Undefined, token: null));
+            ScopeTree.AddReference(new Symbol("a", QLType.Undefined, token: null));
 
             var Validator = new ScopeTreeValidator();
             List<Error> Errors = Validator.CheckReferencesScope(ScopeTree);
@@ -38,9 +39,9 @@ namespace QL.Core.Test.Scopes
         public void OneReferencesNoVariableInScope_WillReturnReferencedOutOfScope()
         {
             var ScopeTree = new Scope(parent: null);
-            ScopeTree.AddReference(new Symbol("a", SymbolType.Integer, token: null));
+            ScopeTree.AddReference(new Symbol("a", QLType.Integer, token: null));
             var SecondScope = new Scope(ScopeTree);
-            SecondScope.AddVariable(new Symbol("a", SymbolType.Integer, token: null));
+            SecondScope.AddVariable(new Symbol("a", QLType.Integer, token: null));
             ScopeTree.Childeren.Add(SecondScope);
 
             var Validator = new ScopeTreeValidator();

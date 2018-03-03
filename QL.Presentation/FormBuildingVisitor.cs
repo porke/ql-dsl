@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Windows.Controls;
 using System.Windows;
 using System.Windows.Media;
+using QL.Core.Types;
 
 namespace QL.Presentation
 {
@@ -22,7 +23,7 @@ namespace QL.Presentation
             border.Child = stackPanel;
             switch (node.Type)
             {
-                case "boolean":
+                case QLType.Boolean:
                     stackPanel.Children.Add(new CheckBox { Content = node.Description });
                     break;
                 default:

@@ -89,7 +89,7 @@
     <Compile Include="Symbols\Symbol.cs" />
     <Compile Include="Symbols\SymbolExtractingVisitor.cs" />
     <Compile Include="Symbols\SymbolTable.cs" />
-    <Compile Include="Symbols\SymbolType.cs" />
+    <Compile Include="Types\QLType.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -100,9 +100,7 @@
       <CustomToolNamespace>QL.Core</CustomToolNamespace>
     </Antlr4>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Types\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

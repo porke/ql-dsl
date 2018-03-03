@@ -1,6 +1,8 @@
 ﻿using QL.Core.Ast;
 using static QL.Core.QLParser;
 using Antlr4.Runtime.Tree;
+using QL.Core.Types;
+using System;
 
 namespace QL.Core.Parsing
 {
@@ -52,10 +54,11 @@ namespace QL.Core.Parsing
 
         public override Node VisitQuestion(QuestionContext context)
         {
+            
             var question = new QuestionNode(context.Start,
                 context.STRING().GetText().Replace("\"", string.Empty),
                 context.LABEL().GetText(),
-                context.type().GetText());
+                QLTypes.FromStringTypeToQLType(context.type().GetText()));
             question.AddChild(Visit(context.expression()));
 
             return question;
@@ -88,7 +91,8 @@ namespace QL.Core.Parsing
 
         public override Node VisitLiteralExpression(LiteralExpressionContext context)
         {
-            return new LiteralNode(context.Start, context.literal().GetText());
+            QLType type = QLTypes.FromTokenTypeToQLType(context.Start);
+            return new LiteralNode(context.Start, context.literal().GetText(), type);
         }
 
         public override Node VisitUnaryExpression(UnaryExpressionContext context)
