@@ -10,6 +10,7 @@ namespace QL.Core.Ast
         }
 
         public string Operator { get; }
+        public bool IsBinary => ChildNodes.Count == 2;
 
         protected override T VisitNode<T>(IVisitor<T> visitor)
         {

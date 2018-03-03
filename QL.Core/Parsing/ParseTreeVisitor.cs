@@ -57,7 +57,6 @@ namespace QL.Core.Parsing
 
         public override Node VisitQuestion(QuestionContext context)
         {
-            
             var question = new QuestionNode(context.Start,
                 context.STRING().GetText().Replace("\"", string.Empty),
                 context.LABEL().GetText(),

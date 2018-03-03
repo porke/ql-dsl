@@ -25,10 +25,16 @@ namespace QL.Presentation.ViewModels
             }
             else
             {
-                Form.Questions.Add(new TextQuestionViewModel(node.Description, node.Label, false, string.Empty, Form));
+                string evaluatedValue = node.ChildNodes[0].Accept(this).ToString();
+                Form.Questions.Add(new TextQuestionViewModel(node.Description, node.Label, false, evaluatedValue, Form));
             }
 
             return null;
+        }
+
+        public override object Visit(LiteralNode node)
+        {
+            return node.Value;
         }
     }
 }

@@ -4,6 +4,7 @@ namespace QL.Core.Api
 {
     public interface IInterpreterService
     {
-        FormNode AssignValue<T>(string questionId, T value);
+        Node AssignValue<T>(string questionId, T value, Node ast);
+        Node EvaluateAst(Node ast);
     }
 }

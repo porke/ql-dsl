@@ -6,9 +6,15 @@ namespace QL.Core.Interpreting
 {
     internal class InterpreterService : IInterpreterService
     {
-        public FormNode AssignValue<T>(string questionLabel, T value)
+        public Node AssignValue<T>(string questionId, T value, Node ast)
         {
             throw new NotImplementedException();
+        }
+
+        public Node EvaluateAst(Node ast)
+        {
+            var visitor = new InterpreterVisitor();
+            return visitor.EvaluateAst(ast);
         }
     }
 }

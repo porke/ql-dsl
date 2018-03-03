@@ -11,12 +11,12 @@
 
         public bool ToBool()
         {
-            return (bool)_value;
+            return bool.Parse(_value.ToString());
         }
 
         public int ToInt()
         {
-            return (int)_value;
+            return int.Parse(_value.ToString());
         }
     }
 }
