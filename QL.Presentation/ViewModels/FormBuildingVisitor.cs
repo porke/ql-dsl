@@ -1,4 +1,5 @@
 ﻿using QL.Core.Ast;
+using QL.Core.Types;
 
 namespace QL.Presentation.ViewModels
 {
@@ -19,14 +20,15 @@ namespace QL.Presentation.ViewModels
                 return null;
             }
 
-            if (node.Type == Core.Types.QLType.Boolean)
+            if (node.Type == QLType.Boolean)
             {
-                Form.Questions.Add(new BooleanQuestionViewModel(node.Description, node.Label, false, value: false, parentForm: Form));
+                bool evaluatedValue = node.ChildNodes.Count > 0 ? bool.Parse(node.ChildNodes[0].Accept(this).ToString()) : false;
+                Form.Questions.Add(new BooleanQuestionViewModel(node.Description, node.Label, false, evaluatedValue, parentForm: Form));
             }
             else
             {
                 string evaluatedValue = node.ChildNodes.Count > 0 ? node.ChildNodes[0].Accept(this).ToString() : string.Empty;
-                Form.Questions.Add(new TextQuestionViewModel(node.Description, node.Label, false, evaluatedValue, Form));
+                Form.Questions.Add(new TextQuestionViewModel(node.Description, node.Label, false, evaluatedValue, parentForm: Form));
             }
 
             return null;
