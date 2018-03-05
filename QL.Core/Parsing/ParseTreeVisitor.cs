@@ -57,11 +57,13 @@ namespace QL.Core.Parsing
 
         public override Node VisitQuestion(QuestionContext context)
         {
+            var expressionNode = Visit(context.expression());
             var question = new QuestionNode(context.Start,
                 context.STRING().GetText().Replace("\"", string.Empty),
                 context.LABEL().GetText(),
+                expressionNode != null,
                 QLTypes.FromStringTypeToQLType(context.type().GetText()));
-            question.AddChild(Visit(context.expression()));
+            question.AddChild(expressionNode);
 
             return question;
         }

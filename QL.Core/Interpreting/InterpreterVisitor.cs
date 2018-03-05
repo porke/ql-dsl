@@ -1,16 +1,17 @@
 ﻿using Antlr4.Runtime;
 using QL.Core.Ast;
 using QL.Core.Types;
-using System.Collections.Generic;
+using System.Linq;
 
 namespace QL.Core.Interpreting
 {
     internal class InterpreterVisitor : BaseVisitor<Node>
-    {       
-        private Dictionary<string, Value> _globalMemory = new Dictionary<string, Value>();
+    {
+        private MemorySystem _memory;
 
-        internal Node EvaluateAst(Node ast)
+        internal Node EvaluateAst(Node ast, MemorySystem memory)
         {
+            _memory = memory;
             return ast.Accept(this);
         }
 
@@ -36,10 +37,17 @@ namespace QL.Core.Interpreting
 
         public override Node Visit(QuestionNode question)
         {
-            var questionNode = new QuestionNode(question.Token, question.Description, question.Label, question.Type);
+            var questionNode = new QuestionNode(question.Token, question.Description, question.Label, question.IsEvaluated, question.Type);
             foreach (var expression in question.ChildNodes)
             {
-                questionNode.AddChild(expression.Accept(this));
+                var evaluatedNode = expression.Accept(this) as LiteralNode;
+                _memory.AssignValue(question.Label, new Value(evaluatedNode.Value));
+                questionNode.AddChild(evaluatedNode);
+            }
+
+            if (!questionNode.ChildNodes.Any())
+            {
+                questionNode.ChildNodes.Add(new LiteralNode(question.Token, _memory.RetrieveValue(question.Label).ToString(), question.Type));
             }
 
             return questionNode;
@@ -84,16 +92,21 @@ namespace QL.Core.Interpreting
 
         public override Node Visit(VariableNode variable)
         {
-            // TODO: Fetch variable value from memory
-            return new LiteralNode(variable.Token, string.Empty, QLType.Undefined);
+            // TODO: The interpreter currently can only correctly resolve variables which have already been defined
+            // If the variable has not vet been evaluated then it will be initialized with a default value
+            // This can lead to the final computation being incorrect.
+            return new LiteralNode(variable.Token, _memory.RetrieveValue(variable.Label).ToString(), QLType.Undefined);
         }
 
         private Node EvaluateBinaryExpression(Node leftOperandNode, Node rightOperandNode, string @operator, IToken token)
         {
+            // TODO: we need to introduce a proper type system and type promotion
             object leftOperandValue = (leftOperandNode.Accept(this) as LiteralNode).Value;
             object rightOperandValue = (rightOperandNode.Accept(this) as LiteralNode).Value;
             var leftValue = new Value(leftOperandValue);
             var rightValue = new Value(rightOperandValue);
+            
+            // TODO: the switch will need to be replaced with a different way of dispatching the correct logic
             switch (@operator)
             {
                 case "-":

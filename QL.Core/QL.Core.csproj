@@ -47,7 +47,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Api\InterpreterService.cs" />
+    <Compile Include="Api\IInterpreterService.cs" />
     <Compile Include="Api\ParsedSymbols.cs" />
     <Compile Include="Api\IParserService.cs" />
     <Compile Include="Api\ServiceRegistry.cs" />
@@ -72,6 +72,7 @@
     <Compile Include="Errors\Error.cs" />
     <Compile Include="Interpreting\InterpreterVisitor.cs" />
     <Compile Include="Interpreting\InterpreterService.cs" />
+    <Compile Include="Interpreting\MemorySystem.cs" />
     <Compile Include="Parsing\ErrorListener.cs" />
     <Compile Include="Parsing\ParsingFailureException.cs" />
     <Compile Include="Parsing\ParserService.cs" />

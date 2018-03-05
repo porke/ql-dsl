@@ -18,5 +18,10 @@
         {
             return int.Parse(_value.ToString());
         }
+
+        public override string ToString()
+        {
+            return _value.ToString();
+        }
     }
 }

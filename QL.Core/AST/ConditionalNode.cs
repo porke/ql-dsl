@@ -11,9 +11,7 @@ namespace QL.Core.Ast
 
         protected override T VisitNode<T>(IVisitor<T> visitor)
         {
-            var returnValue = visitor.Visit(this);
-            VisitChildren(visitor);
-            return returnValue;
+            return visitor.Visit(this);
         }
     }
 }

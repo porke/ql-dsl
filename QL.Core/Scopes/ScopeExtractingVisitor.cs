@@ -44,15 +44,15 @@ namespace QL.Core.Scopes
             {
                 var childScope = CreateChildScope();
                 _scopes.Push(childScope);
-            }            
+            }
 
-            return _scopes.Peek();
+            return VisitChildren(node);
         }
 
         public override Scope Visit(QuestionNode node)
         {
             _scopes.Peek().AddVariable(_symbolTable[node.Label]);
-            return _scopes.Peek();
+            return VisitChildren(node);
         }
 
         public override Scope Visit(VariableNode node)

@@ -1,5 +1,7 @@
 ﻿using QL.Core.Api;
 using QL.Core.Ast;
+using QL.Core.Interpreting;
+using QL.Core.Types;
 using QL.Presentation.ViewModels;
 using System;
 using System.Linq;
@@ -10,7 +12,8 @@ namespace QL.Presentation.Controllers
     {        
         private readonly IParserService _parsingService;
         private readonly IInterpreterService _interpretingService;
-        private MainViewModel _mainViewModel;
+        private readonly MainViewModel _mainViewModel;
+        private MemorySystem _memory;
 
         public MainController(MainViewModel viewModel, IParserService parsingService, IInterpreterService interpretingService)
         {
@@ -33,22 +36,27 @@ namespace QL.Presentation.Controllers
             }
             _mainViewModel.QuestionnaireValidation = "Validation succeeded! Enjoy your questionnaire";
 
-            Node evaluatedAst = _interpretingService.EvaluateAst(parsedSymbols.FormNode);
-            var formBuildingVisitor = new FormBuildingVisitor();
-            evaluatedAst.Accept(formBuildingVisitor);
-            _mainViewModel.Form = formBuildingVisitor.Form;
-            _mainViewModel.Form.QuestionValueAssignedCommand = new RelayCommand<QuestionViewModel>(QuestionValueAssignedCommand_Execute);
+            _memory = new MemorySystem();
+            RebuildQuestionnaire(parsedSymbols.FormNode, _memory);
         }
 
         private void QuestionValueAssignedCommand_Execute(object target)
         {
             var questionViewModel = target as QuestionViewModel;
+            _memory.AssignValue(questionViewModel.Id, new Value(questionViewModel.Value));
 
-            var formBuildingVisitor = new FormBuildingVisitor();
-            var newForm = _interpretingService.AssignValue(questionViewModel.Id, string.Empty, null);
-            newForm.Accept(formBuildingVisitor);
+            Node ast = _parsingService.ParseQLInput(_mainViewModel.QuestionnaireInput).FormNode;
+            RebuildQuestionnaire(ast, _memory);
+        }
 
-            _mainViewModel.Form.Reconcile(formBuildingVisitor.Form);            
+        private void RebuildQuestionnaire(Node ast, MemorySystem memory)
+        {
+            Node evaluatedAst = _interpretingService.EvaluateQuestionnaire(ast, memory);
+
+            var formBuildingVisitor = new FormViewModelBuildingVisitor();
+            evaluatedAst.Accept(formBuildingVisitor);
+            _mainViewModel.Form = formBuildingVisitor.Form;
+            _mainViewModel.Form.QuestionValueAssignedCommand = new RelayCommand<QuestionViewModel>(QuestionValueAssignedCommand_Execute);
         }
     }
 }

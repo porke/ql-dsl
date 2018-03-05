@@ -30,14 +30,6 @@ namespace QL.Core.Ast
 
         protected abstract T VisitNode<T>(IVisitor<T> visitor);
 
-        protected void VisitChildren<T>(IVisitor<T> visitor)
-        {
-            foreach (Node child in _childNodes)
-            {
-                child.Accept(visitor);
-            }
-        }
-
         public IToken Token => _token;
         public IList<Node> ChildNodes => _childNodes;
     }

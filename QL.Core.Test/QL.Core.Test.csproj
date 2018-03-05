@@ -83,8 +83,10 @@
     <EmbeddedResource Include="IncorrectForms\unclosedBlock.ql" />
     <EmbeddedResource Include="IncorrectForms\binaryExpressionWithMissingOperand.ql" />
     <EmbeddedResource Include="CorrectForms\threeNestedQuestions.ql" />
-    <EmbeddedResource Include="CorrectForms\oneLiteralAssignment.ql" />
+    <EmbeddedResource Include="CorrectForms\oneBooleanEvaluation.ql" />
     <EmbeddedResource Include="CorrectForms\oneConditional.ql" />
+    <EmbeddedResource Include="CorrectForms\twoQuestionsOneReference.ql" />
+    <EmbeddedResource Include="CorrectForms\oneLiteralAssignment.ql" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
