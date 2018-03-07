@@ -7,16 +7,14 @@ namespace QL.Core.Interpreting
     {
         private Dictionary<string, Value> _values = new Dictionary<string, Value>();
 
-        public Value RetrieveValue(string id)
+        public bool TryRetrieveValue(string id, out Value returnValue)
         { 
-            Value returnValue;
             if (!_values.TryGetValue(id, out returnValue))
             {
-                returnValue = new Value(0);
-                AssignValue(id, returnValue);
+                return false;
             }
 
-            return returnValue;
+            return true;
         }
 
         public void AssignValue(string id, Value value)

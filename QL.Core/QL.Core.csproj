@@ -73,6 +73,11 @@
     <Compile Include="Interpreting\InterpreterVisitor.cs" />
     <Compile Include="Interpreting\InterpreterService.cs" />
     <Compile Include="Interpreting\MemorySystem.cs" />
+    <Compile Include="Operators\AdditionOperator.cs" />
+    <Compile Include="Operators\BooleanNegationOperator.cs" />
+    <Compile Include="Operators\IBinaryOperator.cs" />
+    <Compile Include="Operators\IUnaryOperator.cs" />
+    <Compile Include="Operators\NegationOperator.cs" />
     <Compile Include="Parsing\ErrorListener.cs" />
     <Compile Include="Parsing\ParsingFailureException.cs" />
     <Compile Include="Parsing\ParserService.cs" />
@@ -93,6 +98,7 @@
     <Compile Include="Symbols\SymbolExtractingVisitor.cs" />
     <Compile Include="Symbols\SymbolTable.cs" />
     <Compile Include="Types\QLType.cs" />
+    <Compile Include="Operators\OperatorResultTypeResolver.cs" />
     <Compile Include="Types\Value.cs" />
   </ItemGroup>
   <ItemGroup>

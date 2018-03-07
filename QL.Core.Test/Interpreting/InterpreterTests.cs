@@ -33,7 +33,7 @@ namespace QL.Core.Test.Interpreting
         {            
             // Arrange
             var parsedSymbols = _parsingService.ParseQLInput(TestDataResolver.LoadTestFile("oneLiteralAssignment.ql"));
-            var newAst = _interpreter.EvaluateAst(parsedSymbols.FormNode, _memory);
+            var newAst = _interpreter.EvaluateAst(parsedSymbols.FormNode, _memory, parsedSymbols.Symbols);
             _assertVisitor.EnqueueLiteralNodeCallback(ln =>
             {
                 Assert.AreEqual("100", ln.Value);
@@ -51,7 +51,7 @@ namespace QL.Core.Test.Interpreting
         {
             // Arrange
             var parsedSymbols = _parsingService.ParseQLInput(TestDataResolver.LoadTestFile("oneBooleanEvaluation.ql"));
-            var newAst = _interpreter.EvaluateAst(parsedSymbols.FormNode, _memory);
+            var newAst = _interpreter.EvaluateAst(parsedSymbols.FormNode, _memory, parsedSymbols.Symbols);
             _assertVisitor.EnqueueLiteralNodeCallback(ln =>
             {
                 Assert.AreEqual(true, bool.Parse(ln.Value));
@@ -69,7 +69,7 @@ namespace QL.Core.Test.Interpreting
         {
             // Arrange
             var parsedSymbols = _parsingService.ParseQLInput(TestDataResolver.LoadTestFile("oneConditional.ql"));
-            var newAst = _interpreter.EvaluateAst(parsedSymbols.FormNode, _memory);
+            var newAst = _interpreter.EvaluateAst(parsedSymbols.FormNode, _memory, parsedSymbols.Symbols);
             _assertVisitor.EnqueueQuestionNodeCallback(q =>
             {
                 Assert.AreEqual("elseQuestion", q.Description);
@@ -87,8 +87,8 @@ namespace QL.Core.Test.Interpreting
         {
             // Arrange
             var parsedSymbols = _parsingService.ParseQLInput(TestDataResolver.LoadTestFile("twoQuestionsOneReference.ql"));
-            _memory.AssignValue("whatIsMeaning", new Value(42));
-            var newAst = _interpreter.EvaluateAst(parsedSymbols.FormNode, _memory);
+            _memory.AssignValue("whatIsMeaning", new Value(42, QLType.Integer));
+            var newAst = _interpreter.EvaluateAst(parsedSymbols.FormNode, _memory, parsedSymbols.Symbols);
             _assertVisitor.EnqueueLiteralNodeCallback(lt => 
             {
                 Assert.AreEqual(42, int.Parse(lt.Value));

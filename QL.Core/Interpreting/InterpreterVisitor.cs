@@ -1,16 +1,27 @@
 ﻿using Antlr4.Runtime;
 using QL.Core.Ast;
+using QL.Core.Operators;
+using QL.Core.Symbols;
 using QL.Core.Types;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace QL.Core.Interpreting
 {
     internal class InterpreterVisitor : BaseVisitor<Node>
     {
+        private SymbolTable _symbols;
         private MemorySystem _memory;
+        private Dictionary<string, IUnaryOperator> _unaryOperators = new Dictionary<string, IUnaryOperator>
+        { { "!", new BooleanNegationOperator() },
+          { "-", new NegationOperator()} };
 
-        internal Node EvaluateAst(Node ast, MemorySystem memory)
+        private Dictionary<string, IBinaryOperator> _binaryOperators = new Dictionary<string, IBinaryOperator>
+        { {"+", new AdditionOperator() } };        
+
+        internal Node EvaluateAst(Node ast, MemorySystem memory, SymbolTable symbols)
         {
+            _symbols = symbols;
             _memory = memory;
             return ast.Accept(this);
         }
@@ -41,13 +52,19 @@ namespace QL.Core.Interpreting
             foreach (var expression in question.ChildNodes)
             {
                 var evaluatedNode = expression.Accept(this) as LiteralNode;
-                _memory.AssignValue(question.Label, new Value(evaluatedNode.Value));
+                _memory.AssignValue(question.Label, new Value(evaluatedNode.Value, question.Type));
                 questionNode.AddChild(evaluatedNode);
             }
 
             if (!questionNode.ChildNodes.Any())
             {
-                questionNode.ChildNodes.Add(new LiteralNode(question.Token, _memory.RetrieveValue(question.Label).ToString(), question.Type));
+                Value memoryValue;
+                if (!_memory.TryRetrieveValue(question.Label, out memoryValue))
+                {
+                    memoryValue = new Value(question.Type);
+                }
+
+                questionNode.ChildNodes.Add(new LiteralNode(question.Token, memoryValue.ToString(), question.Type));
             }
 
             return questionNode;
@@ -56,7 +73,7 @@ namespace QL.Core.Interpreting
         public override Node Visit(ConditionalNode conditional)
         {
             Node expressionNode = conditional.ChildNodes[0];
-            var evaluatedNodeValue = new Value((expressionNode.Accept(this) as LiteralNode).Value);
+            var evaluatedNodeValue = new Value((expressionNode.Accept(this) as LiteralNode).Value, QLType.Boolean);
             if (evaluatedNodeValue.ToBool())
             {
                 var ifNode = conditional.ChildNodes[1];
@@ -95,24 +112,29 @@ namespace QL.Core.Interpreting
             // TODO: The interpreter currently can only correctly resolve variables which have already been defined
             // If the variable has not vet been evaluated then it will be initialized with a default value
             // This can lead to the final computation being incorrect.
-            return new LiteralNode(variable.Token, _memory.RetrieveValue(variable.Label).ToString(), QLType.Undefined);
+            Value memoryValue;
+            if (!_memory.TryRetrieveValue(variable.Label, out memoryValue))
+            {
+                memoryValue = new Value(_symbols[variable.Label].Type);
+            }
+            return new LiteralNode(variable.Token, memoryValue.ToString(), memoryValue.Type);
         }
 
         private Node EvaluateBinaryExpression(Node leftOperandNode, Node rightOperandNode, string @operator, IToken token)
         {
-            // TODO: we need to introduce a proper type system and type promotion
-            object leftOperandValue = (leftOperandNode.Accept(this) as LiteralNode).Value;
-            object rightOperandValue = (rightOperandNode.Accept(this) as LiteralNode).Value;
-            var leftValue = new Value(leftOperandValue);
-            var rightValue = new Value(rightOperandValue);
-            
-            // TODO: the switch will need to be replaced with a different way of dispatching the correct logic
+            var leftOperandLiteral = leftOperandNode.Accept(this) as LiteralNode;
+            var rightOperandLiteral = rightOperandNode.Accept(this) as LiteralNode;
+            var leftValue = new Value(leftOperandLiteral.Value, leftOperandLiteral.Type);
+            var rightValue = new Value(rightOperandLiteral.Value, rightOperandLiteral.Type);
+
+            // TODO: the switch will need to be replaced with a different way of dispatching the correct logic            
             switch (@operator)
             {
                 case "-":
                     return new LiteralNode(token, (leftValue.ToInt() - rightValue.ToInt()).ToString(), QLType.Undefined);
                 case "+":
-                    return new LiteralNode(token, (leftValue.ToInt() + rightValue.ToInt()).ToString(), QLType.Undefined);
+                    Value returnValue = _binaryOperators[@operator].Evaluate(leftValue, rightValue);
+                    return new LiteralNode(token, returnValue.ToString(), returnValue.Type);
                 case "*":
                     return new LiteralNode(token, (leftValue.ToInt() * rightValue.ToInt()).ToString(), QLType.Undefined);
                 case "/":
@@ -140,17 +162,11 @@ namespace QL.Core.Interpreting
 
         private Node EvaluateUnaryExpression(Node node, string @operator, IToken token)
         {
-            object value = (node.Accept(this) as LiteralNode).Value;
-            var nodeValue = new Value(value);
-            switch (@operator)
-            {
-                case "-":
-                    return new LiteralNode(token, (-nodeValue.ToInt()).ToString(), QLType.Undefined);
-                case "!":
-                    return new LiteralNode(token, (!nodeValue.ToBool()).ToString(), QLType.Boolean);
-            }
+            var operand = node.Accept(this) as LiteralNode;
+            var nodeValue = new Value(operand.Value, operand.Type);
 
-            return null;
+            var returnValue = _unaryOperators[@operator].Evaluate(nodeValue);
+            return new LiteralNode(token, returnValue.ToString(), returnValue.Type);
         }
     }
 }

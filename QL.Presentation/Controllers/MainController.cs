@@ -1,6 +1,7 @@
 ﻿using QL.Core.Api;
 using QL.Core.Ast;
 using QL.Core.Interpreting;
+using QL.Core.Symbols;
 using QL.Core.Types;
 using QL.Presentation.ViewModels;
 using System;
@@ -14,6 +15,7 @@ namespace QL.Presentation.Controllers
         private readonly IInterpreterService _interpretingService;
         private readonly MainViewModel _mainViewModel;
         private MemorySystem _memory;
+        private SymbolTable _symbols;
 
         public MainController(MainViewModel viewModel, IParserService parsingService, IInterpreterService interpretingService)
         {
@@ -34,24 +36,31 @@ namespace QL.Presentation.Controllers
                 (err, acc) => err + Environment.NewLine + acc);
                 return;
             }
+            _symbols = parsedSymbols.Symbols;
             _mainViewModel.QuestionnaireValidation = "Validation succeeded! Enjoy your questionnaire";
 
             _memory = new MemorySystem();
-            RebuildQuestionnaire(parsedSymbols.FormNode, _memory);
+            RebuildQuestionnaire(parsedSymbols.FormNode);
         }
 
         private void QuestionValueAssignedCommand_Execute(object target)
         {
             var questionViewModel = target as QuestionViewModel;
-            _memory.AssignValue(questionViewModel.Id, new Value(questionViewModel.Value));
+
+            Value memoryValue;
+            if(!_memory.TryRetrieveValue(questionViewModel.Id, out memoryValue))
+            {
+                memoryValue = new Value(_symbols[questionViewModel.Id].Type);
+            }
+            _memory.AssignValue(questionViewModel.Id, new Value(questionViewModel.Value, memoryValue.Type));
 
             Node ast = _parsingService.ParseQLInput(_mainViewModel.QuestionnaireInput).FormNode;
-            RebuildQuestionnaire(ast, _memory);
+            RebuildQuestionnaire(ast);
         }
 
-        private void RebuildQuestionnaire(Node ast, MemorySystem memory)
+        private void RebuildQuestionnaire(Node ast)
         {
-            Node evaluatedAst = _interpretingService.EvaluateQuestionnaire(ast, memory);
+            Node evaluatedAst = _interpretingService.EvaluateQuestionnaire(ast, _memory, _symbols);
 
             var formBuildingVisitor = new FormViewModelBuildingVisitor();
             evaluatedAst.Accept(formBuildingVisitor);
