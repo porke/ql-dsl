@@ -29,10 +29,10 @@ namespace QL.Core.Test.Scopes
             Scope scope = scopeExtractor.GetTopLevelScope();
             Assert.AreEqual(1, scope.Variables.Count);
             Assert.AreEqual("whatIsMeaning", scope.Variables[0].Name);
-            Assert.AreEqual(QLType.Money, scope.Variables[0].Type);
+            Assert.AreEqual(QLType.Decimal, scope.Variables[0].Type);
             Assert.AreEqual(1, scope.References.Count);
             Assert.AreEqual("whatIsMeaning", scope.References[0].Name);
-            Assert.AreEqual(QLType.Money, scope.References[0].Type);
+            Assert.AreEqual(QLType.Decimal, scope.References[0].Type);
             Assert.AreEqual(1, scope.Children.Count);
             scope = scope.Children[0];
             Assert.AreEqual(1, scope.Variables.Count);
@@ -40,7 +40,7 @@ namespace QL.Core.Test.Scopes
             Assert.AreEqual(QLType.Boolean, scope.Variables[0].Type);
             Assert.AreEqual(1, scope.References.Count);
             Assert.AreEqual("whatIsMeaning", scope.References[0].Name);
-            Assert.AreEqual(QLType.Money, scope.References[0].Type);
+            Assert.AreEqual(QLType.Decimal, scope.References[0].Type);
             Assert.AreEqual(1, scope.Children.Count);
             scope = scope.Children[0];
             Assert.AreEqual(1, scope.Variables.Count);

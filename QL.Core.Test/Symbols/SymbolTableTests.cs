@@ -25,7 +25,7 @@ namespace QL.Core.Test.Symbols
 
             Assert.AreEqual(1, symbolExtractor.SymbolTable.Count);
             Assert.AreEqual("whatIsMeaning", symbolExtractor.SymbolTable[0].Name);
-            Assert.AreEqual(QLType.Money, symbolExtractor.SymbolTable[0].Type);
+            Assert.AreEqual(QLType.Decimal, symbolExtractor.SymbolTable[0].Type);
         }
 
         [TestMethod]
@@ -40,7 +40,7 @@ namespace QL.Core.Test.Symbols
             Assert.AreEqual("whatIsMeaning", symbolExtractor.SymbolTable[0].Name);
             Assert.AreEqual("hasSoldHouse", symbolExtractor.SymbolTable[1].Name);
             Assert.AreEqual("dayToday", symbolExtractor.SymbolTable[2].Name);
-            Assert.AreEqual(QLType.Money, symbolExtractor.SymbolTable[0].Type);
+            Assert.AreEqual(QLType.Decimal, symbolExtractor.SymbolTable[0].Type);
             Assert.AreEqual(QLType.Boolean, symbolExtractor.SymbolTable[1].Type);
             Assert.AreEqual(QLType.Date, symbolExtractor.SymbolTable[2].Type);
         }

@@ -15,10 +15,6 @@ namespace QL.Core.Operators
             {
                 return new Value(-input.ToDecimal(), input.Type);
             }
-            else if (input.Type == QLType.Money)
-            {
-                return new Value(-input.ToMoney(), input.Type);
-            }
 
             throw new NotSupportedException($"{input.Type} is not supported by the negation operator.");
         }

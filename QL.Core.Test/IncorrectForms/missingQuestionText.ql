@@ -1,3 +1,3 @@
 ﻿form test {
-whatIsThis: money
+whatIsThis: decimal
 }

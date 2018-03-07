@@ -2,6 +2,6 @@
 "TestInteger"
 testInt: integer
 
-"TestMoney"
-testMoney: money = 2 + testInt
+"TestDecimal"
+testDecimal: decimal = 2 + testInt
 }

@@ -38,9 +38,7 @@ namespace QL.Core.Operators
 
         static OperatorResultTypeResolver()
         {
-            _typeResolutions.Add(new TypePair(QLType.Integer, QLType.Money), QLType.Money);
             _typeResolutions.Add(new TypePair(QLType.Integer, QLType.Decimal), QLType.Decimal);
-            _typeResolutions.Add(new TypePair(QLType.Decimal, QLType.Money), QLType.Decimal);
 
             var invertedResolutions = _typeResolutions.Select(kvp => new KeyValuePair<TypePair, QLType>(kvp.Key.GetSwappedPair(), kvp.Value))
                                                       .ToDictionary(kvp => kvp.Key, kvp => kvp.Value);

@@ -8,9 +8,9 @@ namespace QL.Core.Test.Operators
     public class OperatorResultTypeResolverTests
     {
         [TestMethod]
-        public void IntegerAndMoney_WillPromoteToMoney()
+        public void IntegerAndDecimal_WillPromoteToDecimal()
         {
-            Assert.AreEqual(QLType.Money, OperatorResultTypeResolver.ResolveOperationType(QLType.Integer, QLType.Money));
+            Assert.AreEqual(QLType.Decimal, OperatorResultTypeResolver.ResolveOperationType(QLType.Integer, QLType.Decimal));
         }
     }
 }

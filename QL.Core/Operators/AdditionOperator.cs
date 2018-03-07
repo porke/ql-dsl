@@ -16,11 +16,6 @@ namespace QL.Core.Operators
             {
                 return new Value(lhs.ToDecimal() + rhs.ToDecimal(), finalType);
             }
-            else if (finalType == QLType.Money)
-            {
-                return new Value(lhs.ToMoney() + rhs.ToMoney(), finalType);
-            }
-
             throw new NotSupportedException($"{finalType} is not supported by the addition operator");
         }
     }

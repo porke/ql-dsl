@@ -1,10 +1,10 @@
 ﻿form test {
 "What is this?"
-watIsDit: money
+watIsDit: decimal
 
 "This is it?"
-isThisIt: money = watIsDit + 
+isThisIt: decimal = watIsDit + 
 
 "No it isnt?"
-noItIsnt: money
+noItIsnt: decimal
 }

@@ -10,7 +10,6 @@ namespace QL.Core.Types
             { QLType.Decimal, 0.0 },
             { QLType.Integer, 0 },
             { QLType.String, "" },
-            { QLType.Money, 0.0d },
             { QLType.Undefined, new object() },
             { QLType.Date, DateTime.MinValue } };
 
@@ -41,11 +40,6 @@ namespace QL.Core.Types
         public int ToInt()
         {
             return int.Parse(_value.ToString());
-        }
-
-        public decimal ToMoney()
-        {
-            return decimal.Parse(_value.ToString());
         }
 
         public double ToDecimal()

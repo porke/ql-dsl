@@ -5,6 +5,6 @@
 	}
 	else {
 		"elseQuestion"
-		 qqq: money
+		 qqq: decimal
 	}
 }

@@ -29,14 +29,12 @@ type: TYPEBOOLEAN
 	| TYPEINTEGER
 	| TYPEDECIMAL
 	| TYPESTRING
-	| TYPEDATE 
-	| TYPEMONEY;
+	| TYPEDATE;
 
 literal: BOOLEAN 
 		| INTEGER 
 		| DECIMAL 
-		| STRING 
-		| MONEY 
+		| STRING
 		| DATE;
 
 binaryOperator: GREATERTHAN 
@@ -90,7 +88,6 @@ TYPEINTEGER:    'integer';
 TYPEDECIMAL:    'decimal';
 TYPESTRING:		'string';
 TYPEDATE:		'date';
-TYPEMONEY:		'money';
 
 LEFTCURLY:		'{';
 RIGHTCURLY:		'}';
@@ -107,10 +104,9 @@ fragment NUMBER:	('0'..'9');
 // Literals
 BOOLEAN:	('true'|'false'); 
 INTEGER:	NUMBER+;
-DECIMAL:	INTEGER '.' (NUMBER (NUMBER)?)?;
+DECIMAL:	INTEGER '.' INTEGER;
 STRING:		'"' .*? '"';
 DATE:		INTEGER '-' INTEGER '-' INTEGER;
-MONEY:		INTEGER '.' NUMBER NUMBER;
 
 // Labels (Placed last, because it will match with other keywords)
 LABEL:	(LOWERCASE|UPPERCASE)(LOWERCASE|UPPERCASE|NUMBER|'_')*;

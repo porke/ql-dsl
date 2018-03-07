@@ -6,7 +6,6 @@ namespace QL.Core.Types
     public enum QLType
     {
         String,
-        Money,
         Date,
         Integer,
         Boolean,
@@ -35,9 +34,6 @@ namespace QL.Core.Types
                     break;
                 case QLParser.STRING:
                     type = QLType.String;
-                    break;
-                case QLParser.MONEY:
-                    type = QLType.Money;
                     break;
             }
             return type;
