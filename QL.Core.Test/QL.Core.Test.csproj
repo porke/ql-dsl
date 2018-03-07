@@ -61,7 +61,7 @@
     <Compile Include="Parsing\ConditionalParseTests.cs" />
     <Compile Include="Parsing\ExpressionParseTests.cs" />
     <Compile Include="Parsing\FormParseTests.cs" />
-    <EmbeddedResource Include="IncorrectForms\wrongType.ql" />
+    <EmbeddedResource Include="TestData\IncorrectForms\wrongType.ql" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Parsing\QuestionParseTests.cs" />
     <Compile Include="Scopes\ScopeTreeTests.cs" />
@@ -71,24 +71,24 @@
     <Compile Include="TestDataResolver.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="CorrectForms\emptyForm.ql" />
-    <EmbeddedResource Include="CorrectForms\ifElseStatement.ql" />
-    <EmbeddedResource Include="CorrectForms\ifStatement.ql" />
-    <EmbeddedResource Include="CorrectForms\multipleQuestions.ql" />
-    <EmbeddedResource Include="CorrectForms\questionWithSimpleAssignment.ql" />
-    <EmbeddedResource Include="CorrectForms\singleQuestion.ql" />
-    <EmbeddedResource Include="CorrectForms\simpleExpression.ql" />
-    <EmbeddedResource Include="IncorrectForms\missingLabel.ql" />
-    <EmbeddedResource Include="IncorrectForms\missingQuestionText.ql" />
-    <EmbeddedResource Include="IncorrectForms\emptyExpression.ql" />
-    <EmbeddedResource Include="IncorrectForms\unclosedBlock.ql" />
-    <EmbeddedResource Include="IncorrectForms\binaryExpressionWithMissingOperand.ql" />
-    <EmbeddedResource Include="CorrectForms\threeNestedQuestions.ql" />
-    <EmbeddedResource Include="CorrectForms\oneBooleanEvaluation.ql" />
-    <EmbeddedResource Include="CorrectForms\oneConditional.ql" />
-    <EmbeddedResource Include="CorrectForms\twoQuestionsOneReference.ql" />
-    <EmbeddedResource Include="CorrectForms\oneLiteralAssignment.ql" />
-    <EmbeddedResource Include="CorrectForms\simpleTypeWideningConversion.ql" />
+    <EmbeddedResource Include="TestData\CorrectForms\emptyForm.ql" />
+    <EmbeddedResource Include="TestData\CorrectForms\ifElseStatement.ql" />
+    <EmbeddedResource Include="TestData\CorrectForms\ifStatement.ql" />
+    <EmbeddedResource Include="TestData\CorrectForms\multipleQuestions.ql" />
+    <EmbeddedResource Include="TestData\CorrectForms\questionWithSimpleAssignment.ql" />
+    <EmbeddedResource Include="TestData\CorrectForms\singleQuestion.ql" />
+    <EmbeddedResource Include="TestData\CorrectForms\simpleExpression.ql" />
+    <EmbeddedResource Include="TestData\IncorrectForms\missingLabel.ql" />
+    <EmbeddedResource Include="TestData\IncorrectForms\missingQuestionText.ql" />
+    <EmbeddedResource Include="TestData\IncorrectForms\emptyExpression.ql" />
+    <EmbeddedResource Include="TestData\IncorrectForms\unclosedBlock.ql" />
+    <EmbeddedResource Include="TestData\IncorrectForms\binaryExpressionWithMissingOperand.ql" />
+    <EmbeddedResource Include="TestData\CorrectForms\threeNestedQuestions.ql" />
+    <EmbeddedResource Include="TestData\CorrectForms\oneBooleanEvaluation.ql" />
+    <EmbeddedResource Include="TestData\CorrectForms\oneConditional.ql" />
+    <EmbeddedResource Include="TestData\CorrectForms\twoQuestionsOneReference.ql" />
+    <EmbeddedResource Include="TestData\CorrectForms\oneLiteralAssignment.ql" />
+    <EmbeddedResource Include="TestData\CorrectForms\simpleTypeWideningConversion.ql" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
