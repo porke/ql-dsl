@@ -1,7 +1,7 @@
 ﻿form test {
 	"What was the selling price?"
-      sellingPrice: money
+      sellingPrice: decimal
 
     "Value house:"
-      valueHouse: money = sellingPrice
+      valueHouse: decimal = sellingPrice
 }
