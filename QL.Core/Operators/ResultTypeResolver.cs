@@ -5,7 +5,7 @@ using System;
 
 namespace QL.Core.Operators
 {
-    internal static class OperatorResultTypeResolver
+    internal static class ResultTypeResolver
     {
         private class TypePair : IEquatable<TypePair>
         {
@@ -36,7 +36,7 @@ namespace QL.Core.Operators
 
         private static Dictionary<TypePair, QLType> _typeResolutions = new Dictionary<TypePair, QLType>();
 
-        static OperatorResultTypeResolver()
+        static ResultTypeResolver()
         {
             _typeResolutions.Add(new TypePair(QLType.Integer, QLType.Decimal), QLType.Decimal);
 

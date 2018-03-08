@@ -72,11 +72,26 @@
     <Compile Include="Interpreting\InterpreterVisitor.cs" />
     <Compile Include="Interpreting\InterpreterService.cs" />
     <Compile Include="Interpreting\MemorySystem.cs" />
-    <Compile Include="Operators\AdditionOperator.cs" />
-    <Compile Include="Operators\BooleanNegationOperator.cs" />
-    <Compile Include="Operators\IBinaryOperator.cs" />
-    <Compile Include="Operators\IUnaryOperator.cs" />
-    <Compile Include="Operators\NegationOperator.cs" />
+    <Compile Include="Operators\Binary\Division.cs" />
+    <Compile Include="Operators\Binary\SmallerOrEqual.cs" />
+    <Compile Include="Operators\Binary\Smaller.cs" />
+    <Compile Include="Operators\Binary\GreaterOrEqual.cs" />
+    <Compile Include="Operators\Binary\Greater.cs" />
+    <Compile Include="Operators\Binary\NotEqual.cs" />
+    <Compile Include="Operators\Binary\Multiplication.cs" />
+    <Compile Include="Operators\Binary\Equal.cs" />
+    <Compile Include="Operators\Binary\And.cs" />
+    <Compile Include="Operators\Binary\Or.cs" />
+    <Compile Include="Operators\Binary\Substraction.cs" />
+    <Compile Include="Operators\Binary\Groups\Logical.cs" />
+    <Compile Include="Operators\Binary\Addition.cs" />
+    <Compile Include="Operators\Binary\Groups\AbsoluteComparisons.cs" />
+    <Compile Include="Operators\Operator.cs" />
+    <Compile Include="Operators\Parser.cs" />
+    <Compile Include="Operators\Unary\BooleanNegation.cs" />
+    <Compile Include="Operators\Binary\Groups\Arithmetical.cs" />
+    <Compile Include="Operators\Binary\Groups\RelativeComparisons.cs" />
+    <Compile Include="Operators\Unary\ArithmeticalNegation.cs" />
     <Compile Include="Parsing\ErrorListener.cs" />
     <Compile Include="Parsing\ParsingFailureException.cs" />
     <Compile Include="Parsing\ParserService.cs" />
@@ -96,7 +111,8 @@
     <Compile Include="Symbols\SymbolExtractingVisitor.cs" />
     <Compile Include="Symbols\SymbolTable.cs" />
     <Compile Include="Types\QLType.cs" />
-    <Compile Include="Operators\OperatorResultTypeResolver.cs" />
+    <Compile Include="Operators\ResultTypeResolver.cs" />
+    <Compile Include="Types\TypeCheckingVisitor.cs" />
     <Compile Include="Types\Value.cs" />
   </ItemGroup>
   <ItemGroup>

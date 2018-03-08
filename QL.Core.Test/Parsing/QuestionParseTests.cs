@@ -1,5 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using QL.Core.Api;
+using QL.Core.Operators;
 using QL.Core.Types;
 
 namespace QL.Core.Test.Parsing
@@ -104,11 +105,11 @@ namespace QL.Core.Test.Parsing
             });
             _assertVisitor.EnqueueExpressionNodeCallback(expression =>
             {
-                Assert.AreEqual("-", expression.Operator);
+                Assert.IsInstanceOfType(expression.Operator, typeof(Substraction));
             });
             _assertVisitor.EnqueueExpressionNodeCallback(expression =>
             {
-                Assert.AreEqual("+", expression.Operator);
+                Assert.IsInstanceOfType(expression.Operator, typeof(Addition));
             });
             _assertVisitor.EnqueueLiteralNodeCallback(literal =>
             {

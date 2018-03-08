@@ -3,9 +3,9 @@ using System;
 
 namespace QL.Core.Operators
 {
-    internal class NegationOperator : IUnaryOperator
+    internal class ArithmeticalNegation : Operator
     {
-        public Value Evaluate(Value input)
+        public override Value Evaluate(Value input, Value empty = null)
         {
             if (input.Type == QLType.Integer)
             {
@@ -16,7 +16,7 @@ namespace QL.Core.Operators
                 return new Value(-input.ToDecimal(), input.Type);
             }
 
-            throw new NotSupportedException($"{input.Type} is not supported by the negation operator.");
+            throw new NotSupportedException($"{input.Type} is not supported by the '-' operator.");
         }
     }
 }

@@ -1,0 +1,4 @@
+﻿namespace QL.Core.Types
+{
+
+}

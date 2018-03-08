@@ -3,11 +3,11 @@ using System;
 
 namespace QL.Core.Operators
 {
-    internal class AdditionOperator : IBinaryOperator
+    internal class Addition : Arithmetical
     {
-        public Value Evaluate(Value lhs, Value rhs)
+        public override Value Evaluate(Value lhs, Value rhs)
         {
-            QLType finalType = OperatorResultTypeResolver.ResolveOperationType(lhs.Type, rhs.Type);
+            QLType finalType = ResultTypeResolver.ResolveOperationType(lhs.Type, rhs.Type);
             if (finalType == QLType.Integer)
             {
                 return new Value(lhs.ToInt() + rhs.ToInt(), finalType);
@@ -16,7 +16,7 @@ namespace QL.Core.Operators
             {
                 return new Value(lhs.ToDecimal() + rhs.ToDecimal(), finalType);
             }
-            throw new NotSupportedException($"{finalType} is not supported by the addition operator");
+            throw new NotSupportedException($"{finalType} is not supported by the '+' operator");
         }
     }
 }

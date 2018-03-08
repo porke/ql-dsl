@@ -10,7 +10,7 @@ namespace QL.Core.Test.Operators
         [TestMethod]
         public void IntegerAndDecimal_WillPromoteToDecimal()
         {
-            Assert.AreEqual(QLType.Decimal, OperatorResultTypeResolver.ResolveOperationType(QLType.Integer, QLType.Decimal));
+            Assert.AreEqual(QLType.Decimal, ResultTypeResolver.ResolveOperationType(QLType.Integer, QLType.Decimal));
         }
     }
 }

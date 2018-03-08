@@ -32,7 +32,7 @@ namespace QL.Core.Types
 
         public QLType Type => _type;
 
-        public bool ToBool()
+        public bool ToBoolean()
         {
             return bool.Parse(_value.ToString());
         }

@@ -2,6 +2,7 @@
 using static QL.Core.QLParser;
 using Antlr4.Runtime.Tree;
 using QL.Core.Types;
+using static QL.Core.Operators.Parser;
 
 namespace QL.Core.Parsing
 {
@@ -101,14 +102,14 @@ namespace QL.Core.Parsing
 
         public override Node VisitUnaryExpression(UnaryExpressionContext context)
         {
-            var expression = new ExpressionNode(context.Start, context.unaryOperator().GetText());
+            var expression = new ExpressionNode(context.Start, StringToUnaryOperator(context.unaryOperator().GetText()));
             expression.AddChild(Visit(context.expression()));
             return expression;
         }
 
         public override Node VisitBinaryExpression(BinaryExpressionContext context)
         {
-            var expression = new ExpressionNode(context.Start, context.binaryOperator().GetText());
+            var expression = new ExpressionNode(context.Start, StringToBinaryOperator(context.binaryOperator().GetText()));
             expression.AddChild(Visit(context.expression(0)));
             expression.AddChild(Visit(context.expression(1)));
             return expression;
