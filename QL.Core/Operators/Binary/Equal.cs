@@ -5,17 +5,17 @@ namespace QL.Core.Operators
 {
     internal class Equal : AbsoluteComparison
     {
-        public override Value Evaluate(Value lhs, Value rhs)
+        public override Value Evaluate(Value leftHand, Value rightHand)
         {
-            switch (lhs.Type)
+            switch (leftHand.Type)
             {
-                case QLType.Integer: return new Value(lhs.ToInt() == rhs.ToInt(), QLType.Boolean);
-                case QLType.Decimal: return new Value(lhs.ToDecimal() == rhs.ToDecimal(), QLType.Boolean);
-                case QLType.Boolean: return new Value(lhs.ToBoolean() == rhs.ToBoolean(), QLType.Boolean);
+                case QLType.Integer: return new Value(leftHand.ToInt() == rightHand.ToInt(), QLType.Boolean);
+                case QLType.Decimal: return new Value(leftHand.ToDecimal() == rightHand.ToDecimal(), QLType.Boolean);
+                case QLType.Boolean: return new Value(leftHand.ToBoolean() == rightHand.ToBoolean(), QLType.Boolean);
                 case QLType.String:
-                case QLType.Date: return new Value(String.Equals(lhs.ToString(), rhs.ToString(), StringComparison.Ordinal), QLType.Boolean);
+                case QLType.Date: return new Value(String.Equals(leftHand.ToString(), rightHand.ToString(), StringComparison.Ordinal), QLType.Boolean);
             }
-            throw new NotSupportedException($"{lhs.Type} is not supported by the '==' operator");
+            throw new NotSupportedException($"{leftHand.Type} is not supported by the '==' operator");
         }
     }
 }

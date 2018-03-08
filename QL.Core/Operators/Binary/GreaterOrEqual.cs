@@ -1,20 +1,21 @@
 ﻿using QL.Core.Types;
-using System;
 
 namespace QL.Core.Operators
 {
     internal class GreaterOrEqual : RelativeComparison
     {
-        public override Value Evaluate(Value lhs, Value rhs)
+        public override Value Evaluate(Value leftHand, Value rightHand)
         {
-            QLType finalType = ResultTypeResolver.ResolveOperationType(lhs.Type, rhs.Type);
-            switch (finalType)
+            if (leftHand.Type == rightHand.Type)
             {
-                case QLType.Integer: return new Value(lhs.ToInt() >= rhs.ToInt(), QLType.Boolean);
-                case QLType.Decimal: return new Value(lhs.ToDecimal() >= rhs.ToDecimal(), QLType.Boolean);
-                case QLType.Date: return new Value(true, QLType.Boolean); // TODO: Implement date comparison.
+                switch (leftHand.Type)
+                {
+                    case QLType.Integer: return new Value(leftHand.ToInt() >= rightHand.ToInt(), QLType.Boolean);
+                    case QLType.Decimal: return new Value(leftHand.ToDecimal() >= rightHand.ToDecimal(), QLType.Boolean);
+                    case QLType.Date: return new Value(true, QLType.Boolean); // TODO: Implement date comparison.
+                }
             }
-            throw new NotSupportedException($"{finalType} is not supported by the '>=' operator");
+            return new Value(leftHand.ToDecimal() >= rightHand.ToDecimal(), QLType.Boolean);
         }
     }
 }

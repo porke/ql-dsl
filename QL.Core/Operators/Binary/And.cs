@@ -4,9 +4,9 @@ namespace QL.Core.Operators
 {
     internal class And : Logical
     {
-        public override Value Evaluate(Value lhs, Value rhs)
+        public override Value Evaluate(Value leftHand, Value rightHand)
         {
-            return new Value(lhs.ToBoolean() && rhs.ToBoolean(), QLType.Boolean);
+            return new Value(leftHand.ToBoolean() && rightHand.ToBoolean(), QLType.Boolean);
         }
     }
 }

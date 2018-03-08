@@ -6,6 +6,7 @@ using QL.Core.Symbols;
 using System.Linq;
 using QL.Core.Scopes;
 using QL.Core.Errors;
+using QL.Core.Types;
 
 namespace QL.Core.Parsing
 {
@@ -51,6 +52,13 @@ namespace QL.Core.Parsing
             var ReferenceErrorExtractor = new ReferenceCheckingVisitor();
             ast.Accept(ReferenceErrorExtractor);
             errors.AddRange(ReferenceErrorExtractor.ReferencingErrors);
+
+            if (errors.Count == 0)
+            {
+                var TypeErrorExtractor = new TypeCheckingVisitor(symbolTable);
+                ast.Accept(TypeErrorExtractor);
+                errors.AddRange(TypeErrorExtractor.TypeErrors);
+            }
            
             return errors.Select(err => err.ToString()).ToList();
         }

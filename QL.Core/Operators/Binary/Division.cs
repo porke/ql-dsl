@@ -5,16 +5,16 @@ namespace QL.Core.Operators
 {
     internal class Division : Arithmetical
     {
-        public override Value Evaluate(Value lhs, Value rhs)
+        public override Value Evaluate(Value leftHand, Value rightHand)
         {
-            QLType finalType = ResultTypeResolver.ResolveOperationType(lhs.Type, rhs.Type);
+            QLType finalType = ResultingType(leftHand.Type, rightHand.Type);
             if (finalType == QLType.Integer)
             {
-                return new Value(lhs.ToInt() / rhs.ToInt(), finalType);
+                return new Value(leftHand.ToInt() / rightHand.ToInt(), finalType);
             }
             else if (finalType == QLType.Decimal)
             {
-                return new Value(lhs.ToDecimal() / rhs.ToDecimal(), finalType);
+                return new Value(leftHand.ToDecimal() / rightHand.ToDecimal(), finalType);
             }
             throw new NotSupportedException($"{finalType} is not supported by the '/' operator");
         }

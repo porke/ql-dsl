@@ -60,14 +60,12 @@
     <Compile Include="Ast\QuestionNode.cs" />
     <Compile Include="Ast\ConditionalNode.cs" />
     <Compile Include="Ast\IVisitor.cs" />
-    <Compile Include="Errors\BinaryOpperator.cs" />
-    <Compile Include="Errors\Assignment.cs" />
-    <Compile Include="Errors\NonBooleanInConditional.cs" />
-    <Compile Include="Errors\UnaryOpperator.cs" />
-    <Compile Include="Errors\Comparison.cs" />
+    <Compile Include="Errors\ConditionalType.cs" />
+    <Compile Include="Errors\QuestionAssignmentType.cs" />
+    <Compile Include="Errors\BinaryOperatorType.cs" />
+    <Compile Include="Errors\UnaryOperatorType.cs" />
     <Compile Include="Errors\ReferenceNotFound.cs" />
     <Compile Include="Errors\VariableDuplicate.cs" />
-    <Compile Include="Errors\NonBooleanInLogicalExpression.cs" />
     <Compile Include="Errors\Error.cs" />
     <Compile Include="Interpreting\InterpreterVisitor.cs" />
     <Compile Include="Interpreting\InterpreterService.cs" />
@@ -111,7 +109,6 @@
     <Compile Include="Symbols\SymbolExtractingVisitor.cs" />
     <Compile Include="Symbols\SymbolTable.cs" />
     <Compile Include="Types\QLType.cs" />
-    <Compile Include="Operators\ResultTypeResolver.cs" />
     <Compile Include="Types\TypeCheckingVisitor.cs" />
     <Compile Include="Types\Value.cs" />
   </ItemGroup>

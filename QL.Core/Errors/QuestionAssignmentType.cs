@@ -1,12 +1,12 @@
 ﻿namespace QL.Core.Errors
 {
-    public class Assignment : Error
+    public class QuestionAssignmentType : Error
     {
         public string QuestionType;
         public string AssignmentType;
         public int ErrorLine;
 
-        public Assignment(string questionType, string assignmentType, int errorLine)
+        public QuestionAssignmentType(string questionType, string assignmentType, int errorLine)
         {
             QuestionType = questionType;
             AssignmentType = assignmentType;
@@ -15,7 +15,7 @@
 
         public override string ToString()
         {
-            return $"Type error in line {ErrorLine}: The question is of type \'{QuestionType}\'"
+            return $"Type error in line {ErrorLine}: The question is of type \'{QuestionType}\' "
                     + $"but the assignment evaluates to a(n) {AssignmentType}";
         }
     }

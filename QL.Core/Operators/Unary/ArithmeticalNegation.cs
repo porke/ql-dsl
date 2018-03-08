@@ -18,5 +18,15 @@ namespace QL.Core.Operators
 
             throw new NotSupportedException($"{input.Type} is not supported by the '-' operator.");
         }
+
+        public override bool AcceptTypes(QLType value, QLType empty = QLType.Undefined)
+        {
+            return (value == QLType.Integer || value == QLType.Decimal);
+        }
+
+        public override QLType ResultingType(QLType value, QLType empty = QLType.Undefined)
+        {
+            return value;
+        }
     }
 }

@@ -1,12 +1,12 @@
 ﻿namespace QL.Core.Errors
 {
-    public class UnaryOpperator : Error
+    public class UnaryOperatorType : Error
     {
         public string Type;
         public string Opperator;
         public int ErrorLine;
 
-        public UnaryOpperator(string type, string opperator, int errorLine)
+        public UnaryOperatorType(string type, string opperator, int errorLine)
         {
             Type = type;
             Opperator = opperator;

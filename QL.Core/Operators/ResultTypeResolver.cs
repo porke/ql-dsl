@@ -48,14 +48,14 @@ namespace QL.Core.Operators
             }
         }
 
-        public static QLType ResolveOperationType(QLType lhs, QLType rhs)
+        public static QLType ResolveOperationType(QLType leftHand, QLType rightHand)
         {
-            if (lhs == rhs)
+            if (leftHand == rightHand)
             {
-                return lhs;
+                return leftHand;
             }
 
-            return _typeResolutions[new TypePair(lhs, rhs)];
+            return _typeResolutions[new TypePair(leftHand, rightHand)];
         }
     }
 }
