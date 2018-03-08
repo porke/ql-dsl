@@ -1,7 +1,7 @@
 ﻿using Antlr4.Runtime;
 using System.Collections.Generic;
 
-namespace QL.Core.Ast
+namespace QLS.Api.Ast
 {
     public abstract class Node
     {
