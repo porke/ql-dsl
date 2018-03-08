@@ -1,30 +1,14 @@
 ﻿using QL.Core.Ast;
-using QL.Core.Symbols;
-using QL.Core.Types;
+using QL.Core.Errors;
 using System.Collections.Generic;
 
 namespace QL.Core.Scopes
 {
-    public class ScopeExtractingVisitor : BaseVisitor<Scope>
+    public class ReferenceCheckingVisitor : BaseVisitor<Scope>
     {
+        public List<Error> ReferencingErrors = new List<Error>();
         private Stack<Scope> _scopes = new Stack<Scope>();
-        private SymbolTable _symbolTable;
         private int _currentDepth;
-
-        public ScopeExtractingVisitor(SymbolTable symbolTable)
-        {
-            _symbolTable = symbolTable;
-        }
-        
-        public Scope GetTopLevelScope()
-        {
-            var scope = _scopes.Peek();
-            while (scope.Parent != null)
-            {
-                scope = scope.Parent;
-            }
-            return scope;
-        }
 
         public override Scope Visit(BlockNode node)
         {
@@ -45,20 +29,36 @@ namespace QL.Core.Scopes
                 var childScope = CreateChildScope();
                 _scopes.Push(childScope);
             }
-
             return VisitChildren(node);
         }
 
         public override Scope Visit(QuestionNode node)
         {
-            _scopes.Peek().AddVariable(_symbolTable[node.Label]);
-            return VisitChildren(node);
+            Scope childeren = VisitChildren(node);
+            _scopes.Peek().AddVariable(node.Label);
+            return childeren;
         }
 
         public override Scope Visit(VariableNode node)
         {
-            _scopes.Peek().AddReference(_symbolTable[node.Label] ?? new Symbol(node.Label, QLType.Undefined, node.Token));
+            if (!checkReference(_scopes.Peek(), node.Label))
+            {
+                ReferencingErrors.Add(new ReferenceNotFound(node.Label, node.Token.Line));
+            }
             return _scopes.Peek();
+        }
+
+        private bool checkReference(Scope scope, string reference)
+        {
+            if (scope.ContainsDefenition(reference))
+            {
+                return true;
+            }
+            else if (scope.Parent != null)
+            {
+                return checkReference(scope.Parent, reference);
+            }
+            return false;
         }
 
         private Scope CreateChildScope()

@@ -41,24 +41,18 @@ namespace QL.Core.Parsing
             return symbolTableVisitor.SymbolTable;
         }
 
-        private IReadOnlyList<string> HarvestParsingErrors(SymbolTable symbolTable, Node ast, Scope scopeTree)
+        private IReadOnlyList<string> HarvestParsingErrors(SymbolTable symbolTable, Node ast)
         {
             var errors = new List<Error>();
 
             var duplicateSymbolDetector = new DuplicateSymbolDetector();
             errors.AddRange(duplicateSymbolDetector.FindDuplicateSymbols(symbolTable));
 
-            var scopeTreeValidator = new ScopeTreeValidator();
-            errors.AddRange(scopeTreeValidator.CheckReferencesScope(scopeTree));
+            var ReferenceErrorExtractor = new ReferenceCheckingVisitor();
+            ast.Accept(ReferenceErrorExtractor);
+            errors.AddRange(ReferenceErrorExtractor.ReferencingErrors);
            
             return errors.Select(err => err.ToString()).ToList();
-        }
-
-        private Scope DeriveScopeTree(SymbolTable symbolTable, Node ast)
-        {
-            var scopeExtractingVisitor = new ScopeExtractingVisitor(symbolTable);
-            ast.Accept(scopeExtractingVisitor);
-            return scopeExtractingVisitor.GetTopLevelScope();
         }
 
         public ParsedSymbols ParseQLInput(string input)
@@ -67,7 +61,6 @@ namespace QL.Core.Parsing
             {
                 return new ParsedSymbols(new FormNode(null, string.Empty),
                                          new SymbolTable(),
-                                         new Scope(null),
                                          new List<string>());
             }
 
@@ -76,14 +69,13 @@ namespace QL.Core.Parsing
             {
                 Node ast = ExtractAst(parser);
                 SymbolTable symbols = ExtractSymbols(ast);
-                Scope scopeTree = DeriveScopeTree(symbols, ast);
-                var errors = HarvestParsingErrors(symbols, ast, scopeTree);
+                var errors = HarvestParsingErrors(symbols, ast);
 
-                return new ParsedSymbols(ast, symbols, scopeTree, errors);
+                return new ParsedSymbols(ast, symbols, errors);
             }
             catch (ParsingFailureException ex)
             {
-                return new ParsedSymbols(new FormNode(null, string.Empty), new SymbolTable(), new Scope(null), ex.ParsingErrors);
+                return new ParsedSymbols(new FormNode(null, string.Empty), new SymbolTable(), ex.ParsingErrors);
             }
         }
     }
