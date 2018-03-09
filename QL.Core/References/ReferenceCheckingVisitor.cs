@@ -1,4 +1,5 @@
 ﻿using QL.Api.Ast;
+using QL.Api.Entities;
 using QL.Core.Errors;
 using System.Collections.Generic;
 

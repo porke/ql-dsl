@@ -1,6 +1,7 @@
 ﻿using QL.Api;
 using QL.Api.Ast;
 using QL.Api.Entities;
+using QL.Api.Infrastructure;
 using QL.Api.Types;
 using QL.Presentation.ViewModels;
 using System;
@@ -10,36 +11,36 @@ namespace QL.Presentation.Controllers
 {
     internal class MainController
     {        
-        private readonly IParserService _parsingService;
-        private readonly IInterpreterService _interpretingService;
+        private readonly Pipeline<ParsingTask> _parsingPipeline;
+        private readonly Pipeline<InterpretingTask> _interpretingPipeline;
         private readonly MainViewModel _mainViewModel;
         private MemorySystem _memory;
         private SymbolTable _symbols;
 
-        public MainController(MainViewModel viewModel, IParserService parsingService, IInterpreterService interpretingService)
+        public MainController(MainViewModel viewModel, Pipeline<ParsingTask> parsingPipeline, Pipeline<InterpretingTask> interpretingPipeline)
         {
             _mainViewModel = viewModel;
-            _parsingService = parsingService;
-            _interpretingService = interpretingService;
+            _parsingPipeline = parsingPipeline;
+            _interpretingPipeline = interpretingPipeline;
 
             viewModel.RebuildQuestionnaireCommand = new RelayCommand<string>(RebuildQuestionnaireCommand_Execute);
         }
 
         private void RebuildQuestionnaireCommand_Execute(string questionnaireInput)
         {            
-            var parsedSymbols = _parsingService.ParseQLInput(questionnaireInput);
-            if (parsedSymbols.Errors.Count > 0)
+            var parsingTask = _parsingPipeline.Process(new ParsingTask(questionnaireInput));
+            if (parsingTask.Errors.Count > 0)
             {
-                _mainViewModel.QuestionnaireValidation = parsedSymbols.Errors.Aggregate(
-                $"Validation failed! There are {parsedSymbols.Errors.Count} error(s) in your questionnaire.",
+                _mainViewModel.QuestionnaireValidation = parsingTask.Errors.Aggregate(
+                $"Validation failed! There are {parsingTask.Errors.Count} error(s) in your questionnaire.",
                 (err, acc) => err + Environment.NewLine + acc);
                 return;
             }
-            _symbols = parsedSymbols.Symbols;
+            _symbols = parsingTask.SymbolTable;
             _mainViewModel.QuestionnaireValidation = "Validation succeeded! Enjoy your questionnaire";
 
             _memory = new MemorySystem();
-            RebuildQuestionnaire(parsedSymbols.FormNode);
+            RebuildQuestionnaire(parsingTask.Ast);
         }
 
         private void QuestionValueAssignedCommand_Execute(object target)
@@ -52,17 +53,17 @@ namespace QL.Presentation.Controllers
                 memoryValue = new Value(_symbols[questionViewModel.Id].Type);
             }
             _memory.AssignValue(questionViewModel.Id, new Value(questionViewModel.Value, memoryValue.Type));
-
-            Node ast = _parsingService.ParseQLInput(_mainViewModel.QuestionnaireInput).FormNode;
-            RebuildQuestionnaire(ast);
+            
+            var parsingTask = _parsingPipeline.Process(new ParsingTask(_mainViewModel.QuestionnaireInput));
+            RebuildQuestionnaire(parsingTask.Ast);
         }
 
         private void RebuildQuestionnaire(Node ast)
         {
-            Node evaluatedAst = _interpretingService.EvaluateQuestionnaire(ast, _memory, _symbols);
+            var interpretingTask = _interpretingPipeline.Process(new InterpretingTask(ast, _memory, _symbols));
 
             var formBuildingVisitor = new FormViewModelBuildingVisitor();
-            evaluatedAst.Accept(formBuildingVisitor);
+            interpretingTask.InterpretedAst.Accept(formBuildingVisitor);
             _mainViewModel.Form = formBuildingVisitor.Form;
             _mainViewModel.Form.QuestionValueAssignedCommand = new RelayCommand<QuestionViewModel>(QuestionValueAssignedCommand_Execute);
         }

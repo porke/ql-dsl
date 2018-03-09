@@ -1,24 +1,25 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using QL.Api;
+using QL.Api.Infrastructure;
 
 namespace QL.Core.Test.Parsing
 {
     [TestClass]
     public class ConditionalParseTests
     {
-        private readonly IParserService _parsingService;
+        private readonly Pipeline<ParsingTask> _parsingPipeline;
         private readonly AssertVisitor _assertVisitor;
 
         public ConditionalParseTests()
         {
-            _parsingService = Module.ParsingService;
+            _parsingPipeline = Module.ParsingPipeline;
             _assertVisitor = new AssertVisitor();
         }
 
         [TestMethod]
         public void ParseIfConditionalOnly_WillSucceed()
         {
-            var parsedSymbols = _parsingService.ParseQLInput(TestDataResolver.LoadTestFile("ifStatement.ql"));
+            var parsedTask = _parsingPipeline.Process(new ParsingTask(TestDataResolver.LoadTestFile("ifStatement.ql")));
 
             _assertVisitor.EnqueueConditionalNodeCallback(_ => { });
             _assertVisitor.EnqueueLiteralNodeCallback(literal =>
@@ -26,14 +27,14 @@ namespace QL.Core.Test.Parsing
                 Assert.AreEqual("true", literal.Value);
             });
 
-            parsedSymbols.FormNode.Accept(_assertVisitor);
+            parsedTask.Ast.Accept(_assertVisitor);
             _assertVisitor.VerifyAll();
         }
 
         [TestMethod]
         public void ParseIfElseConditional_WillSucceed()
         {
-            var parsedSymbols = _parsingService.ParseQLInput(TestDataResolver.LoadTestFile("ifElseStatement.ql"));
+            var parsedTask = _parsingPipeline.Process(new ParsingTask(TestDataResolver.LoadTestFile("ifElseStatement.ql")));
 
             _assertVisitor.EnqueueConditionalNodeCallback(_ => { });
             _assertVisitor.EnqueueConditionalNodeCallback(_ => { });
@@ -46,7 +47,7 @@ namespace QL.Core.Test.Parsing
                 Assert.AreEqual("false", literal.Value);
             });
 
-            parsedSymbols.FormNode.Accept(_assertVisitor);
+            parsedTask.Ast.Accept(_assertVisitor);
             _assertVisitor.VerifyAll();
         }
 
@@ -54,11 +55,11 @@ namespace QL.Core.Test.Parsing
         public void ParseIfWithAnUnclosedBlock_WillReportError()
         {
             // Arrange & Act
-            var parsedSymbols = _parsingService.ParseQLInput(TestDataResolver.LoadTestFile("unclosedBlock.ql"));
+            var parsedTask = _parsingPipeline.Process(new ParsingTask(TestDataResolver.LoadTestFile("unclosedBlock.ql")));
 
             // Assert
             Assert.AreEqual("Syntax error in line 8, character 0: extraneous input '<EOF>' expecting {'if', '}', STRING}.",
-                parsedSymbols.Errors[0]);
+                parsedTask.Errors[0]);
         }
     }
 }

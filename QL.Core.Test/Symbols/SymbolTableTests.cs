@@ -1,48 +1,42 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using QL.Api;
+using QL.Api.Infrastructure;
 using QL.Api.Types;
-using QL.Core.Symbols;
+using QL.Core.Infrastructure;
 
 namespace QL.Core.Test.Symbols
 {
     [TestClass]
     public class SymbolTableTests
     {
-        private readonly IParserService _parsingService;
+        private readonly Pipeline<ParsingTask> _parsingPipeline;
 
         public SymbolTableTests()
         {
-            _parsingService = Module.ParsingService;
+            _parsingPipeline = new Pipeline<ParsingTask>();
+            _parsingPipeline.ConnectElement(new ParsingPipelineElement());
+            _parsingPipeline.ConnectElement(new SymbolExtractionPipelineElement());
         }
 
         [TestMethod]
         public void FormWithOneQuestion_OneSymbolDetectedCorrectly()
         {
-            var parsedSymbols = _parsingService.ParseQLInput(TestDataResolver.LoadTestFile("singleQuestion.ql"));
-
-            var symbolExtractor = new SymbolExtractingVisitor();
-            parsedSymbols.FormNode.Accept(symbolExtractor);
-
-            Assert.AreEqual(1, symbolExtractor.SymbolTable.Count);
-            Assert.AreEqual("whatIsMeaning", symbolExtractor.SymbolTable[0].Name);
-            Assert.AreEqual(QLType.Decimal, symbolExtractor.SymbolTable[0].Type);
+            var parsingTask = _parsingPipeline.Process(new ParsingTask(TestDataResolver.LoadTestFile("singleQuestion.ql")));
+            Assert.AreEqual(1, parsingTask.SymbolTable.Count);
+            Assert.AreEqual("whatIsMeaning", parsingTask.SymbolTable[0].Name);
+            Assert.AreEqual(QLType.Decimal, parsingTask.SymbolTable[0].Type);
         }
 
         [TestMethod]
         public void FormWithThreeQuestion_OneSymbolDetectedCorrectly()
         {
-            var parsedSymbols = _parsingService.ParseQLInput(TestDataResolver.LoadTestFile("multipleQuestions.ql"));
-
-            var symbolExtractor = new SymbolExtractingVisitor();
-            parsedSymbols.FormNode.Accept(symbolExtractor);
-
-            Assert.AreEqual(3, symbolExtractor.SymbolTable.Count);
-            Assert.AreEqual("whatIsMeaning", symbolExtractor.SymbolTable[0].Name);
-            Assert.AreEqual("hasSoldHouse", symbolExtractor.SymbolTable[1].Name);
-            Assert.AreEqual("dayToday", symbolExtractor.SymbolTable[2].Name);
-            Assert.AreEqual(QLType.Decimal, symbolExtractor.SymbolTable[0].Type);
-            Assert.AreEqual(QLType.Boolean, symbolExtractor.SymbolTable[1].Type);
-            Assert.AreEqual(QLType.Date, symbolExtractor.SymbolTable[2].Type);
+            var parsingTask = _parsingPipeline.Process(new ParsingTask(TestDataResolver.LoadTestFile("multipleQuestions.ql")));
+            Assert.AreEqual(3, parsingTask.SymbolTable.Count);
+            Assert.AreEqual("whatIsMeaning", parsingTask.SymbolTable[0].Name);
+            Assert.AreEqual("hasSoldHouse", parsingTask.SymbolTable[1].Name);
+            Assert.AreEqual("dayToday", parsingTask.SymbolTable[2].Name);
+            Assert.AreEqual(QLType.Decimal, parsingTask.SymbolTable[0].Type);
+            Assert.AreEqual(QLType.Boolean, parsingTask.SymbolTable[1].Type);
+            Assert.AreEqual(QLType.Date, parsingTask.SymbolTable[2].Type);
         }
     }
 }

@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace QL.Core.Scopes
+namespace QL.Api.Entities
 {
-    internal class Scope
+    public class Scope
     {
         public readonly IList<Scope> Children = new List<Scope>();
         public readonly Scope Parent;

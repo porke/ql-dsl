@@ -57,10 +57,12 @@
     <Compile Include="Ast\Node.cs" />
     <Compile Include="Ast\QuestionNode.cs" />
     <Compile Include="Ast\VariableNode.cs" />
-    <Compile Include="IInterpreterService.cs" />
-    <Compile Include="IParserService.cs" />
+    <Compile Include="Entities\Scope.cs" />
     <Compile Include="Entities\MemorySystem.cs" />
-    <Compile Include="ParsedSymbols.cs" />
+    <Compile Include="Infrastructure\InterpretingTask.cs" />
+    <Compile Include="Infrastructure\IPipelineElement.cs" />
+    <Compile Include="Infrastructure\ParsingTask.cs" />
+    <Compile Include="Infrastructure\Pipeline.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Entities\Symbol.cs" />
     <Compile Include="Entities\SymbolTable.cs" />

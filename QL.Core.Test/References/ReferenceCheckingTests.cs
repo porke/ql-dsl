@@ -1,5 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using QL.Api;
+using QL.Api.Infrastructure;
 using QL.Core.Scopes;
 
 namespace QL.Core.Test.References
@@ -7,19 +8,19 @@ namespace QL.Core.Test.References
     [TestClass]
     public class ReferenceCheckingTests
     {
-        private readonly IParserService _parsingService;
+        private readonly Pipeline<ParsingTask> _parsingPipeline;
 
         public ReferenceCheckingTests()
         {
-            _parsingService = Module.ParsingService;
+            _parsingPipeline = Module.ParsingPipeline;
         }
 
         [TestMethod]
         public void forwardReferencing_ErrorDetectedCorrectly()
         {
-            var parsedSymbols = _parsingService.ParseQLInput(TestDataResolver.LoadTestFile("forwardReferencing.ql"));
+            var parsingTask = _parsingPipeline.Process(new ParsingTask(TestDataResolver.LoadTestFile("forwardReferencing.ql")));
             var ReferenceErrorExtractor = new ReferenceCheckingVisitor();
-            parsedSymbols.FormNode.Accept(ReferenceErrorExtractor);
+            parsingTask.Ast.Accept(ReferenceErrorExtractor);
 
             Assert.AreEqual(1, ReferenceErrorExtractor.ReferencingErrors.Count);
         }

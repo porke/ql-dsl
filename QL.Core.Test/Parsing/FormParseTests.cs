@@ -1,17 +1,21 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using QL.Api;
+using QL.Api.Infrastructure;
+using QL.Core.Infrastructure;
 
 namespace QL.Core.Test.Parsing
 {
     [TestClass]
     public sealed class FormParseTests
     {
-        private readonly IParserService _parsingService;
+        private readonly Pipeline<ParsingTask> _parsingPipeline;
         private readonly AssertVisitor _assertVisitor;
 
         public FormParseTests()
         {
-            _parsingService = Module.ParsingService;
+            _parsingPipeline = new Pipeline<ParsingTask>();
+            _parsingPipeline.ConnectElement(new ParsingPipelineElement());
+
             _assertVisitor = new AssertVisitor();
         }
 
@@ -19,32 +23,32 @@ namespace QL.Core.Test.Parsing
         public void ParseEmptyFormWithNoStatements_WillSucceed()
         {
             // Arrange & Act
-            var parsedSymbols = _parsingService.ParseQLInput(TestDataResolver.LoadTestFile("emptyForm.ql"));
+            var task = _parsingPipeline.Process(new ParsingTask(TestDataResolver.LoadTestFile("emptyForm.ql")));
 
             // Assert            
             _assertVisitor.EnqueueFormNodeCallback(formNode =>
             {
                 Assert.AreEqual("empty", formNode.Label);
             });
-            parsedSymbols.FormNode.Accept(_assertVisitor);
+            task.Ast.Accept(_assertVisitor);
         }
 
         [TestMethod]
         public void ParseEmptyFormWithSyntaxError_WillReportSyntaxError()
         {
-            // Arrange & Act
-            var parsedSymbols = _parsingService.ParseQLInput("form { test }");
+            // Arrange & Act            
+            var task = _parsingPipeline.Process(new ParsingTask("form { test }"));
 
-            Assert.AreEqual("Syntax error in line 1, character 5: extraneous input '{' expecting LABEL.", parsedSymbols.Errors[0]);
+            Assert.AreEqual("Syntax error in line 1, character 5: extraneous input '{' expecting LABEL.", task.Errors[0]);
         }
 
         [TestMethod]
         public void ParseEmptyString_WillReturnEmptyFormNode()
         {
             // Arrange & Act
-            var parsedSymbols = _parsingService.ParseQLInput("");
+            var task = _parsingPipeline.Process(new ParsingTask(""));
 
-            Assert.IsTrue(parsedSymbols.FormNode.Token == null);
+            Assert.AreEqual("Input string is empty", task.Errors[0]);
         }
     }
 }

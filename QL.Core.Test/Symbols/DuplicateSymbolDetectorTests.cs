@@ -1,8 +1,9 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using QL.Api.Entities;
+using QL.Api.Infrastructure;
 using QL.Api.Types;
 using QL.Core.Errors;
-using QL.Core.Symbols;
+using QL.Core.Infrastructure;
 using System.Collections.Generic;
 
 namespace QL.Core.Test.Symbols
@@ -19,8 +20,10 @@ namespace QL.Core.Test.Symbols
             symbolTable.Add(new Symbol("b", QLType.Date, null));
 
             // Act & Assert
-            var duplicateDetector = new DuplicateSymbolDetector();
-            Assert.AreEqual(0, duplicateDetector.FindDuplicateSymbols(symbolTable).Count);
+            var duplicateDetector = new DuplicateSymbolDetectionPipelineElement();
+            var task = new ParsingTask("");
+            task.SymbolTable = symbolTable;
+            Assert.AreEqual(0, duplicateDetector.Process(task).Errors.Count);
         }
 
         [TestMethod]
@@ -31,12 +34,11 @@ namespace QL.Core.Test.Symbols
             symbolTable.Add(new Symbol("a", QLType.Decimal, null));
             symbolTable.Add(new Symbol("a", QLType.Decimal, null));
 
-            // Act
-            var duplicateDetector = new DuplicateSymbolDetector();
-            IReadOnlyList<Error> duplicateSymbolErrors = duplicateDetector.FindDuplicateSymbols(symbolTable);
-
-            // Assert
-            Assert.AreEqual(1, duplicateSymbolErrors.Count);
+            // Act & Assert
+            var duplicateDetector = new DuplicateSymbolDetectionPipelineElement();
+            var task = new ParsingTask("");
+            task.SymbolTable = symbolTable;
+            Assert.AreEqual(1, duplicateDetector.Process(task).Errors.Count);
         }
 
         [TestMethod]
@@ -49,12 +51,11 @@ namespace QL.Core.Test.Symbols
             symbolTable.Add(new Symbol("a", QLType.Decimal, null));
             symbolTable.Add(new Symbol("d", QLType.Boolean, null));
 
-            // Act
-            var duplicateDetector = new DuplicateSymbolDetector();
-            IReadOnlyList<Error> duplicateSymbolErrors = duplicateDetector.FindDuplicateSymbols(symbolTable);
-
-            // Assert
-            Assert.AreEqual(2, duplicateSymbolErrors.Count);
+            // Act & Assert
+            var duplicateDetector = new DuplicateSymbolDetectionPipelineElement();
+            var task = new ParsingTask("");
+            task.SymbolTable = symbolTable;
+            Assert.AreEqual(2, duplicateDetector.Process(task).Errors.Count);
         }
 
         [TestMethod]
@@ -67,12 +68,11 @@ namespace QL.Core.Test.Symbols
             symbolTable.Add(new Symbol("d", QLType.Decimal, null));
             symbolTable.Add(new Symbol("d", QLType.Boolean, null));
 
-            // Act
-            var duplicateDetector = new DuplicateSymbolDetector();
-            IReadOnlyList<Error> duplicateSymbolErrors = duplicateDetector.FindDuplicateSymbols(symbolTable);
-
-            // Assert
-            Assert.AreEqual(2, duplicateSymbolErrors.Count);
+            // Act & Assert
+            var duplicateDetector = new DuplicateSymbolDetectionPipelineElement();
+            var task = new ParsingTask("");
+            task.SymbolTable = symbolTable;
+            Assert.AreEqual(2, duplicateDetector.Process(task).Errors.Count);
         }
     }
 }
