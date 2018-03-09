@@ -1,7 +1,4 @@
-﻿using Antlr4.Runtime;
-using System;
-
-namespace QL.Api.Types
+﻿namespace QL.Api.Types
 {
     public enum QLType
     {

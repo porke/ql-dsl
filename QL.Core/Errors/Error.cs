@@ -1,6 +1,6 @@
 ﻿namespace QL.Core.Errors
 {
-    public abstract class Error
+    internal abstract class Error
     {
     }
 }

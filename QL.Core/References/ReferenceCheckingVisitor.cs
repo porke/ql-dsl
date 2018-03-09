@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace QL.Core.Scopes
 {
-    public class ReferenceCheckingVisitor : BaseVisitor<Scope>
+    internal class ReferenceCheckingVisitor : BaseVisitor<Scope>
     {
         public List<Error> ReferencingErrors = new List<Error>();
         private Stack<Scope> _scopes = new Stack<Scope>();

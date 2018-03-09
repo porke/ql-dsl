@@ -1,6 +1,6 @@
 ﻿namespace QL.Core.Errors
 {
-    public class UnaryOperatorType : Error
+    internal class UnaryOperatorType : Error
     {
         public string Type;
         public string Opperator;

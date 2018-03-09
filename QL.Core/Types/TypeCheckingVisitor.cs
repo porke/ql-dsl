@@ -7,7 +7,7 @@ using System.Linq;
 
 namespace QL.Core.Types
 {
-    public class TypeCheckingVisitor : BaseVisitor<QLType>
+    internal class TypeCheckingVisitor : BaseVisitor<QLType>
     {
         public List<Error> TypeErrors = new List<Error>();
         private SymbolTable _symbolTable;

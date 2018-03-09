@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace QL.Core.Scopes
 {
-    public class Scope
+    internal class Scope
     {
         public readonly IList<Scope> Children = new List<Scope>();
         public readonly Scope Parent;

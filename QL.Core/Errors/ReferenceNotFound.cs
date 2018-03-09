@@ -1,6 +1,6 @@
 ﻿namespace QL.Core.Errors
 {
-    public class ReferenceNotFound : Error
+    internal class ReferenceNotFound : Error
     {
         public string VariableName;
         public int ErrorLine;

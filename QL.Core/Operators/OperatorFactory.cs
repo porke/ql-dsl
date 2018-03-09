@@ -3,10 +3,10 @@ using System;
 
 namespace QL.Core.Operators
 {
-    static class Parser
+    internal static class OperatorFactory
     {
         // TODO: possibly replace parser with dictionary.
-        public static Operator StringToBinaryOperator(string text)
+        public static Operator CreateBinaryOperator(string text)
         {
             switch (text)
             {
@@ -26,7 +26,7 @@ namespace QL.Core.Operators
             throw new NotSupportedException($"{text} is not implemented as an operator.");
         }
 
-        public static Operator StringToUnaryOperator(string text)
+        public static Operator CreateUnaryOperator(string text)
         {
             switch (text)
             {

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace QL.Core.Parsing
 {
-    public sealed class ParsingFailureException : Exception
+    internal sealed class ParsingFailureException : Exception
     {
         public IReadOnlyList<string> ParsingErrors { get; }
 

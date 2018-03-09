@@ -1,6 +1,6 @@
 ﻿namespace QL.Core.Errors
 {
-    public class QuestionAssignmentType : Error
+    internal class QuestionAssignmentType : Error
     {
         public string QuestionType;
         public string AssignmentType;

@@ -1,6 +1,6 @@
 ﻿namespace QL.Core.Errors
 {
-    public class VariableDuplicate : Error
+    internal class VariableDuplicate : Error
     {
         public string VariableName;
         public int ErrorLine;

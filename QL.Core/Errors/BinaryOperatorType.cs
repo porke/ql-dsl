@@ -1,6 +1,6 @@
 ﻿namespace QL.Core.Errors
 {
-    public class BinaryOperatorType : Error
+    internal class BinaryOperatorType : Error
     {
         public string LeftType;
         public string RightType;

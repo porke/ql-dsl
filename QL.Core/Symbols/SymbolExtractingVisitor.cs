@@ -3,7 +3,7 @@ using QL.Api.Entities;
 
 namespace QL.Core.Symbols
 {
-    public class SymbolExtractingVisitor : BaseVisitor<Symbol>
+    internal class SymbolExtractingVisitor : BaseVisitor<Symbol>
     {
         public SymbolTable SymbolTable = new SymbolTable();
 

@@ -4,7 +4,7 @@ using System;
 
 namespace QL.Core.Types
 {
-    internal static class Converter
+    internal static class QLTypeConverter
     {
         public static QLType FromTokenTypeToQLType(IToken token)
         {

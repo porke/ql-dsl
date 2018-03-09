@@ -1,6 +1,6 @@
 ﻿namespace QL.Core.Errors
 {
-    public class ConditionalType : Error
+    internal class ConditionalType : Error
     {
         public string Type;
         public int ErrorLine;

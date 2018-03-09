@@ -71,7 +71,7 @@
     <Compile Include="Operators\Binary\Groups\Logical.cs" />
     <Compile Include="Operators\Binary\Addition.cs" />
     <Compile Include="Operators\Binary\Groups\AbsoluteComparisons.cs" />
-    <Compile Include="Operators\Parser.cs" />
+    <Compile Include="Operators\OperatorFactory.cs" />
     <Compile Include="Operators\Unary\BooleanNegation.cs" />
     <Compile Include="Operators\Binary\Groups\Arithmetical.cs" />
     <Compile Include="Operators\Binary\Groups\RelativeComparisons.cs" />
@@ -91,7 +91,7 @@
     <Compile Include="References\Scope.cs" />
     <Compile Include="References\ReferenceCheckingVisitor.cs" />
     <Compile Include="Symbols\SymbolExtractingVisitor.cs" />
-    <Compile Include="Types\Converter.cs" />
+    <Compile Include="Types\QLTypeConverter.cs" />
     <Compile Include="Types\TypeCheckingVisitor.cs" />
   </ItemGroup>
   <ItemGroup>
