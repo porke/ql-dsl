@@ -1,5 +1,5 @@
 ﻿using QL.Api.Infrastructure;
-using QL.Core.Symbols;
+using QL.Core.Parsing;
 
 namespace QL.Core.Infrastructure
 {

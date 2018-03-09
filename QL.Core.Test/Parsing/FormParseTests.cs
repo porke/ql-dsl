@@ -1,5 +1,4 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using QL.Api;
 using QL.Api.Infrastructure;
 using QL.Core.Infrastructure;
 

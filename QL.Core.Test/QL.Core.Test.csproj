@@ -61,12 +61,12 @@
     <Compile Include="Parsing\ExpressionParseTests.cs" />
     <Compile Include="Parsing\FormParseTests.cs" />
     <EmbeddedResource Include="TestData\IncorrectForms\wrongType.ql" />
-    <Compile Include="Types\TypeTests.cs" />
+    <Compile Include="Validation\TypeValidationTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Parsing\QuestionParseTests.cs" />
-    <Compile Include="References\ReferenceCheckingTests.cs" />
-    <Compile Include="Symbols\DuplicateSymbolDetectorTests.cs" />
-    <Compile Include="Symbols\SymbolTableTests.cs" />
+    <Compile Include="Validation\ReferenceCheckingTests.cs" />
+    <Compile Include="Validation\DuplicateSymbolDetectorTests.cs" />
+    <Compile Include="Parsing\SymbolTableTests.cs" />
     <Compile Include="TestDataResolver.cs" />
   </ItemGroup>
   <ItemGroup>

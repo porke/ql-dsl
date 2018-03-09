@@ -1,9 +1,8 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using QL.Api;
 using QL.Api.Infrastructure;
 using QL.Api.Types;
 using QL.Core.Infrastructure;
-using QL.Core.Operators;
+using QL.Core.Interpreting.Operators;
 
 namespace QL.Core.Test.Parsing
 {
