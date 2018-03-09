@@ -1,5 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using QL.Core.Api;
+using QL.Api;
 using QL.Core.Scopes;
 
 namespace QL.Core.Test.References
@@ -11,7 +11,7 @@ namespace QL.Core.Test.References
 
         public ReferenceCheckingTests()
         {
-            _parsingService = ServiceRegistry.ParsingService;
+            _parsingService = Module.ParsingService;
         }
 
         [TestMethod]

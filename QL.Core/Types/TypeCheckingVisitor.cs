@@ -1,7 +1,7 @@
-﻿using QL.Core.Ast;
+﻿using QL.Api.Ast;
+using QL.Api.Entities;
+using QL.Api.Types;
 using QL.Core.Errors;
-using QL.Core.Operators;
-using QL.Core.Symbols;
 using System.Collections.Generic;
 using System.Linq;
 

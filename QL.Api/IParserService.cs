@@ -1,4 +1,4 @@
-﻿namespace QL.Core.Api
+﻿namespace QL.Api
 {
     public interface IParserService
     {        

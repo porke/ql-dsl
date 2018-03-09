@@ -1,6 +1,6 @@
 ﻿using Antlr4.Runtime;
 
-namespace QL.Core.Ast
+namespace QL.Api.Ast
 {
     public class BlockNode : Node
     {

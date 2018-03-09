@@ -1,6 +1,6 @@
-﻿using QL.Core.Api;
-using QL.Core.Ast;
-using QL.Core.Symbols;
+﻿using QL.Api;
+using QL.Api.Ast;
+using QL.Api.Entities;
 
 namespace QL.Core.Interpreting
 {

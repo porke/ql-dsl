@@ -1,4 +1,5 @@
-﻿using QL.Core.Errors;
+﻿using QL.Api.Entities;
+using QL.Core.Errors;
 using System.Collections.Generic;
 
 namespace QL.Core.Symbols

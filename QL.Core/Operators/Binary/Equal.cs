@@ -1,4 +1,4 @@
-﻿using QL.Core.Types;
+﻿using QL.Api.Types;
 using System;
 
 namespace QL.Core.Operators
@@ -13,7 +13,7 @@ namespace QL.Core.Operators
                 case QLType.Decimal: return new Value(leftHand.ToDecimal() == rightHand.ToDecimal(), QLType.Boolean);
                 case QLType.Boolean: return new Value(leftHand.ToBoolean() == rightHand.ToBoolean(), QLType.Boolean);
                 case QLType.String:
-                case QLType.Date: return new Value(String.Equals(leftHand.ToString(), rightHand.ToString(), StringComparison.Ordinal), QLType.Boolean);
+                case QLType.Date: return new Value(string.Equals(leftHand.ToString(), rightHand.ToString(), StringComparison.Ordinal), QLType.Boolean);
             }
             throw new NotSupportedException($"{leftHand.Type} is not supported by the '==' operator");
         }

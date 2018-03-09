@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace QL.Core.Symbols
+namespace QL.Api.Entities
 {
     public class SymbolTable : IEnumerable<Symbol>
     {

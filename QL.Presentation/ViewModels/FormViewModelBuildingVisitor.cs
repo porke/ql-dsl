@@ -1,5 +1,5 @@
-﻿using QL.Core.Ast;
-using QL.Core.Types;
+﻿using QL.Api.Ast;
+using QL.Api.Types;
 
 namespace QL.Presentation.ViewModels
 {

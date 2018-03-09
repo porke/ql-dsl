@@ -2,7 +2,7 @@
 using QLS.Api.Ast;
 using static QLS.Core.QLSParser;
 
-namespace QLS.Core
+namespace QLS.Core.Parsing
 {
     internal class ParseTreeVisitor : QLSBaseVisitor<Node>
     {

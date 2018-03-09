@@ -1,7 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using QL.Core.Api;
+using QL.Api;
+using QL.Api.Types;
 using QL.Core.Symbols;
-using QL.Core.Types;
 
 namespace QL.Core.Test.Symbols
 {
@@ -12,7 +12,7 @@ namespace QL.Core.Test.Symbols
 
         public SymbolTableTests()
         {
-            _parsingService = ServiceRegistry.ParsingService;
+            _parsingService = Module.ParsingService;
         }
 
         [TestMethod]

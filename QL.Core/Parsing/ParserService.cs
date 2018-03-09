@@ -1,12 +1,13 @@
-﻿using QL.Core.Api;
-using Antlr4.Runtime;
+﻿using Antlr4.Runtime;
 using System.Collections.Generic;
-using QL.Core.Ast;
 using QL.Core.Symbols;
 using System.Linq;
 using QL.Core.Scopes;
 using QL.Core.Errors;
 using QL.Core.Types;
+using QL.Api;
+using QL.Api.Ast;
+using QL.Api.Entities;
 
 namespace QL.Core.Parsing
 {

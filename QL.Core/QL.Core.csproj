@@ -47,19 +47,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Api\IInterpreterService.cs" />
-    <Compile Include="Api\ParsedSymbols.cs" />
-    <Compile Include="Api\IParserService.cs" />
-    <Compile Include="Api\ServiceRegistry.cs" />
-    <Compile Include="Ast\BaseVisitor.cs" />
-    <Compile Include="Ast\VariableNode.cs" />
-    <Compile Include="Ast\ExpressionNode.cs" />
-    <Compile Include="Ast\LiteralNode.cs" />
-    <Compile Include="Ast\BlockNode.cs" />
-    <Compile Include="Ast\Node.cs" />
-    <Compile Include="Ast\QuestionNode.cs" />
-    <Compile Include="Ast\ConditionalNode.cs" />
-    <Compile Include="Ast\IVisitor.cs" />
     <Compile Include="Errors\ConditionalType.cs" />
     <Compile Include="Errors\QuestionAssignmentType.cs" />
     <Compile Include="Errors\BinaryOperatorType.cs" />
@@ -69,7 +56,7 @@
     <Compile Include="Errors\Error.cs" />
     <Compile Include="Interpreting\InterpreterVisitor.cs" />
     <Compile Include="Interpreting\InterpreterService.cs" />
-    <Compile Include="Interpreting\MemorySystem.cs" />
+    <Compile Include="Module.cs" />
     <Compile Include="Operators\Binary\Division.cs" />
     <Compile Include="Operators\Binary\SmallerOrEqual.cs" />
     <Compile Include="Operators\Binary\Smaller.cs" />
@@ -84,7 +71,6 @@
     <Compile Include="Operators\Binary\Groups\Logical.cs" />
     <Compile Include="Operators\Binary\Addition.cs" />
     <Compile Include="Operators\Binary\Groups\AbsoluteComparisons.cs" />
-    <Compile Include="Operators\Operator.cs" />
     <Compile Include="Operators\Parser.cs" />
     <Compile Include="Operators\Unary\BooleanNegation.cs" />
     <Compile Include="Operators\Binary\Groups\Arithmetical.cs" />
@@ -100,17 +86,13 @@
     <Compile Include="QL.g4.parser.cs">
       <DependentUpon>QL.g4</DependentUpon>
     </Compile>
-    <Compile Include="Ast\FormNode.cs" />
     <Compile Include="Parsing\ParseTreeVisitor.cs" />
     <Compile Include="Symbols\DuplicateSymbolDetector.cs" />
     <Compile Include="References\Scope.cs" />
     <Compile Include="References\ReferenceCheckingVisitor.cs" />
-    <Compile Include="Symbols\Symbol.cs" />
     <Compile Include="Symbols\SymbolExtractingVisitor.cs" />
-    <Compile Include="Symbols\SymbolTable.cs" />
-    <Compile Include="Types\QLType.cs" />
+    <Compile Include="Types\Converter.cs" />
     <Compile Include="Types\TypeCheckingVisitor.cs" />
-    <Compile Include="Types\Value.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -121,7 +103,12 @@
       <CustomToolNamespace>QL.Core</CustomToolNamespace>
     </Antlr4>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\QL.Api\QL.Api.csproj">
+      <Project>{e314abd5-8189-4707-b201-a82933957f51}</Project>
+      <Name>QL.Api</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

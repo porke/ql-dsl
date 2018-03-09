@@ -1,4 +1,5 @@
-﻿using QL.Core.Ast;
+﻿using QL.Api.Ast;
+using QL.Api.Entities;
 
 namespace QL.Core.Symbols
 {

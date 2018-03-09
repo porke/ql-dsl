@@ -1,6 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using QL.Core.Api;
-using QL.Core.Ast;
+using QL.Api;
 
 namespace QL.Core.Test.Parsing
 {
@@ -12,7 +11,7 @@ namespace QL.Core.Test.Parsing
 
         public FormParseTests()
         {
-            _parsingService = ServiceRegistry.ParsingService;
+            _parsingService = Module.ParsingService;
             _assertVisitor = new AssertVisitor();
         }
 

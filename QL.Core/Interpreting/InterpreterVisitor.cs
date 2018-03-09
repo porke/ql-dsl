@@ -1,8 +1,9 @@
 ﻿using Antlr4.Runtime;
-using QL.Core.Ast;
+using QL.Api.Ast;
+using QL.Api.Entities;
+using QL.Api.Operators;
+using QL.Api.Types;
 using QL.Core.Operators;
-using QL.Core.Symbols;
-using QL.Core.Types;
 using System.Linq;
 
 namespace QL.Core.Interpreting

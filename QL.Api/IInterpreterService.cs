@@ -1,8 +1,7 @@
-﻿using QL.Core.Ast;
-using QL.Core.Interpreting;
-using QL.Core.Symbols;
+﻿using QL.Api.Ast;
+using QL.Api.Entities;
 
-namespace QL.Core.Api
+namespace QL.Api
 {
     public interface IInterpreterService
     {

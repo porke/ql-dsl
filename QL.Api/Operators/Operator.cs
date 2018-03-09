@@ -1,6 +1,6 @@
-﻿using QL.Core.Types;
+﻿using QL.Api.Types;
 
-namespace QL.Core.Operators
+namespace QL.Api.Operators
 {
     public abstract class Operator
     {

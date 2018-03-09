@@ -1,7 +1,7 @@
 ﻿using Antlr4.Runtime;
-using QL.Core.Operators;
+using QL.Api.Operators;
 
-namespace QL.Core.Ast
+namespace QL.Api.Ast
 {
     public class ExpressionNode : Node
     {

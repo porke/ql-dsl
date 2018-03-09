@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 
-namespace QL.Core.Ast
+namespace QL.Api.Ast
 {
     public abstract class BaseVisitor<T> : IVisitor<T>
     {        

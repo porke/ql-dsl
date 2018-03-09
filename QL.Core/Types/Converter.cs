@@ -1,19 +1,10 @@
 ﻿using Antlr4.Runtime;
+using QL.Api.Types;
 using System;
 
 namespace QL.Core.Types
 {
-    public enum QLType
-    {
-        String,
-        Date,
-        Integer,
-        Boolean,
-        Decimal,
-        Undefined
-    }
-
-    public static class QLTypes
+    internal static class Converter
     {
         public static QLType FromTokenTypeToQLType(IToken token)
         {
@@ -52,6 +43,5 @@ namespace QL.Core.Types
             }
             return type;
         }
-            
     }
 }

@@ -1,4 +1,4 @@
-﻿using QL.Core.Types;
+﻿using QL.Api.Types;
 using System;
 
 namespace QL.Core.Operators

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using QL.Api.Operators;
+using System;
 
 namespace QL.Core.Operators
 {

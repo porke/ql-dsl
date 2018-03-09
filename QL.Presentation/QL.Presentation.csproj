@@ -171,9 +171,17 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\QL.Api\QL.Api.csproj">
+      <Project>{E314ABD5-8189-4707-B201-A82933957F51}</Project>
+      <Name>QL.Api</Name>
+    </ProjectReference>
     <ProjectReference Include="..\QL.Core\QL.Core.csproj">
       <Project>{210ca766-0e42-485e-a2ff-57f5f909081e}</Project>
       <Name>QL.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\QLS.Core\QLS.Core.csproj">
+      <Project>{D23AFE3A-3F92-42CA-A8A8-1142925B6C00}</Project>
+      <Name>QLS.Core</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

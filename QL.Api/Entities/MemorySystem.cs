@@ -1,7 +1,7 @@
-﻿using QL.Core.Types;
+﻿using QL.Api.Types;
 using System.Collections.Generic;
 
-namespace QL.Core.Interpreting
+namespace QL.Api.Entities
 {
     public class MemorySystem
     {

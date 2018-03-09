@@ -1,5 +1,4 @@
-﻿using System;
-using QLS.Api.Ast;
+﻿using QLS.Api.Ast;
 using Antlr4.Runtime;
 
 namespace QLS.Core.Parsing

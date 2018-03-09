@@ -1,5 +1,4 @@
-﻿using QL.Core.Api;
-using QL.Presentation.Controllers;
+﻿using QL.Presentation.Controllers;
 using QL.Presentation.ViewModels;
 using System.Windows;
 
@@ -15,7 +14,7 @@ namespace QL.Presentation
 
             var viewModel = new MainViewModel();
             DataContext = viewModel;
-            _controller = new MainController(viewModel, ServiceRegistry.ParsingService, ServiceRegistry.InterpretingService);
+            _controller = new MainController(viewModel, QL.Core.Module.ParsingService, QL.Core.Module.InterpretingService);
         }
     }
 }

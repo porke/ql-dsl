@@ -1,10 +1,10 @@
 ﻿using Antlr4.Runtime;
 
-namespace QL.Core.Ast
+namespace QL.Api.Ast
 {
-    public class VariableNode : Node
+    public class FormNode : Node
     {
-        public VariableNode(IToken token, string label) : base(token)
+        public FormNode(IToken token, string label) : base(token)
         {
             Label = label;
         }
@@ -13,7 +13,7 @@ namespace QL.Core.Ast
 
         protected override T VisitNode<T>(IVisitor<T> visitor)
         {
-            return visitor.Visit(this);
+            return visitor.Visit(this); ;
         }
     }
 }

@@ -1,8 +1,7 @@
-﻿using QL.Core.Api;
-using QL.Core.Ast;
-using QL.Core.Interpreting;
-using QL.Core.Symbols;
-using QL.Core.Types;
+﻿using QL.Api;
+using QL.Api.Ast;
+using QL.Api.Entities;
+using QL.Api.Types;
 using QL.Presentation.ViewModels;
 using System;
 using System.Linq;

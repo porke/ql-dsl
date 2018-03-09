@@ -1,4 +1,4 @@
-﻿namespace QL.Core.Ast
+﻿namespace QL.Api.Ast
 {
     public interface IVisitor<T>
     {

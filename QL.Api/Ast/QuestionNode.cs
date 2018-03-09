@@ -1,7 +1,7 @@
 ﻿using Antlr4.Runtime;
-using QL.Core.Types;
+using QL.Api.Types;
 
-namespace QL.Core.Ast
+namespace QL.Api.Ast
 {
     public class QuestionNode : Node
     {

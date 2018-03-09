@@ -1,8 +1,8 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using QL.Core.Api;
-using QL.Core.Ast;
+using QL.Api;
+using QL.Api.Entities;
+using QL.Api.Types;
 using QL.Core.Interpreting;
-using QL.Core.Types;
 
 namespace QL.Core.Test.Interpreting
 {
@@ -17,7 +17,7 @@ namespace QL.Core.Test.Interpreting
 
         public InterpreterTests()
         {
-            _parsingService = ServiceRegistry.ParsingService;            
+            _parsingService = Module.ParsingService;            
         }
 
         [TestInitialize]

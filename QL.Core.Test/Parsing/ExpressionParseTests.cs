@@ -1,5 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using QL.Core.Api;
+using QL.Api;
 
 namespace QL.Core.Test.Parsing
 {
@@ -10,7 +10,7 @@ namespace QL.Core.Test.Parsing
 
         public ExpressionParseTests()
         {
-            _parsingService = ServiceRegistry.ParsingService;
+            _parsingService = Module.ParsingService;
         }
 
         [TestMethod]

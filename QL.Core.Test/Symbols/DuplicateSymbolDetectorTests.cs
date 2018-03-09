@@ -1,8 +1,8 @@
-﻿using Antlr4.Runtime;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using QL.Api.Entities;
+using QL.Api.Types;
 using QL.Core.Errors;
 using QL.Core.Symbols;
-using QL.Core.Types;
 using System.Collections.Generic;
 
 namespace QL.Core.Test.Symbols
