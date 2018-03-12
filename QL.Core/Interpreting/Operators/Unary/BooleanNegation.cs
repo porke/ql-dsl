@@ -5,6 +5,14 @@ namespace QL.Core.Interpreting.Operators
 {
     internal class BooleanNegation : IOperator
     {
+        public string AsString
+        {
+            get
+            {
+                return "!";
+            }
+        }
+
         public Value Evaluate(Value input, Value empty = null)
         {
             return new Value(!input.ToBoolean(), QLType.Boolean);

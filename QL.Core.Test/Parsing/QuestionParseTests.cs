@@ -107,11 +107,11 @@ namespace QL.Core.Test.Parsing
             });
             _assertVisitor.EnqueueExpressionNodeCallback(expression =>
             {
-                Assert.IsInstanceOfType(expression.Operator, typeof(Substraction));
+                Assert.AreEqual("+",expression.Operator.AsString);
             });
             _assertVisitor.EnqueueExpressionNodeCallback(expression =>
             {
-                Assert.IsInstanceOfType(expression.Operator, typeof(Addition));
+                Assert.AreEqual("-", expression.Operator.AsString);
             });
             _assertVisitor.EnqueueLiteralNodeCallback(literal =>
             {
@@ -169,7 +169,7 @@ namespace QL.Core.Test.Parsing
             var task = _parsingPipeline.Process(new ParsingTask(TestDataResolver.LoadTestFile("emptyExpression.ql")));
 
             // Assert
-            Assert.AreEqual("Syntax error in line 4, character 0: mismatched input '}' expecting {'!', '+', '-', '(', BOOLEAN, INTEGER, DECIMAL, STRING, DATE, LABEL}.",
+            Assert.AreEqual("Syntax error in line 4, character 0: mismatched input '}' expecting {'!', '-', '(', BOOLEAN, INTEGER, DECIMAL, STRING, DATE, LABEL}.",
                 task.Errors[0]);
         }
     }
