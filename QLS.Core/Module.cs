@@ -1,15 +1,18 @@
-﻿using QLS.Api.Ast;
+﻿using QLS.Api.Infrastructure;
 using QLS.Core.Parsing;
 
 namespace QLS.Core
 {
     public static class Module
     {
-        public static IParsingService ParsingService { get; }
+        public static Pipeline<StylesheetTask> ParsingPipeline { get; } = CreateParsingPipeline();
 
-        static Module()
+        private static Pipeline<StylesheetTask> CreateParsingPipeline()
         {
-            ParsingService = new ParsingService();
+            var pipeline = new Pipeline<StylesheetTask>();
+            pipeline.ConnectElement(new ParsingPipelineElement());
+
+            return pipeline;
         }
     }
 }

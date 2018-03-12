@@ -51,7 +51,9 @@
     <Compile Include="Ast\QuestionNode.cs" />
     <Compile Include="Ast\SectionNode.cs" />
     <Compile Include="Ast\StylesheetNode.cs" />
-    <Compile Include="IParsingService.cs" />
+    <Compile Include="Infrastructure\IPipelineElement.cs" />
+    <Compile Include="Infrastructure\Pipeline.cs" />
+    <Compile Include="Infrastructure\StylesheetTask.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -49,7 +49,7 @@
   <ItemGroup>
     <Compile Include="Module.cs" />
     <Compile Include="Parsing\ParseTreeVisitor.cs" />
-    <Compile Include="Parsing\ParsingService.cs" />
+    <Compile Include="Parsing\ParsingPipelineElement.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="QLS.g4.lexer.cs">
       <DependentUpon>QLS.g4</DependentUpon>

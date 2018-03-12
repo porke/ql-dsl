@@ -1,10 +1,12 @@
-﻿using QLS.Api.Ast;
-using Antlr4.Runtime;
+﻿using Antlr4.Runtime;
+using QLS.Api.Infrastructure;
 
 namespace QLS.Core.Parsing
 {
-    internal class ParsingService : IParsingService
+    internal class ParsingPipelineElement : IPipelineElement<StylesheetTask>
     {
+        public bool CanContinue => true;
+
         private QLSParser SetupParser(string text)
         {
             var inputStream = new AntlrInputStream(text);
@@ -12,12 +14,13 @@ namespace QLS.Core.Parsing
             var commonTokenStream = new CommonTokenStream(speakLexer);
             return new QLSParser(commonTokenStream);
         }
-
-        public Node ParseQLSSheet(string qlsSheetText)
+        
+        public StylesheetTask Process(StylesheetTask input)
         {
-            QLSParser parser = SetupParser(qlsSheetText);
+            QLSParser parser = SetupParser(input.StylesheetText);
             var visitor = new ParseTreeVisitor();
-            return visitor.Visit(parser.stylesheet());
+            input.Ast = visitor.Visit(parser.stylesheet());
+            return input;
         }
     }
 }

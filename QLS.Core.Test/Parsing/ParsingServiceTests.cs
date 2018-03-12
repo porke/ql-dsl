@@ -1,5 +1,8 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using QLS.Api.Ast;
+using QLS.Api.Infrastructure;
+using QLS.Core.Parsing;
+using System.Collections.Generic;
 
 namespace QLS.Core.Test.Parsing
 {
@@ -7,19 +10,20 @@ namespace QLS.Core.Test.Parsing
     public class ParsingServiceTests
     {
         private AssertVisitor _assertVisitor;
-        private IParsingService _parsingService;
+        private ParsingPipelineElement _parsingService;
 
         [TestInitialize]
         public void Setup()
         {
             _assertVisitor = new AssertVisitor();
-            _parsingService = Module.ParsingService;
+            _parsingService = new ParsingPipelineElement();
         }
 
         [TestMethod]
         public void ParseSimpleStylesheetWithOnePage_WillSucceed()
         {
-            Node ast = _parsingService.ParseQLSSheet(TestDataResolver.LoadTestFile("emptyStylesheetWithOnePage.qls"));
+            var stylesheetTask = new StylesheetTask(TestDataResolver.LoadTestFile("emptyStylesheetWithOnePage.qls"), new List<string>());
+            Node ast = _parsingService.Process(stylesheetTask).Ast;
 
             _assertVisitor.EnqueueStylesheetNodeCallback(st =>
             {
@@ -36,7 +40,8 @@ namespace QLS.Core.Test.Parsing
         [TestMethod]
         public void ParseSimpleStylesheetWithTwoPagesAndSections_WillSucceed()
         {
-            Node ast = _parsingService.ParseQLSSheet(TestDataResolver.LoadTestFile("emptyStylesheetWithTwoPagesAndSections.qls"));
+            var stylesheetTask = new StylesheetTask(TestDataResolver.LoadTestFile("emptyStylesheetWithTwoPagesAndSections.qls"), new List<string>());
+            Node ast = _parsingService.Process(stylesheetTask).Ast;
 
             _assertVisitor.EnqueueStylesheetNodeCallback(st =>
             {
@@ -65,7 +70,8 @@ namespace QLS.Core.Test.Parsing
         [TestMethod]
         public void ParseSimpleStylesheetWithOnePageOneSectionOneQuestion_WillSucceed()
         {
-            Node ast = _parsingService.ParseQLSSheet(TestDataResolver.LoadTestFile("onePageStylesheetWithQuestion.qls"));
+            var stylesheetTask = new StylesheetTask(TestDataResolver.LoadTestFile("onePageStylesheetWithQuestion.qls"), new List<string>());
+            Node ast = _parsingService.Process(stylesheetTask).Ast;
 
             _assertVisitor.EnqueueStylesheetNodeCallback(st =>
             {
