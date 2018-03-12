@@ -36,7 +36,7 @@ namespace QL.Core.Test.Validation
         {
             var parsingTasks = _parsingPipeline.Process(new ParsingTask(TestDataResolver.LoadTestFile("binaryExpressionWithWrongTypes.ql")));
             Assert.AreEqual(1, parsingTasks.Errors.Count);
-            Assert.AreEqual("Type error in line 3: \'?\' cannot be applied to " +
+            Assert.AreEqual("Type error in line 3: \'+\' cannot be applied to " +
                 "the combination of Decimal and Boolean", parsingTasks.Errors[0]);
         }
     }

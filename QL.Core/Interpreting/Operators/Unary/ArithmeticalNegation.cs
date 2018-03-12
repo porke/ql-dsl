@@ -6,6 +6,14 @@ namespace QL.Core.Interpreting.Operators
 {
     internal class ArithmeticalNegation : IOperator
     {
+        public string AsString
+        {
+            get
+            {
+                return "-";
+            }
+        }
+
         public Value Evaluate(Value input, Value empty = null)
         {
             if (input.Type == QLType.Integer)

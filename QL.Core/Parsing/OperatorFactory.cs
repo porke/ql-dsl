@@ -6,23 +6,22 @@ namespace QL.Core.Parsing
 {
     internal static class OperatorFactory
     {
-        // TODO: possibly replace parser with dictionary.
         public static IOperator CreateBinaryOperator(string text)
         {
             switch (text)
             {
-                case "-": return new Substraction();
-                case "+": return new Addition();
-                case "*": return new Multiplication();
-                case "/": return new Division();
-                case "||": return new Or();
-                case "&&": return new And();
-                case ">": return new Greater();
-                case "<": return new Smaller();
-                case ">=": return new GreaterOrEqual();
-                case "<=": return new SmallerOrEqual();
-                case "!=": return new NotEqual();
-                case "==": return new Equal();
+                case "-": return new Arithmetic((x, y) => x - y, "-");
+                case "+": return new Arithmetic((x, y) => x + y, "+");
+                case "*": return new Arithmetic((x, y) => x * y, "*");
+                case "/": return new Arithmetic((x, y) => x / y, "-");
+                case "||": return new Logical((x, y) => x || y, "||");
+                case "&&": return new Logical((x, y) => x && y, "&&");
+                case ">": return new RelativeComparison((x, y) => x > y, ">");
+                case "<": return new RelativeComparison((x, y) => x < y, "<");
+                case ">=": return new RelativeComparison((x, y) => x >= y, ">=");
+                case "<=": return new RelativeComparison((x, y) => x <= y, "<=");
+                case "!=": return new AbsoluteComparison((x, y) => x != y, "!=");
+                case "==": return new AbsoluteComparison((x, y) => x == y, "==");
             }
             throw new NotSupportedException($"{text} is not implemented as an operator.");
         }

@@ -37,22 +37,30 @@ literal: BOOLEAN
 		| STRING
 		| DATE;
 
-binaryOperator: GREATERTHAN 
-				| SMALLERTHAN 
-				| GREATEREQUAL 
-				| SMALLEREQUAL 
-				| NOTEQUAL 
-				| AND 
-				| OR 
-				| EQUAL 
-				| PLUS 
-				| MINUS 
-				| DIVIDE	
-				| MULTIPLY;
+unaryOperator: MINUS #unaryArithmetic
+				| NOT #unaryLogical;
 
-unaryOperator: MINUS 
-				| PLUS 
-				| NOT;
+binaryOperator: absoluteComparison
+				| relativeComparison
+				| arithmetic
+				| logical;
+
+absoluteComparison: NOTEQUAL
+					| EQUAL;
+
+relativeComparison: GREATERTHAN
+					| SMALLERTHAN
+					| GREATEREQUAL
+					| SMALLEREQUAL;
+
+arithmetic: PLUS 
+			| MINUS 
+			| DIVIDE	
+			| MULTIPLY;
+
+logical: AND 
+		| OR;
+
 
 /* 
 *  Lexer Rules
