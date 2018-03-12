@@ -1,0 +1,12 @@
+﻿stylesheet test {
+	page testPage {
+		section "testSection" {
+			
+		}
+	}
+	page nextPage {
+		section "nextSection" {
+		
+		}	
+	}
+}

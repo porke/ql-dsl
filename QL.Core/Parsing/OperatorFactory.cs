@@ -1,7 +1,8 @@
 ﻿using QL.Api.Operators;
+using QL.Core.Interpreting.Operators;
 using System;
 
-namespace QL.Core.Parsin
+namespace QL.Core.Parsing
 {
     internal static class OperatorFactory
     {

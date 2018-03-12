@@ -8,5 +8,7 @@ namespace QLS.Api.Ast
 
         public virtual T Visit(StylesheetNode node) { return VisitChildren(node); }
         public virtual T Visit(PageNode node) { return VisitChildren(node); }
+        public virtual T Visit(SectionNode node) { return VisitChildren(node); }
+        public virtual T Visit(QuestionNode node) { return VisitChildren(node); }
     }
 }

@@ -1,5 +1,7 @@
 ﻿stylesheet test {
 	page testPage {
-	
+		section "test section" {
+			question testQuestion
+		}
 	}
 }

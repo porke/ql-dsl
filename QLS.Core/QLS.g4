@@ -1,12 +1,15 @@
 grammar QLS;
 
 stylesheet: STYLESHEET LABEL LEFTCURLY (page)* RIGHCURLY;
-page: PAGE LABEL block;
-block: LEFTCURLY RIGHTCURLY;
+page: PAGE LABEL LEFTCURLY (section)* RIGHCURLY;
+section: SECTION STRING LEFTCURLY (question)* RIGHCURLY;
+question: QUESTION LABEL;
 
 // Terms
 STYLESHEET: 'stylesheet';
 PAGE: 'page';
+SECTION: 'section';
+QUESTION: 'question';
 
 
 LEFTCURLY:		'{';
@@ -18,6 +21,7 @@ fragment LOWERCASE: ('a'..'z');
 fragment NUMBER:	('0'..'9');
 
 LABEL:	(LOWERCASE|UPPERCASE)(LOWERCASE|UPPERCASE|NUMBER|'_')*;
+STRING:		'"' .*? '"';
 
 // Hidden
 WHITESPACE:	    (' ' | '\t' | '\n' | '\r') -> skip;

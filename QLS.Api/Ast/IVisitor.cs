@@ -4,5 +4,7 @@
     {
         T Visit(PageNode node);
         T Visit(StylesheetNode node);
+        T Visit(SectionNode node);
+        T Visit(QuestionNode node);
     }
 }
