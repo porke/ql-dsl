@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="Presentation.Views.PageView"
+﻿<UserControl x:Class="Presentation.Views.SectionsView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -7,13 +7,11 @@
              xmlns:vm="clr-namespace:Presentation.ViewModels"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
-    <UserControl.Resources>
-        <DataTemplate DataType="{x:Type vm:TextQuestionViewModel}">
-            <local:TextQuestionView/>
-        </DataTemplate>
-        <DataTemplate DataType="{x:Type vm:BooleanQuestionViewModel}">
-            <local:BooleanQuestionView/>
-        </DataTemplate>
-    </UserControl.Resources>
-    <local:SectionsView DataContext="{Binding Sections}"/>
+    <ItemsControl ItemsSource="{Binding Sections}">
+        <ItemsControl.ItemTemplate>
+            <DataTemplate DataType="{x:Type vm:SectionViewModel}">
+                <local:SectionView/>
+            </DataTemplate>
+        </ItemsControl.ItemTemplate>
+    </ItemsControl>
 </UserControl>

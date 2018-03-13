@@ -1,7 +1,8 @@
-﻿using QLS.Api.Ast;
+﻿using Presentation.ViewModels;
+using QLS.Api.Ast;
 using System.Collections.Generic;
 
-namespace Presentation.ViewModels
+namespace Presentation.Visitors
 {
     internal class StylesheetVisitor : BaseVisitor<object>
     {
@@ -18,12 +19,17 @@ namespace Presentation.ViewModels
         {
             var pageViewModel = new PageViewModel(page.Label);
             PagesViewModel.Pages.Add(pageViewModel);
+            foreach (var section in page.ChildNodes)
+            {
+                pageViewModel.Sections.Sections.Add(section.Accept(this) as SectionViewModel);
+            }
+            
             return null;
         }
 
         public override object Visit(SectionNode section)
-        {
-            return null;
+        {            
+            return new SectionViewModel(section.Label);
         }
     }
 }

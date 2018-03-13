@@ -1,6 +1,4 @@
-﻿using ReactiveUI;
-
-namespace Presentation.ViewModels
+﻿namespace Presentation.ViewModels
 {
     internal class PageViewModel
     {
@@ -9,7 +7,7 @@ namespace Presentation.ViewModels
             Label = label;
         }
 
-        public IReactiveList<QuestionViewModel> Questions { get; } = new ReactiveList<QuestionViewModel>();
+        public SectionsViewModel Sections { get; } = new SectionsViewModel();
 
         public string Label { get; }
     }

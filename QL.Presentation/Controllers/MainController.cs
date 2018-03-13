@@ -7,6 +7,7 @@ using QLS.Api.Infrastructure;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Presentation.Visitors;
 
 namespace Presentation.Controllers
 {
@@ -76,7 +77,7 @@ namespace Presentation.Controllers
         {
             var interpretingTask = _interpretingPipeline.Process(new InterpretingTask(ast, _memory, _symbols));
 
-            var formBuildingVisitor = new FormViewModelBuildingVisitor();
+            var formBuildingVisitor = new QuestionnaireVisitor();
             interpretingTask.InterpretedAst.Accept(formBuildingVisitor);
 
             FormViewModel form = formBuildingVisitor.Form;

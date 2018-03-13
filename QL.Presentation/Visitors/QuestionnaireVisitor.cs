@@ -1,9 +1,10 @@
-﻿using QL.Api.Ast;
+﻿using Presentation.ViewModels;
+using QL.Api.Ast;
 using QL.Api.Types;
 
-namespace Presentation.ViewModels
+namespace Presentation.Visitors
 {
-    internal class FormViewModelBuildingVisitor : BaseVisitor<object>
+    internal class QuestionnaireVisitor : BaseVisitor<object>
     {
         public FormViewModel Form { get; private set; }
 

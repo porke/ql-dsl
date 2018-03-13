@@ -104,13 +104,17 @@
     <Compile Include="Converters\BooleanNegationConverter.cs" />
     <Compile Include="RelayCommand.cs" />
     <Compile Include="ViewModels\BooleanQuestionViewModel.cs" />
-    <Compile Include="ViewModels\FormViewModelBuildingVisitor.cs" />
+    <Compile Include="ViewModels\SectionsViewModel.cs" />
+    <Compile Include="Views\SectionsView.xaml.cs">
+      <DependentUpon>SectionsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Visitors\QuestionnaireVisitor.cs" />
     <Compile Include="ViewModels\FormViewModel.cs" />
     <Compile Include="ViewModels\PagesViewModel.cs" />
     <Compile Include="ViewModels\PageViewModel.cs" />
     <Compile Include="ViewModels\QuestionViewModel.cs" />
     <Compile Include="ViewModels\SectionViewModel.cs" />
-    <Compile Include="ViewModels\StylesheetVisitor.cs" />
+    <Compile Include="Visitors\StylesheetVisitor.cs" />
     <Compile Include="ViewModels\TextQuestionViewModel.cs" />
     <Compile Include="Views\FormView.xaml.cs">
       <DependentUpon>FormView.xaml</DependentUpon>
@@ -123,6 +127,9 @@
     </Compile>
     <Compile Include="Views\PageView.xaml.cs">
       <DependentUpon>PageView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SectionView.xaml.cs">
+      <DependentUpon>SectionView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\TextQuestionView.xaml.cs">
       <DependentUpon>TextQuestionView.xaml</DependentUpon>
@@ -153,6 +160,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\PageView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SectionsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SectionView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
