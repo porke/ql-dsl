@@ -1,4 +1,4 @@
-﻿namespace QL.Api.Infrastructure
+﻿namespace Infrastructure
 {
     public interface IPipelineElement<T>
     {

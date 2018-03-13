@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace QL.Api.Entities
 {
-    public class SymbolTable : IEnumerable<Symbol>
+    public sealed class SymbolTable : IEnumerable<Symbol>
     {
         private IList<Symbol> _symbols = new List<Symbol>();
 

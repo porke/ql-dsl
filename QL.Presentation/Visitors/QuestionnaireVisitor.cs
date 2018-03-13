@@ -1,6 +1,6 @@
 ﻿using Presentation.ViewModels;
 using QL.Api.Ast;
-using QL.Api.Types;
+using QL.Api.Entities;
 
 namespace Presentation.Visitors
 {
@@ -22,8 +22,7 @@ namespace Presentation.Visitors
             {
                 return null;
             }
-
-            // TODO: Check if it is an evaluated value
+            
             if (node.Type == QLType.Boolean)
             {                
                 bool evaluatedValue = node.ChildNodes.Count > 0 ? bool.Parse(node.ChildNodes[0].Accept(this).ToString()) : false;

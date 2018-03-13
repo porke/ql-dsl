@@ -1,7 +1,7 @@
 ﻿using static QL.Core.QLParser;
 using Antlr4.Runtime.Tree;
 using QL.Api.Ast;
-using QL.Api.Types;
+using QL.Api.Entities;
 
 namespace QL.Core.Parsing
 {

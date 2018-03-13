@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using QL.Api.Infrastructure;
 using QL.Core.Validation;
+using Infrastructure;
 
 namespace QL.Core.Infrastructure
 {

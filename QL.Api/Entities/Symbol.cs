@@ -1,9 +1,8 @@
 ﻿using Antlr4.Runtime;
-using QL.Api.Types;
 
 namespace QL.Api.Entities
 {
-    public class Symbol
+    public sealed class Symbol
     {
         public Symbol(string name, QLType type, IToken token)
         {

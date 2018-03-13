@@ -68,6 +68,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Infrastructure\Infrastructure.csproj">
+      <Project>{8F6E14C8-558D-4BDE-AC55-C4A614DCE343}</Project>
+      <Name>Infrastructure</Name>
+    </ProjectReference>
     <ProjectReference Include="..\QLS.Api\QLS.Api.csproj">
       <Project>{8A83E46F-CF59-4810-AB92-3E1191DE17B1}</Project>
       <Name>QLS.Api</Name>

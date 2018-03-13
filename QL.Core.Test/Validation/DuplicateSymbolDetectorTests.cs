@@ -1,7 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using QL.Api.Entities;
 using QL.Api.Infrastructure;
-using QL.Api.Types;
 using QL.Core.Infrastructure;
 
 namespace QL.Core.Test.Validation

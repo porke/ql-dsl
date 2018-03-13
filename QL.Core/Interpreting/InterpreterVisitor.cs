@@ -2,7 +2,6 @@
 using QL.Api.Ast;
 using QL.Api.Entities;
 using QL.Api.Operators;
-using QL.Api.Types;
 using System.Linq;
 
 namespace QL.Core.Interpreting

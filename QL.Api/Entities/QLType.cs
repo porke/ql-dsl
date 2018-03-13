@@ -1,4 +1,4 @@
-﻿namespace QL.Api.Types
+﻿namespace QL.Api.Entities
 {
     public enum QLType
     {

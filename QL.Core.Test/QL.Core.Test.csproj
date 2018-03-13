@@ -94,6 +94,10 @@
     <EmbeddedResource Include="TestData\IncorrectForms\binaryExpressionWithWrongTypes.ql" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Infrastructure\Infrastructure.csproj">
+      <Project>{8F6E14C8-558D-4BDE-AC55-C4A614DCE343}</Project>
+      <Name>Infrastructure</Name>
+    </ProjectReference>
     <ProjectReference Include="..\QL.Api\QL.Api.csproj">
       <Project>{E314ABD5-8189-4707-B201-A82933957F51}</Project>
       <Name>QL.Api</Name>

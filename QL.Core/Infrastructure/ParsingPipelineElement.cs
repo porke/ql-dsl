@@ -2,6 +2,7 @@
 using QL.Api.Infrastructure;
 using Antlr4.Runtime;
 using QL.Core.Parsing;
+using Infrastructure;
 
 namespace QL.Core.Infrastructure
 {

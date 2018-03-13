@@ -1,4 +1,5 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Infrastructure;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using QL.Api.Infrastructure;
 
 namespace QL.Core.Test.Parsing

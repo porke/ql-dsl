@@ -1,7 +1,7 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Infrastructure;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using QL.Api.Entities;
 using QL.Api.Infrastructure;
-using QL.Api.Types;
 using QL.Core.Interpreting;
 
 namespace QL.Core.Test.Interpreting

@@ -60,15 +60,13 @@
     <Compile Include="Entities\Scope.cs" />
     <Compile Include="Entities\MemorySystem.cs" />
     <Compile Include="Infrastructure\InterpretingTask.cs" />
-    <Compile Include="Infrastructure\IPipelineElement.cs" />
     <Compile Include="Infrastructure\ParsingTask.cs" />
-    <Compile Include="Infrastructure\Pipeline.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Entities\Symbol.cs" />
     <Compile Include="Entities\SymbolTable.cs" />
     <Compile Include="Operators\IOperator.cs" />
-    <Compile Include="Types\QLType.cs" />
-    <Compile Include="Types\Value.cs" />
+    <Compile Include="Entities\QLType.cs" />
+    <Compile Include="Entities\Value.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

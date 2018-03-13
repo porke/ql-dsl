@@ -93,6 +93,10 @@
     </Antlr4>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Infrastructure\Infrastructure.csproj">
+      <Project>{8F6E14C8-558D-4BDE-AC55-C4A614DCE343}</Project>
+      <Name>Infrastructure</Name>
+    </ProjectReference>
     <ProjectReference Include="..\QL.Api\QL.Api.csproj">
       <Project>{e314abd5-8189-4707-b201-a82933957f51}</Project>
       <Name>QL.Api</Name>

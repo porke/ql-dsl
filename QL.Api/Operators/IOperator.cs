@@ -1,4 +1,4 @@
-﻿using QL.Api.Types;
+﻿using QL.Api.Entities;
 
 namespace QL.Api.Operators
 {

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace QLS.Api.Infrastructure
+namespace Infrastructure
 {
     public sealed class Pipeline<T>
     {

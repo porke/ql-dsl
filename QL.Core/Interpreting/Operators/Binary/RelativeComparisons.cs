@@ -1,5 +1,5 @@
-﻿using QL.Api.Operators;
-using QL.Api.Types;
+﻿using QL.Api.Entities;
+using QL.Api.Operators;
 
 namespace QL.Core.Interpreting.Operators
 {

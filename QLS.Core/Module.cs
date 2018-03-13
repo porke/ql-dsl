@@ -1,4 +1,5 @@
-﻿using QLS.Api.Infrastructure;
+﻿using Infrastructure;
+using QLS.Api.Infrastructure;
 using QLS.Core.Parsing;
 
 namespace QLS.Core

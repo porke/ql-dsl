@@ -1,9 +1,8 @@
-﻿using QL.Api.Types;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace QL.Api.Entities
 {
-    public class MemorySystem
+    public sealed class MemorySystem
     {
         private Dictionary<string, Value> _values = new Dictionary<string, Value>();
 

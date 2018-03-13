@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace QL.Api.Types
+namespace QL.Api.Entities
 {
     public class Value
     {

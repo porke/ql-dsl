@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace QL.Api.Entities
 {
-    public class Scope
+    public sealed class Scope
     {
         public readonly IList<Scope> Children = new List<Scope>();
         public readonly Scope Parent;
