@@ -2,25 +2,33 @@
 using QL.Api.Entities;
 using QL.Api.Infrastructure;
 using QL.Api.Types;
-using QL.Presentation.ViewModels;
+using Presentation.ViewModels;
+using QLS.Api.Infrastructure;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
-namespace QL.Presentation.Controllers
+namespace Presentation.Controllers
 {
     internal class MainController
     {        
-        private readonly Pipeline<ParsingTask> _parsingPipeline;
-        private readonly Pipeline<InterpretingTask> _interpretingPipeline;
+        private readonly QL.Api.Infrastructure.Pipeline<ParsingTask> _parsingPipeline;
+        private readonly QL.Api.Infrastructure.Pipeline<InterpretingTask> _interpretingPipeline;
+        private readonly QLS.Api.Infrastructure.Pipeline<StylesheetTask> _stylesheetPipeline;
+
         private readonly MainViewModel _mainViewModel;
         private MemorySystem _memory;
         private SymbolTable _symbols;
 
-        public MainController(MainViewModel viewModel, Pipeline<ParsingTask> parsingPipeline, Pipeline<InterpretingTask> interpretingPipeline)
+        public MainController(MainViewModel viewModel,
+                              QL.Api.Infrastructure.Pipeline<ParsingTask> parsingPipeline,
+                              QL.Api.Infrastructure.Pipeline<InterpretingTask> interpretingPipeline,
+                              QLS.Api.Infrastructure.Pipeline<StylesheetTask> stylesheetPipeline)
         {
             _mainViewModel = viewModel;
             _parsingPipeline = parsingPipeline;
             _interpretingPipeline = interpretingPipeline;
+            _stylesheetPipeline = stylesheetPipeline;
 
             viewModel.RebuildQuestionnaireCommand = new RelayCommand<string>(RebuildQuestionnaireCommand_Execute);
         }
@@ -53,18 +61,38 @@ namespace QL.Presentation.Controllers
             }
             _memory.AssignValue(questionViewModel.Id, new Value(questionViewModel.Value, memoryValue.Type));
             
+            // TODO: Why rebuild the ast all the time, perhaps replace the parsing pipeline here with interpreting pipeline
             var parsingTask = _parsingPipeline.Process(new ParsingTask(_mainViewModel.QuestionnaireInput));
             RebuildQuestionnaire(parsingTask.Ast);
         }
 
         private void RebuildQuestionnaire(Node ast)
         {
+            _mainViewModel.Form = CreateFormViewModelFromQL(ast);
+            _mainViewModel.Form.Pages = CreatePagesFromStylesheet();
+        }
+
+        private FormViewModel CreateFormViewModelFromQL(Node ast)
+        {
             var interpretingTask = _interpretingPipeline.Process(new InterpretingTask(ast, _memory, _symbols));
 
             var formBuildingVisitor = new FormViewModelBuildingVisitor();
             interpretingTask.InterpretedAst.Accept(formBuildingVisitor);
-            _mainViewModel.Form = formBuildingVisitor.Form;
-            _mainViewModel.Form.QuestionValueAssignedCommand = new RelayCommand<QuestionViewModel>(QuestionValueAssignedCommand_Execute);
+
+            FormViewModel form = formBuildingVisitor.Form;
+            form.QuestionValueAssignedCommand = new RelayCommand<QuestionViewModel>(QuestionValueAssignedCommand_Execute);
+            return form;
+        }
+
+        private PagesViewModel CreatePagesFromStylesheet()
+        {
+            IReadOnlyList<QuestionViewModel> questionViewModels = _mainViewModel.Form.Questions.ToList();
+            var stylesheetTask = new StylesheetTask(_mainViewModel.StylesheetInput, questionViewModels.Select(x => x.Id).ToList());
+            var processedStylesheet = _stylesheetPipeline.Process(stylesheetTask);
+
+            var stylesheetVisitor = new StylesheetVisitor(questionViewModels);
+            processedStylesheet.Ast.Accept(stylesheetVisitor);
+            return stylesheetVisitor.PagesViewModel;
         }
     }
 }

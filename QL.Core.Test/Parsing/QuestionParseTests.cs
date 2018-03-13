@@ -107,11 +107,11 @@ namespace QL.Core.Test.Parsing
             });
             _assertVisitor.EnqueueExpressionNodeCallback(expression =>
             {
-                Assert.AreEqual("+",expression.Operator.AsString);
+                Assert.AreEqual("-",expression.Operator.AsString);
             });
             _assertVisitor.EnqueueExpressionNodeCallback(expression =>
             {
-                Assert.AreEqual("-", expression.Operator.AsString);
+                Assert.AreEqual("+", expression.Operator.AsString);
             });
             _assertVisitor.EnqueueLiteralNodeCallback(literal =>
             {

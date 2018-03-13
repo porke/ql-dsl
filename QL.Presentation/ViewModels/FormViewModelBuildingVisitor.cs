@@ -1,11 +1,11 @@
 ﻿using QL.Api.Ast;
 using QL.Api.Types;
 
-namespace QL.Presentation.ViewModels
+namespace Presentation.ViewModels
 {
     internal class FormViewModelBuildingVisitor : BaseVisitor<object>
     {
-        public FormViewModel Form { get; set; }
+        public FormViewModel Form { get; private set; }
 
         public override object Visit(FormNode node)
         {

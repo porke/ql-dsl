@@ -5,7 +5,7 @@ VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QL.Core", "QL.Core\QL.Core.csproj", "{210CA766-0E42-485E-A2FF-57F5F909081E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QL.Presentation", "QL.Presentation\QL.Presentation.csproj", "{5B114B5C-AA94-43D0-BA00-F1FEF8875AFF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Presentation", "QL.Presentation\Presentation.csproj", "{5B114B5C-AA94-43D0-BA00-F1FEF8875AFF}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QL.Core.Test", "QL.Core.Test\QL.Core.Test.csproj", "{425D07F5-31C4-4A95-92EE-C0D7AB7BA5DA}"
 EndProject

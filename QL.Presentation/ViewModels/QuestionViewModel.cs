@@ -1,7 +1,7 @@
 ﻿using System;
 using ReactiveUI;
 
-namespace QL.Presentation.ViewModels
+namespace Presentation.ViewModels
 {
     internal abstract class QuestionViewModel : ReactiveObject
     {
@@ -21,14 +21,7 @@ namespace QL.Presentation.ViewModels
 
             this.ObservableForProperty(x => x.Value)
                 .Subscribe(x => parentForm.QuestionValueAssignedCommand.Execute(this));
-        }
-
-        public void Reconcile(QuestionViewModel question)
-        {
-            _description = question._description;
-            _isEvaluated = question._isEvaluated;
-            _value = question._value;
-        }
+        }       
 
         public string Description => _description;
 

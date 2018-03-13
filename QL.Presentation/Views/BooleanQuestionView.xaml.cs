@@ -1,6 +1,6 @@
 ﻿using System.Windows.Controls;
 
-namespace QL.Presentation.Views
+namespace Presentation.Views
 {
     public partial class BooleanQuestionView : UserControl
     {

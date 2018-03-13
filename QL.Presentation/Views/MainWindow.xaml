@@ -1,10 +1,10 @@
-﻿<Window x:Class="QL.Presentation.MainWindow"
+﻿<Window x:Class="Presentation.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"               
-        xmlns:resx="clr-namespace:QL.Presentation.Properties"        
-        xmlns:local="clr-namespace:QL.Presentation.Views"
+        xmlns:resx="clr-namespace:Presentation.Properties"        
+        xmlns:local="clr-namespace:Presentation.Views"
         mc:Ignorable="d"
         Title="{Binding AppTitle}" Height="400" Width="800">
     <Grid>
@@ -20,7 +20,14 @@
                 <RowDefinition Height="3*"/>
             </Grid.RowDefinitions>
 
-            <TextBox AcceptsReturn="True" TextWrapping="NoWrap" AcceptsTab="True" Text="{Binding QuestionnaireInput}"/>
+            <TabControl>
+                <TabItem Header="{x:Static resx:Resources.Questionnaire}">
+                    <TextBox AcceptsReturn="True" TextWrapping="NoWrap" AcceptsTab="True" Text="{Binding QuestionnaireInput}"/>
+                </TabItem>
+                <TabItem Header="{x:Static resx:Resources.Stylesheet}">
+                    <TextBox AcceptsReturn="True" TextWrapping="NoWrap" AcceptsTab="True" Text="{Binding StylesheetInput}"/>
+                </TabItem>
+            </TabControl>
             <Button Command="{Binding RebuildQuestionnaireCommand}" CommandParameter="{Binding QuestionnaireInput}" Grid.Row="1" Content="{x:Static resx:Resources.ShowQuestionnaire}"/>
             <TextBox Grid.Row="2" Text="{Binding QuestionnaireValidation}"/>
         </Grid>

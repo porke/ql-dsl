@@ -1,6 +1,6 @@
 ﻿using System.Windows.Controls;
 
-namespace QL.Presentation.Views
+namespace Presentation.Views
 {
     /// <summary>
     /// Interaction logic for FormView.xaml

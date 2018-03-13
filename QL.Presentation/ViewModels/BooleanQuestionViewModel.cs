@@ -1,4 +1,4 @@
-﻿namespace QL.Presentation.ViewModels
+﻿namespace Presentation.ViewModels
 {
     internal class BooleanQuestionViewModel : QuestionViewModel
     {        

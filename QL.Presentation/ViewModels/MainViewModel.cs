@@ -1,12 +1,13 @@
-﻿using QL.Presentation.Properties;
+﻿using Presentation.Properties;
 using ReactiveUI;
 using System.Windows.Input;
 
-namespace QL.Presentation.ViewModels
+namespace Presentation.ViewModels
 {
     internal class MainViewModel : ReactiveObject
     {
         private string _questionnaireInput;
+        private string _stylesheetInput;
         private string _questionnaireValidation;
         private FormViewModel _formViewModel = new FormViewModel("Default");
 
@@ -22,6 +23,12 @@ namespace QL.Presentation.ViewModels
         {
             get { return _questionnaireInput; }
             set { this.RaiseAndSetIfChanged(ref _questionnaireInput, value); }
+        }
+
+        public string StylesheetInput
+        {
+            get { return _stylesheetInput; }
+            set { this.RaiseAndSetIfChanged(ref _stylesheetInput, value); }
         }
 
         public string QuestionnaireValidation

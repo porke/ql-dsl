@@ -2,7 +2,7 @@
 using System.Diagnostics;
 using System.Windows.Input;
 
-namespace QL.Presentation
+namespace Presentation
 {
     public class RelayCommand<T> : ICommand where T: class
     {

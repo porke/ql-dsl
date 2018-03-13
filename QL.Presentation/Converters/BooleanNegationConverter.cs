@@ -2,7 +2,7 @@
 using System.Globalization;
 using System.Windows.Data;
 
-namespace QL.Presentation.Converters
+namespace Presentation.Converters
 {
     internal class BooleanNegationConverter : IValueConverter
     {

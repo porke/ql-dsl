@@ -120,7 +120,13 @@
   <data name="MainTitle" xml:space="preserve">
     <value>QL Dev Env</value>
   </data>
+  <data name="Questionnaire" xml:space="preserve">
+    <value>Questionnaire</value>
+  </data>
   <data name="ShowQuestionnaire" xml:space="preserve">
     <value>Show questionnaire</value>
+  </data>
+  <data name="Stylesheet" xml:space="preserve">
+    <value>Stylesheet</value>
   </data>
 </root>

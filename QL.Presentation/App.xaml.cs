@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 
-namespace QL.Presentation
+namespace Presentation
 {
     /// <summary>
     /// Interaction logic for App.xaml
