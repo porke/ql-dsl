@@ -7,13 +7,5 @@
              xmlns:vm="clr-namespace:Presentation.ViewModels"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
-    <UserControl.Resources>
-        <DataTemplate DataType="{x:Type vm:TextQuestionViewModel}">
-            <local:TextQuestionView/>
-        </DataTemplate>
-        <DataTemplate DataType="{x:Type vm:BooleanQuestionViewModel}">
-            <local:BooleanQuestionView/>
-        </DataTemplate>
-    </UserControl.Resources>
     <local:SectionsView DataContext="{Binding Sections}"/>
 </UserControl>

@@ -1,5 +1,6 @@
 ﻿using Presentation.ViewModels;
 using QLS.Api.Ast;
+using System.Linq;
 using System.Collections.Generic;
 
 namespace Presentation.Visitors
@@ -19,9 +20,9 @@ namespace Presentation.Visitors
         {
             var pageViewModel = new PageViewModel(page.Label);
             PagesViewModel.Pages.Add(pageViewModel);
-            foreach (var section in page.ChildNodes)
+            foreach (var sectionNode in page.ChildNodes)
             {
-                pageViewModel.Sections.Sections.Add(section.Accept(this) as SectionViewModel);
+                pageViewModel.Sections.Sections.Add(sectionNode.Accept(this) as SectionViewModel);
             }
             
             return null;
@@ -29,7 +30,22 @@ namespace Presentation.Visitors
 
         public override object Visit(SectionNode section)
         {            
-            return new SectionViewModel(section.Label);
+            var sectionViewModel = new SectionViewModel(section.Label);
+            foreach (var questionNode in section.ChildNodes)
+            {
+                var questionViewModel = questionNode.Accept(this) as QuestionViewModel;
+                if (questionViewModel != null)
+                {
+                    sectionViewModel.Questions.Add(questionViewModel);
+                }
+            }
+
+            return sectionViewModel;
+        }
+
+        public override object Visit(QuestionNode question)
+        {
+            return _questions.FirstOrDefault(q => q.Id.Equals(question.Label));
         }
     }
 }
