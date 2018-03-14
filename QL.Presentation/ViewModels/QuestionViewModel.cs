@@ -1,5 +1,6 @@
 ﻿using System;
 using ReactiveUI;
+using QLS.Api.Entities;
 
 namespace Presentation.ViewModels
 {
@@ -32,6 +33,8 @@ namespace Presentation.ViewModels
             get { return _value; }
             set { this.RaiseAndSetIfChanged(ref _value, value); }
         }
+
+        public WidgetType WidgetType { get; set; } = WidgetType.Textbox;
 
         public bool IsEvaluated => _isEvaluated;
     }

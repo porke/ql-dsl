@@ -1,5 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using QLS.Api.Ast;
+using QLS.Api.Entities;
 using QLS.Api.Infrastructure;
 using QLS.Core.Parsing;
 using System.Collections.Generic;
@@ -87,6 +88,20 @@ namespace QLS.Core.Test.Parsing
             });
             ast.Accept(_assertVisitor);
             _assertVisitor.VerifyAll();
-        }        
+        }
+
+        [TestMethod]
+        public void ParseSimpleStylesheetWithOnePageOneSectionOneQuestionAndWidget_WillSucceed()
+        {
+            var stylesheetTask = new StylesheetTask(TestDataResolver.LoadTestFile("onePageStylesheetWithQuestionAndWidget.qls"), new List<string>());
+            Node ast = _parsingService.Process(stylesheetTask).Ast;
+
+            _assertVisitor.EnqueueWidgetNodeCallback(w =>
+            {
+                Assert.AreEqual(WidgetType.Radio, w.WidgetType);
+            });
+            ast.Accept(_assertVisitor);
+            _assertVisitor.VerifyAll();
+        }
     }
 }

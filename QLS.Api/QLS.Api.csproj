@@ -51,6 +51,8 @@
     <Compile Include="Ast\QuestionNode.cs" />
     <Compile Include="Ast\SectionNode.cs" />
     <Compile Include="Ast\StylesheetNode.cs" />
+    <Compile Include="Ast\WidgetNode.cs" />
+    <Compile Include="Entities\WidgetType.cs" />
     <Compile Include="Infrastructure\StylesheetTask.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

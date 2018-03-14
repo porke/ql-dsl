@@ -3,7 +3,7 @@ using QL.Api.Operators;
 
 namespace QL.Api.Ast
 {
-    public class ExpressionNode : Node
+    public sealed class ExpressionNode : Node
     {
         public ExpressionNode(IToken token, IOperator @operator) : base(token)
         {

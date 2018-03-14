@@ -2,7 +2,7 @@
 
 namespace QLS.Api.Ast
 {
-    public class StylesheetNode : Node
+    public sealed class StylesheetNode : Node
     {
         public StylesheetNode(IToken token, string label) : base(token)
         {

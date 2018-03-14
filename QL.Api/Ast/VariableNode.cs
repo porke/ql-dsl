@@ -2,7 +2,7 @@
 
 namespace QL.Api.Ast
 {
-    public class VariableNode : Node
+    public sealed class VariableNode : Node
     {
         public VariableNode(IToken token, string label) : base(token)
         {

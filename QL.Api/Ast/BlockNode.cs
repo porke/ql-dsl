@@ -2,7 +2,7 @@
 
 namespace QL.Api.Ast
 {
-    public class BlockNode : Node
+    public sealed class BlockNode : Node
     {
         public BlockNode(IToken token, int depth) : base(token)
         {

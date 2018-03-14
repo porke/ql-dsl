@@ -1,5 +1,6 @@
 ﻿using Antlr4.Runtime.Misc;
 using QLS.Api.Ast;
+using QLS.Api.Entities;
 using static QLS.Core.QLSParser;
 
 namespace QLS.Core.Parsing
@@ -41,7 +42,30 @@ namespace QLS.Core.Parsing
 
         public override Node VisitQuestion([NotNull] QuestionContext context)
         {
-            return new QuestionNode(context.Start, context.LABEL().ToString());
+            var questionNode = new QuestionNode(context.Start, context.LABEL().ToString());
+            if (context.widget() != null)
+            {
+                questionNode.AddChild(Visit(context.widget()));
+            }
+            return questionNode;
+        }
+
+        public override Node VisitWidget([NotNull] WidgetContext context)
+        {
+            WidgetType widgetType = WidgetType.Textbox;
+            switch (context.widget_type().Start.Type)
+            {
+                case WIDGETDROPDOWN:
+                    widgetType = WidgetType.Dropdown;
+                    break;
+                case WIDGETCHECKBOX:
+                    widgetType = WidgetType.Checkbox;
+                    break;
+                case WIDGETRADIO:
+                    widgetType = WidgetType.Radio;
+                    break;
+            }
+            return new WidgetNode(context.Start, widgetType);
         }
     }
 }

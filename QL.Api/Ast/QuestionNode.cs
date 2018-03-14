@@ -3,7 +3,7 @@ using QL.Api.Entities;
 
 namespace QL.Api.Ast
 {
-    public class QuestionNode : Node
+    public sealed class QuestionNode : Node
     {
         public QuestionNode(IToken token, string description, string label, bool isEvaluated, QLType type) : base(token)
         {

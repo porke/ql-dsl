@@ -2,7 +2,7 @@
 
 namespace QLS.Api.Ast
 {
-    public class QuestionNode : Node
+    public sealed class QuestionNode : Node
     {
         public QuestionNode(IToken token, string label) : base(token)
         {
