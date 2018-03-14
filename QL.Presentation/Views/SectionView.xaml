@@ -5,17 +5,30 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Presentation.Views"
              xmlns:vm="clr-namespace:Presentation.ViewModels"
+             xmlns:dt="clr-namespace:Presentation.DataTemplates"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <UserControl.Resources>
-        <DataTemplate DataType="{x:Type vm:TextQuestionViewModel}">
+        <DataTemplate x:Key="TextQuestionTemplate">
             <local:TextQuestionView/>
         </DataTemplate>
-        <DataTemplate DataType="{x:Type vm:BooleanQuestionViewModel}">
-            <local:BooleanQuestionView/>
+        <DataTemplate x:Key="CheckboxQuestionTemplate">
+            <local:CheckboxQuestionView/>
         </DataTemplate>
+        <DataTemplate x:Key="RadioQuestionTemplate">
+            <local:RadioQuestionView/>
+        </DataTemplate>
+        <DataTemplate x:Key="DropdownQuestionTemplate">
+            <local:DropdownQuestionView/>
+        </DataTemplate>
+
+        <dt:QuestionDataTemplateSelector x:Key="QuestionDataTemplateSelector"
+                                        DropdownDataTemplate="{StaticResource DropdownQuestionTemplate}"
+                                        CheckboxDataTemplate="{StaticResource CheckboxQuestionTemplate}"
+                                        RadioDataTemplate="{StaticResource RadioQuestionTemplate}"
+                                        TextDataTemplate="{StaticResource TextQuestionTemplate}"/>
     </UserControl.Resources>
     <GroupBox Header="{Binding Label}">
-        <ItemsControl ItemsSource="{Binding Questions}"/>
+        <ItemsControl ItemsSource="{Binding Questions}" ItemTemplateSelector="{StaticResource QuestionDataTemplateSelector}"/>
     </GroupBox>
 </UserControl>

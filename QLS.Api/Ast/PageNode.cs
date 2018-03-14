@@ -2,7 +2,7 @@
 
 namespace QLS.Api.Ast
 {
-    public class PageNode : Node
+    public sealed class PageNode : Node
     {
         public PageNode(IToken token, string label) : base(token)
         {

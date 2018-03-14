@@ -2,7 +2,7 @@
 
 namespace QL.Api.Ast
 {
-    public class FormNode : Node
+    public sealed class FormNode : Node
     {
         public FormNode(IToken token, string label) : base(token)
         {

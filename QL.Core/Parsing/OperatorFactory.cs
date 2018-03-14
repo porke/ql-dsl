@@ -16,6 +16,8 @@ namespace QL.Core.Parsing
 
         public IOperator CreateBinaryOperator(string text)
         {
+            // TODO: use the parser constants to decide
+            // QLParser.GREATERTHAN for example
             switch (text)
             {
                 case "-": return new Arithmetic((x, y) => x - y, "-", _valueFactory);

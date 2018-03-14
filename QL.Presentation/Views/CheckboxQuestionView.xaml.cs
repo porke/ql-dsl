@@ -2,9 +2,9 @@
 
 namespace Presentation.Views
 {
-    public partial class BooleanQuestionView : UserControl
+    public partial class CheckboxQuestionView : UserControl
     {
-        public BooleanQuestionView()
+        public CheckboxQuestionView()
         {
             InitializeComponent();
         }

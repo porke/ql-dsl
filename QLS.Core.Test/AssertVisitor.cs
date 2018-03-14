@@ -11,6 +11,7 @@ namespace QLS.Core.Test
         private Queue<Action<PageNode>> _pageNodeExpectations = new Queue<Action<PageNode>>();
         private Queue<Action<SectionNode>> _sectionNodeExpectations = new Queue<Action<SectionNode>>();
         private Queue<Action<QuestionNode>> _questionNodeExpectations = new Queue<Action<QuestionNode>>();
+        private Queue<Action<WidgetNode>> _widgetNodeExpectations = new Queue<Action<WidgetNode>>();
 
         public void EnqueueStylesheetNodeCallback(Action<StylesheetNode> assertionAction)
         {
@@ -32,12 +33,18 @@ namespace QLS.Core.Test
             _questionNodeExpectations.Enqueue(assertionAction);
         }
 
+        public void EnqueueWidgetNodeCallback(Action<WidgetNode> assertionAction)
+        {
+            _widgetNodeExpectations.Enqueue(assertionAction);
+        }
+
         public void VerifyAll()
         {
             Assert.AreEqual(0, _stylesheetNodeExpectations.Count, "Unmet expectations for stylesheet nodes.");
             Assert.AreEqual(0, _pageNodeExpectations.Count, "Unmet expectations for page nodes.");
             Assert.AreEqual(0, _sectionNodeExpectations.Count, "Unmet expectations for section nodes.");
             Assert.AreEqual(0, _questionNodeExpectations.Count, "Unmet expectations for question nodes.");
+            Assert.AreEqual(0, _widgetNodeExpectations.Count, "Unmet expectations for widget nodes.");
         }
 
         public override Node Visit(SectionNode node)
@@ -75,6 +82,16 @@ namespace QLS.Core.Test
             if (_pageNodeExpectations.Count > 0)
             {
                 _pageNodeExpectations.Dequeue().Invoke(node);
+            }
+
+            return VisitChildren(node);
+        }
+
+        public override Node Visit(WidgetNode node)
+        {
+            if (_widgetNodeExpectations.Count > 0)
+            {
+                _widgetNodeExpectations.Dequeue().Invoke(node);
             }
 
             return VisitChildren(node);

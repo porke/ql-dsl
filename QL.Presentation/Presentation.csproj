@@ -102,9 +102,17 @@
     </ApplicationDefinition>
     <Compile Include="Controllers\MainController.cs" />
     <Compile Include="Converters\BooleanNegationConverter.cs" />
+    <Compile Include="Converters\BooleanToIndexConverter.cs" />
+    <Compile Include="DataTemplates\QuestionDataTemplateSelector.cs" />
     <Compile Include="RelayCommand.cs" />
     <Compile Include="ViewModels\BooleanQuestionViewModel.cs" />
     <Compile Include="ViewModels\SectionsViewModel.cs" />
+    <Compile Include="Views\DropdownQuestionView.xaml.cs">
+      <DependentUpon>DropdownQuestionView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\RadioQuestionView.xaml.cs">
+      <DependentUpon>RadioQuestionView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\SectionsView.xaml.cs">
       <DependentUpon>SectionsView.xaml</DependentUpon>
     </Compile>
@@ -119,8 +127,8 @@
     <Compile Include="Views\FormView.xaml.cs">
       <DependentUpon>FormView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\BooleanQuestionView.xaml.cs">
-      <DependentUpon>BooleanQuestionView.xaml</DependentUpon>
+    <Compile Include="Views\CheckboxQuestionView.xaml.cs">
+      <DependentUpon>CheckboxQuestionView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\PagesView.xaml.cs">
       <DependentUpon>PagesView.xaml</DependentUpon>
@@ -134,6 +142,10 @@
     <Compile Include="Views\TextQuestionView.xaml.cs">
       <DependentUpon>TextQuestionView.xaml</DependentUpon>
     </Compile>
+    <Page Include="Views\DropdownQuestionView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\FormView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -151,7 +163,7 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Views\BooleanQuestionView.xaml">
+    <Page Include="Views\CheckboxQuestionView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -160,6 +172,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\PageView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\RadioQuestionView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

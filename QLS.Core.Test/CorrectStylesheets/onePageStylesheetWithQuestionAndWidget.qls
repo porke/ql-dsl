@@ -1,0 +1,8 @@
+﻿stylesheet test {
+	page testPage {
+		section "testSection" {
+			question questionOne
+				widget radio
+		}
+	}
+}

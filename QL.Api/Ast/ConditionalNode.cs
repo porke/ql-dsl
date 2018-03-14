@@ -2,7 +2,7 @@
 
 namespace QL.Api.Ast
 {
-    public class ConditionalNode : Node
+    public sealed class ConditionalNode : Node
     {
         public ConditionalNode(IToken token) : base(token)
         {

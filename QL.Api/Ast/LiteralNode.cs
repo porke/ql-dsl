@@ -3,7 +3,7 @@ using QL.Api.Entities;
 
 namespace QL.Api.Ast
 {
-    public class LiteralNode : Node
+    public sealed class LiteralNode : Node
     {
         public LiteralNode(IToken token, string value, QLType type) : base(token)
         {
