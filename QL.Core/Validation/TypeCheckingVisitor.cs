@@ -72,7 +72,7 @@ namespace QL.Core.Validation
             {
                 return node.Operator.ResultingType(leftHandType, rightHandType);
             }
-            TypeErrors.Add(new BinaryOperatorType(leftHandType.ToString(), rightHandType.ToString(), node.Operator.AsString, node.Token.Line));
+            TypeErrors.Add(new BinaryOperatorType(leftHandType.ToString(), rightHandType.ToString(), node.Operator.ToString(), node.Token.Line));
             return QLType.Undefined;
         }
 
@@ -85,7 +85,7 @@ namespace QL.Core.Validation
             }
             if (node.Operator.AcceptTypes(valueType))
             {
-                TypeErrors.Add(new UnaryOperatorType(valueType.ToString(), node.Operator.AsString, node.Token.Line));
+                TypeErrors.Add(new UnaryOperatorType(valueType.ToString(), node.Operator.ToString(), node.Token.Line));
                 return QLType.Undefined;
             }
             return valueType;

@@ -1,4 +1,5 @@
 ﻿using QL.Api.Entities;
+using QL.Api.Factories;
 using QL.Api.Operators;
 using System;
 
@@ -9,19 +10,18 @@ namespace QL.Core.Interpreting.Operators
         public delegate bool Opperator(string i, string j);
         private Opperator _opperator;
         private string _asString;
+        private readonly IValueFactory _valueFactory;
 
-        public AbsoluteComparison(Opperator opperator, string asString)
+        internal AbsoluteComparison(Opperator opperator, string asString, IValueFactory valueFactor)
         {
             _opperator = opperator;
             _asString = asString;
+            _valueFactory = valueFactor;
         }
 
-        public string AsString
+        public override string ToString()
         {
-            get
-            {
-                return _asString;
-            }
+            return _asString;
         }
 
         public bool AcceptTypes(QLType leftHand, QLType rightHand)
@@ -34,9 +34,9 @@ namespace QL.Core.Interpreting.Operators
             return (leftHand == rightHand);
         }
 
-        public Value Evaluate(Value leftHand, Value rightHand)
+        public IValue Evaluate(IValue leftHand, IValue rightHand)
         {
-            return new Value(string.Equals(leftHand.ToString(), rightHand.ToString(), StringComparison.Ordinal), QLType.Boolean);
+            return _valueFactory.CreateValue(string.Equals(leftHand.ToString(), rightHand.ToString(), StringComparison.Ordinal), QLType.Boolean);
         }
 
         public QLType ResultingType(QLType leftType, QLType rightType) {

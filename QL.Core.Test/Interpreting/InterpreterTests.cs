@@ -1,8 +1,10 @@
 ﻿using Infrastructure;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using QL.Api.Entities;
+using QL.Api.Factories;
 using QL.Api.Infrastructure;
 using QL.Core.Interpreting;
+using static QL.Api.Entities.Value;
 
 namespace QL.Core.Test.Interpreting
 {
@@ -14,6 +16,7 @@ namespace QL.Core.Test.Interpreting
         private AssertVisitor _assertVisitor;
         private InterpreterVisitor _interpreter;
         private MemorySystem _memory;
+        private IValueFactory _valueFactory;
 
         public InterpreterTests()
         {
@@ -24,7 +27,8 @@ namespace QL.Core.Test.Interpreting
         public void Setup()
         {
             _assertVisitor = new AssertVisitor();
-            _interpreter = new InterpreterVisitor();
+            _valueFactory = new ValueFactory();
+            _interpreter = new InterpreterVisitor(_valueFactory);
             _memory = new MemorySystem();
         }
 
@@ -91,7 +95,7 @@ namespace QL.Core.Test.Interpreting
             // Arrange
             var parsingTask = new ParsingTask(TestDataResolver.LoadTestFile("twoQuestionsOneReference.ql"));
             ParsingTask taskOutput = _parsingPipeline.Process(parsingTask);
-            _memory.AssignValue("whatIsMeaning", new Value(42, QLType.Integer));
+            _memory.AssignValue("whatIsMeaning", _valueFactory.CreateValue(42, QLType.Integer));
             var newAst = _interpreter.EvaluateAst(parsingTask.Ast, _memory, parsingTask.SymbolTable);
             _assertVisitor.EnqueueLiteralNodeCallback(lt => 
             {

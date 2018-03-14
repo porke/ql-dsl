@@ -57,8 +57,11 @@
     <Compile Include="Ast\Node.cs" />
     <Compile Include="Ast\QuestionNode.cs" />
     <Compile Include="Ast\VariableNode.cs" />
+    <Compile Include="Entities\IValue.cs" />
     <Compile Include="Entities\Scope.cs" />
     <Compile Include="Entities\MemorySystem.cs" />
+    <Compile Include="Factories\IOperatorFactory.cs" />
+    <Compile Include="Factories\IValueFactory.cs" />
     <Compile Include="Infrastructure\InterpretingTask.cs" />
     <Compile Include="Infrastructure\ParsingTask.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -66,7 +69,6 @@
     <Compile Include="Entities\SymbolTable.cs" />
     <Compile Include="Operators\IOperator.cs" />
     <Compile Include="Entities\QLType.cs" />
-    <Compile Include="Entities\Value.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

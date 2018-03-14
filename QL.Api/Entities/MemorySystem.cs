@@ -4,9 +4,9 @@ namespace QL.Api.Entities
 {
     public sealed class MemorySystem
     {
-        private Dictionary<string, Value> _values = new Dictionary<string, Value>();
+        private Dictionary<string, IValue> _values = new Dictionary<string, IValue>();
 
-        public bool TryRetrieveValue(string id, out Value returnValue)
+        public bool TryRetrieveValue(string id, out IValue returnValue)
         { 
             if (!_values.TryGetValue(id, out returnValue))
             {
@@ -16,7 +16,7 @@ namespace QL.Api.Entities
             return true;
         }
 
-        public void AssignValue(string id, Value value)
+        public void AssignValue(string id, IValue value)
         {
             _values[id] = value;
         }

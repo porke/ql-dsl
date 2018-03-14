@@ -1,37 +1,45 @@
 ﻿using QL.Api.Operators;
 using QL.Core.Interpreting.Operators;
+using QL.Api.Factories;
 using System;
 
 namespace QL.Core.Parsing
 {
-    internal static class OperatorFactory
+    internal class OperatorFactory : IOperatorFactory
     {
-        public static IOperator CreateBinaryOperator(string text)
+        private readonly IValueFactory _valueFactory;
+
+        internal OperatorFactory(IValueFactory valueFactory)
+        {
+            _valueFactory = valueFactory;
+        }
+
+        public IOperator CreateBinaryOperator(string text)
         {
             switch (text)
             {
-                case "-": return new Arithmetic((x, y) => x - y, "-");
-                case "+": return new Arithmetic((x, y) => x + y, "+");
-                case "*": return new Arithmetic((x, y) => x * y, "*");
-                case "/": return new Arithmetic((x, y) => x / y, "-");
-                case "||": return new Logical((x, y) => x || y, "||");
-                case "&&": return new Logical((x, y) => x && y, "&&");
-                case ">": return new RelativeComparison((x, y) => x > y, ">");
-                case "<": return new RelativeComparison((x, y) => x < y, "<");
-                case ">=": return new RelativeComparison((x, y) => x >= y, ">=");
-                case "<=": return new RelativeComparison((x, y) => x <= y, "<=");
-                case "!=": return new AbsoluteComparison((x, y) => x != y, "!=");
-                case "==": return new AbsoluteComparison((x, y) => x == y, "==");
+                case "-": return new Arithmetic((x, y) => x - y, "-", _valueFactory);
+                case "+": return new Arithmetic((x, y) => x + y, "+", _valueFactory);
+                case "*": return new Arithmetic((x, y) => x * y, "*", _valueFactory);
+                case "/": return new Arithmetic((x, y) => x / y, "-", _valueFactory);
+                case "||": return new Logical((x, y) => x || y, "||", _valueFactory);
+                case "&&": return new Logical((x, y) => x && y, "&&", _valueFactory);
+                case ">": return new RelativeComparison((x, y) => x > y, ">", _valueFactory);
+                case "<": return new RelativeComparison((x, y) => x < y, "<", _valueFactory);
+                case ">=": return new RelativeComparison((x, y) => x >= y, ">=", _valueFactory);
+                case "<=": return new RelativeComparison((x, y) => x <= y, "<=", _valueFactory);
+                case "!=": return new AbsoluteComparison((x, y) => x != y, "!=", _valueFactory);
+                case "==": return new AbsoluteComparison((x, y) => x == y, "==", _valueFactory);
             }
             throw new NotSupportedException($"{text} is not implemented as an operator.");
         }
 
-        public static IOperator CreateUnaryOperator(string text)
+        public IOperator CreateUnaryOperator(string text)
         {
             switch (text)
             {
-                case "-": return new ArithmeticalNegation();
-                case "!": return new BooleanNegation();
+                case "-": return new ArithmeticalNegation(_valueFactory);
+                case "!": return new BooleanNegation(_valueFactory);
             }
             throw new NotSupportedException($"{text} is not implemented as an operator.");
         }

@@ -47,6 +47,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Interpreting\Value.cs" />
     <Compile Include="Validation\Errors\ConditionalType.cs" />
     <Compile Include="Validation\Errors\QuestionAssignmentType.cs" />
     <Compile Include="Validation\Errors\BinaryOperatorType.cs" />

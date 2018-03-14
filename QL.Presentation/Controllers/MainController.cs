@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Presentation.Visitors;
 using Infrastructure;
+using QL.Api.Factories;
 
 namespace Presentation.Controllers
 {
@@ -21,16 +22,19 @@ namespace Presentation.Controllers
         private Node _qlAst;
         private MemorySystem _memory;
         private SymbolTable _symbols;
+        private readonly IValueFactory _valueFactory;
 
         public MainController(MainViewModel viewModel,
                               Pipeline<ParsingTask> parsingPipeline,
                               Pipeline<InterpretingTask> interpretingPipeline,
-                              Pipeline<StylesheetTask> stylesheetPipeline)
+                              Pipeline<StylesheetTask> stylesheetPipeline,
+                              IValueFactory valueFactory)
         {
             _mainViewModel = viewModel;
             _parsingPipeline = parsingPipeline;
             _interpretingPipeline = interpretingPipeline;
             _stylesheetPipeline = stylesheetPipeline;
+            _valueFactory = valueFactory;
 
             viewModel.RebuildQuestionnaireCommand = new RelayCommand<string>(RebuildQuestionnaireCommand_Execute);
         }
@@ -57,12 +61,12 @@ namespace Presentation.Controllers
         {
             var questionViewModel = target as QuestionViewModel;
 
-            Value memoryValue;
+            IValue memoryValue;
             if(!_memory.TryRetrieveValue(questionViewModel.Id, out memoryValue))
             {
-                memoryValue = new Value(_symbols[questionViewModel.Id].Type);
+                memoryValue = _valueFactory.CreateDefaultValue(_symbols[questionViewModel.Id].Type);
             }
-            _memory.AssignValue(questionViewModel.Id, new Value(questionViewModel.Value, memoryValue.Type));                        
+            _memory.AssignValue(questionViewModel.Id, _valueFactory.CreateValue(questionViewModel.Value, memoryValue.GetType()));                        
             RebuildQuestionnaire(_qlAst);
         }
 

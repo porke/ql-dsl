@@ -2,11 +2,19 @@
 using Antlr4.Runtime.Tree;
 using QL.Api.Ast;
 using QL.Api.Entities;
+using QL.Api.Factories;
 
 namespace QL.Core.Parsing
 {
     internal class ParseTreeVisitor : QLBaseVisitor<Node>
     {
+        private readonly IOperatorFactory _operatorFactory;
+
+        internal ParseTreeVisitor(IOperatorFactory operatorFactory)
+        {
+            _operatorFactory = operatorFactory;
+        }
+
         public override Node Visit(IParseTree tree)
         {
             if (tree == null)
@@ -101,14 +109,14 @@ namespace QL.Core.Parsing
 
         public override Node VisitUnaryExpression(UnaryExpressionContext context)
         {
-            var expression = new ExpressionNode(context.Start, OperatorFactory.CreateUnaryOperator(context.unaryOperator().GetText()));
+            var expression = new ExpressionNode(context.Start, _operatorFactory.CreateUnaryOperator(context.unaryOperator().GetText()));
             expression.AddChild(Visit(context.expression()));
             return expression;
         }
 
         public override Node VisitBinaryExpression(BinaryExpressionContext context)
         {
-            var expression = new ExpressionNode(context.Start, OperatorFactory.CreateBinaryOperator(context.binaryOperator().GetText()));
+            var expression = new ExpressionNode(context.Start, _operatorFactory.CreateBinaryOperator(context.binaryOperator().GetText()));
             expression.AddChild(Visit(context.expression(0)));
             expression.AddChild(Visit(context.expression(1)));
             return expression;

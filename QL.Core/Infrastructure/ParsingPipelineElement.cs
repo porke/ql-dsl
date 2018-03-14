@@ -3,6 +3,7 @@ using QL.Api.Infrastructure;
 using Antlr4.Runtime;
 using QL.Core.Parsing;
 using Infrastructure;
+using static QL.Api.Entities.Value;
 
 namespace QL.Core.Infrastructure
 {
@@ -33,7 +34,7 @@ namespace QL.Core.Infrastructure
             var errorListener = new ErrorListener();
             parser.AddErrorListener(errorListener);
 
-            var visitor = new ParseTreeVisitor();
+            var visitor = new ParseTreeVisitor(new OperatorFactory(new ValueFactory()));
             input.Ast = visitor.Visit(parser.form());
             errorListener.Errors.ForEach(x => input.Errors.Add(x));
             _canContinue = !errorListener.Errors.Any();

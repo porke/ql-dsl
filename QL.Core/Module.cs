@@ -1,6 +1,8 @@
 ﻿using Infrastructure;
+using QL.Api.Factories;
 using QL.Api.Infrastructure;
 using QL.Core.Infrastructure;
+using static QL.Api.Entities.Value;
 
 namespace QL.Core
 {
@@ -8,6 +10,7 @@ namespace QL.Core
     {
         public static Pipeline<ParsingTask> ParsingPipeline { get; } = CreateParsingPipeline();
         public static Pipeline<InterpretingTask> InterpretingPipeline { get; } = CreateInterpretingPipeline();
+        public static IValueFactory ValueFactory { get; } = new ValueFactory();
 
         private static Pipeline<ParsingTask> CreateParsingPipeline()
         {

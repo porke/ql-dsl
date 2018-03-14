@@ -1,4 +1,5 @@
 ﻿using QL.Api.Entities;
+using QL.Api.Factories;
 using QL.Api.Operators;
 
 namespace QL.Core.Interpreting.Operators
@@ -8,25 +9,24 @@ namespace QL.Core.Interpreting.Operators
         public delegate double Opperator(double i, double j);
         private Opperator _opperator;
         private string _asString;
+        private readonly IValueFactory _valueFactory;
 
-        public Arithmetic(Opperator opperator, string asString)
+        internal Arithmetic(Opperator opperator, string asString, IValueFactory valueFactory)
         {
             _opperator = opperator;
             _asString = asString;
+            _valueFactory = valueFactory;
         }
 
-        public string AsString
+        public override string ToString()
         {
-            get
-            {
                 return _asString;
-            }
         }
 
-        public Value Evaluate(Value leftHand, Value rightHand)
+        public IValue Evaluate(IValue leftHand, IValue rightHand)
         {
-            QLType finalType = ResultingType(leftHand.Type, rightHand.Type);
-            return new Value(_opperator(leftHand.ToDecimal(), rightHand.ToDecimal()), finalType);
+            QLType finalType = ResultingType(leftHand.GetType(), rightHand.GetType());
+            return _valueFactory.CreateValue(_opperator(leftHand.ToDecimal(), rightHand.ToDecimal()), finalType);
         }
 
         public bool AcceptTypes(QLType leftHand, QLType rightHand)
