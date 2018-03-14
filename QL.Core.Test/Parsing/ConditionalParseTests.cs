@@ -19,8 +19,10 @@ namespace QL.Core.Test.Parsing
         [TestMethod]
         public void ParseIfConditionalOnly_WillSucceed()
         {
+            // Arrange & Act
             var parsedTask = _parsingPipeline.Process(new ParsingTask(TestDataResolver.LoadTestFile("ifStatement.ql")));
 
+            // Assert
             _assertVisitor.EnqueueConditionalNodeCallback(_ => { });
             _assertVisitor.EnqueueLiteralNodeCallback(literal =>
             {
@@ -34,8 +36,10 @@ namespace QL.Core.Test.Parsing
         [TestMethod]
         public void ParseIfElseConditional_WillSucceed()
         {
+            // Arrange & Act
             var parsedTask = _parsingPipeline.Process(new ParsingTask(TestDataResolver.LoadTestFile("ifElseStatement.ql")));
 
+            // Assert
             _assertVisitor.EnqueueConditionalNodeCallback(_ => { });
             _assertVisitor.EnqueueConditionalNodeCallback(_ => { });
             _assertVisitor.EnqueueLiteralNodeCallback(literal =>
