@@ -7,16 +7,18 @@ namespace QL.Core.Interpreting.Operators
 {
     internal class ArithmeticalNegation : IOperator
     {
+        private string _asString;
         private readonly IValueFactory _valueFactory;
 
-        internal ArithmeticalNegation(IValueFactory valueFactory)
+        internal ArithmeticalNegation(string asString, IValueFactory valueFactory)
         {
+            _asString = asString;
             _valueFactory = valueFactory;
         }
 
         public override string ToString()
         {
-            return "-";
+            return _asString;
         }
 
         public IValue Evaluate(IValue input, IValue empty = null)

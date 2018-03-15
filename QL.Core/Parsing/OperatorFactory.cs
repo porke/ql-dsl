@@ -2,6 +2,7 @@
 using QL.Core.Interpreting.Operators;
 using QL.Api.Factories;
 using System;
+using Antlr4.Runtime;
 
 namespace QL.Core.Parsing
 {
@@ -14,36 +15,34 @@ namespace QL.Core.Parsing
             _valueFactory = valueFactory;
         }
 
-        public IOperator CreateBinaryOperator(string text)
+        public IOperator CreateBinaryOperator(IToken token)
         {
-            // TODO: use the parser constants to decide
-            // QLParser.GREATERTHAN for example
-            switch (text)
+            switch (token.Type)
             {
-                case "-": return new Arithmetic((x, y) => x - y, "-", _valueFactory);
-                case "+": return new Arithmetic((x, y) => x + y, "+", _valueFactory);
-                case "*": return new Arithmetic((x, y) => x * y, "*", _valueFactory);
-                case "/": return new Arithmetic((x, y) => x / y, "-", _valueFactory);
-                case "||": return new Logical((x, y) => x || y, "||", _valueFactory);
-                case "&&": return new Logical((x, y) => x && y, "&&", _valueFactory);
-                case ">": return new RelativeComparison((x, y) => x > y, ">", _valueFactory);
-                case "<": return new RelativeComparison((x, y) => x < y, "<", _valueFactory);
-                case ">=": return new RelativeComparison((x, y) => x >= y, ">=", _valueFactory);
-                case "<=": return new RelativeComparison((x, y) => x <= y, "<=", _valueFactory);
-                case "!=": return new AbsoluteComparison((x, y) => x != y, "!=", _valueFactory);
-                case "==": return new AbsoluteComparison((x, y) => x == y, "==", _valueFactory);
+                case QLParser.MINUS: return new Arithmetic((x, y) => x - y, token.Text, _valueFactory);
+                case QLParser.PLUS: return new Arithmetic((x, y) => x + y, token.Text, _valueFactory);
+                case QLParser.MULTIPLY: return new Arithmetic((x, y) => x * y, token.Text, _valueFactory);
+                case QLParser.DIVIDE: return new Arithmetic((x, y) => x / y, token.Text, _valueFactory);
+                case QLParser.OR: return new Logical((x, y) => x || y, token.Text, _valueFactory);
+                case QLParser.AND: return new Logical((x, y) => x && y, token.Text, _valueFactory);
+                case QLParser.GREATERTHAN: return new RelativeComparison((x, y) => x > y, token.Text, _valueFactory);
+                case QLParser.SMALLERTHAN: return new RelativeComparison((x, y) => x < y, token.Text, _valueFactory);
+                case QLParser.GREATEREQUAL: return new RelativeComparison((x, y) => x >= y, token.Text, _valueFactory);
+                case QLParser.SMALLEREQUAL: return new RelativeComparison((x, y) => x <= y, token.Text, _valueFactory);
+                case QLParser.NOTEQUAL: return new AbsoluteComparison((x, y) => x != y, token.Text, _valueFactory);
+                case QLParser.EQUAL: return new AbsoluteComparison((x, y) => x == y, token.Text, _valueFactory);
             }
-            throw new NotSupportedException($"{text} is not implemented as an operator.");
+            throw new NotSupportedException($"A token is not implemented as an operator.");
         }
 
-        public IOperator CreateUnaryOperator(string text)
+        public IOperator CreateUnaryOperator(IToken token)
         {
-            switch (text)
+            switch (token.Type)
             {
-                case "-": return new ArithmeticalNegation(_valueFactory);
-                case "!": return new BooleanNegation(_valueFactory);
+                case QLParser.MINUS: return new ArithmeticalNegation(token.Text, _valueFactory);
+                case QLParser.NOT: return new BooleanNegation(token.Text, _valueFactory);
             }
-            throw new NotSupportedException($"{text} is not implemented as an operator.");
+            throw new NotSupportedException($"A token is not implemented as an operator.");
         }
     }
 }

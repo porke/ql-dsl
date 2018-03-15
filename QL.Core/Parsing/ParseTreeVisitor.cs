@@ -109,14 +109,14 @@ namespace QL.Core.Parsing
 
         public override Node VisitUnaryExpression(UnaryExpressionContext context)
         {
-            var expression = new ExpressionNode(context.Start, _operatorFactory.CreateUnaryOperator(context.unaryOperator().GetText()));
+            var expression = new ExpressionNode(context.Start, _operatorFactory.CreateUnaryOperator(context.unaryOperator().Start));
             expression.AddChild(Visit(context.expression()));
             return expression;
         }
 
         public override Node VisitBinaryExpression(BinaryExpressionContext context)
         {
-            var expression = new ExpressionNode(context.Start, _operatorFactory.CreateBinaryOperator(context.binaryOperator().GetText()));
+            var expression = new ExpressionNode(context.Start, _operatorFactory.CreateBinaryOperator(context.binaryOperator().Start));
             expression.AddChild(Visit(context.expression(0)));
             expression.AddChild(Visit(context.expression(1)));
             return expression;

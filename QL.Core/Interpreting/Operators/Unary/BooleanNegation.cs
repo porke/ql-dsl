@@ -6,16 +6,18 @@ namespace QL.Core.Interpreting.Operators
 {
     internal class BooleanNegation : IOperator
     {
+        private string _asString;
         private readonly IValueFactory _valueFactory;
 
-        internal BooleanNegation(IValueFactory valueFactory)
+        internal BooleanNegation(string asString, IValueFactory valueFactory)
         {
+            _asString = asString;
             _valueFactory = valueFactory;
         }
 
         public override string ToString()
         {
-            return "!";
+            return _asString;
         }
 
         public IValue Evaluate(IValue input, IValue empty = null)
