@@ -5,13 +5,8 @@ namespace Presentation.ViewModels
 {
     internal class FormViewModel : ReactiveObject
     {
-        private string _formName;
+        private string _formName = string.Empty;        
         private PagesViewModel _pagesViewModel;
-
-        internal FormViewModel()
-        {
-            _formName = string.Empty;
-        }
 
         internal FormViewModel(string formName)
         {

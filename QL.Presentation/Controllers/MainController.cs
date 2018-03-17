@@ -72,8 +72,10 @@ namespace Presentation.Controllers
 
         private void RebuildQuestionnaire(Node evaluatedAst)
         {
-            _mainViewModel.Form = CreateFormViewModelFromQL(evaluatedAst);
-            _mainViewModel.Form.Pages = CreatePagesFromStylesheet();
+            int selectedPage = _mainViewModel.Form.Pages?.SelectedPage ?? 0;
+
+            _mainViewModel.Form = CreateFormViewModelFromQL(evaluatedAst);            
+            _mainViewModel.Form.Pages = CreatePagesFromStylesheet(selectedPage);            
         }
 
         private FormViewModel CreateFormViewModelFromQL(Node ast)
@@ -88,7 +90,7 @@ namespace Presentation.Controllers
             return form;
         }
 
-        private PagesViewModel CreatePagesFromStylesheet()
+        private PagesViewModel CreatePagesFromStylesheet(int selectedPage)
         {
             IReadOnlyList<QuestionViewModel> questionViewModels = _mainViewModel.Form.Questions.ToList();
             var stylesheetTask = new StylesheetTask(_mainViewModel.StylesheetInput, questionViewModels.Select(x => x.Id).ToList());
@@ -96,6 +98,8 @@ namespace Presentation.Controllers
 
             var stylesheetVisitor = new StylesheetVisitor(questionViewModels);
             processedStylesheet.Ast.Accept(stylesheetVisitor);
+            stylesheetVisitor.PagesViewModel.SelectedPage = selectedPage;
+
             return stylesheetVisitor.PagesViewModel;
         }
     }
