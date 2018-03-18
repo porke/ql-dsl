@@ -22,16 +22,16 @@ namespace Presentation.Visitors
             {
                 return null;
             }
-            
+                        
             if (node.Type == QLType.Boolean)
-            {                
+            {
                 bool evaluatedValue = node.ChildNodes.Count > 0 ? bool.Parse(node.ChildNodes[0].Accept(this).ToString()) : false;
-                Form.Questions.Add(new BooleanQuestionViewModel(node.Description, node.Label, node.IsEvaluated, evaluatedValue, parentForm: Form));
+                Form.Questions.Add(new QuestionViewModel(node.Description, node.Label, node.IsEvaluated, evaluatedValue, node.Type, parentForm: Form));
             }
             else
             {
                 string evaluatedValue = node.ChildNodes.Count > 0 ? node.ChildNodes[0].Accept(this).ToString() : string.Empty;
-                Form.Questions.Add(new TextQuestionViewModel(node.Description, node.Label, node.IsEvaluated, evaluatedValue, parentForm: Form));
+                Form.Questions.Add(new QuestionViewModel(node.Description, node.Label, node.IsEvaluated, evaluatedValue, node.Type, parentForm: Form));
             }
 
             return null;

@@ -21,12 +21,20 @@
         <DataTemplate x:Key="DropdownQuestionTemplate">
             <local:DropdownQuestionView/>
         </DataTemplate>
+        <DataTemplate x:Key="IntegerQuestionTemplate">
+            <local:IntegerQuestionView/>
+        </DataTemplate>
+        <DataTemplate x:Key="DoubleQuestionTemplate">
+            <local:DecimalQuestionView/>
+        </DataTemplate>
 
         <dt:QuestionDataTemplateSelector x:Key="QuestionDataTemplateSelector"
                                         DropdownDataTemplate="{StaticResource DropdownQuestionTemplate}"
                                         CheckboxDataTemplate="{StaticResource CheckboxQuestionTemplate}"
                                         RadioDataTemplate="{StaticResource RadioQuestionTemplate}"
-                                        TextDataTemplate="{StaticResource TextQuestionTemplate}"/>
+                                        TextDataTemplate="{StaticResource TextQuestionTemplate}"
+                                        IntegerDataTemplate="{StaticResource IntegerQuestionTemplate}"
+                                        DecimalDataTemplate="{StaticResource DoubleQuestionTemplate}"/>
     </UserControl.Resources>
     <GroupBox Header="{Binding Label}">
         <ItemsControl ItemsSource="{Binding Questions}" ItemTemplateSelector="{StaticResource QuestionDataTemplateSelector}"/>

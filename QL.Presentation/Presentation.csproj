@@ -103,12 +103,19 @@
     <Compile Include="Controllers\MainController.cs" />
     <Compile Include="Converters\BooleanNegationConverter.cs" />
     <Compile Include="Converters\BooleanToIndexConverter.cs" />
+    <Compile Include="Converters\ObjectToDoubleConverter.cs" />
+    <Compile Include="Converters\ObjectToIntegerConverter.cs" />
     <Compile Include="DataTemplates\QuestionDataTemplateSelector.cs" />
     <Compile Include="RelayCommand.cs" />
-    <Compile Include="ViewModels\BooleanQuestionViewModel.cs" />
     <Compile Include="ViewModels\SectionsViewModel.cs" />
+    <Compile Include="Views\DecimalQuestionView.xaml.cs">
+      <DependentUpon>DecimalQuestionView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\DropdownQuestionView.xaml.cs">
       <DependentUpon>DropdownQuestionView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\IntegerQuestionView.xaml.cs">
+      <DependentUpon>IntegerQuestionView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\RadioQuestionView.xaml.cs">
       <DependentUpon>RadioQuestionView.xaml</DependentUpon>
@@ -123,7 +130,6 @@
     <Compile Include="ViewModels\QuestionViewModel.cs" />
     <Compile Include="ViewModels\SectionViewModel.cs" />
     <Compile Include="Visitors\StylesheetVisitor.cs" />
-    <Compile Include="ViewModels\TextQuestionViewModel.cs" />
     <Compile Include="Views\FormView.xaml.cs">
       <DependentUpon>FormView.xaml</DependentUpon>
     </Compile>
@@ -142,11 +148,19 @@
     <Compile Include="Views\TextQuestionView.xaml.cs">
       <DependentUpon>TextQuestionView.xaml</DependentUpon>
     </Compile>
+    <Page Include="Views\DecimalQuestionView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\DropdownQuestionView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\FormView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\IntegerQuestionView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
