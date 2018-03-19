@@ -2,23 +2,22 @@
 {
     internal class BinaryOperatorType : Error
     {
-        public string LeftType;
-        public string RightType;
-        public string Opperator;
-        public int ErrorLine;
+        private string _leftType;
+        private string _rightType;
+        private string _opperator;
 
         public BinaryOperatorType(string leftType, string rightType, string opperator, int errorLine)
         {
-            LeftType = leftType;
-            RightType = rightType;
-            Opperator = opperator;
+            _leftType = leftType;
+            _rightType = rightType;
+            _opperator = opperator;
             ErrorLine = errorLine;
         }
 
         public override string ToString()
         {
-            return $"Type error in line {ErrorLine}: \'{Opperator}\' cannot be applied to " +
-                $"the combination of {LeftType} and {RightType}";
+            return $"Type error in line {ErrorLine}: \'{_opperator}\' cannot be applied to " +
+                $"the combination of {_leftType} and {_rightType}";
         }
     }
 }

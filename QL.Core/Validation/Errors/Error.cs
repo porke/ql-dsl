@@ -2,5 +2,6 @@
 {
     internal abstract class Error
     {
+        protected int ErrorLine;
     }
 }

@@ -2,18 +2,17 @@
 {
     internal class VariableDuplicate : Error
     {
-        public string VariableName;
-        public int ErrorLine;
+        private string _variableName;
 
         public VariableDuplicate(string variableName, int errorLine)
         {
-            VariableName = variableName;
+            _variableName = variableName;
             ErrorLine = errorLine;
         }
 
         public override string ToString()
         {
-            return $"The variable \"{VariableName}\" in line {ErrorLine} is already declared.";
+            return $"The variable \"{_variableName}\" in line {ErrorLine} is already declared.";
         }
     }
 }

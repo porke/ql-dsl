@@ -2,20 +2,19 @@
 {
     internal class UnaryOperatorType : Error
     {
-        public string Type;
-        public string Opperator;
-        public int ErrorLine;
+        private string _type;
+        private string _opperator;
 
         public UnaryOperatorType(string type, string opperator, int errorLine)
         {
-            Type = type;
-            Opperator = opperator;
+            _type = type;
+            _opperator = opperator;
             ErrorLine = errorLine;
         }
 
         public override string ToString()
         {
-            return $"Type error in line {ErrorLine}: \'{Opperator}\' cannot be applied to {Type}";
+            return $"Type error in line {ErrorLine}: \'{_opperator}\' cannot be applied to {_type}";
         }
     }
 }
