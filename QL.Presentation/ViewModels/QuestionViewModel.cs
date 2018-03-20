@@ -7,29 +7,26 @@ namespace Presentation.ViewModels
 {
     internal class QuestionViewModel : ReactiveObject
     {
-        private string _description;
-        private string _id;
-        private bool _isEvaluated;
         private object _value;
-        private QLType _type;
         private FormViewModel _parentForm;
 
         internal QuestionViewModel(string description, string id, bool isEvaluated, object value, QLType type, FormViewModel parentForm)
         {
-            _id = id;
-            _description = description;
-            _isEvaluated = isEvaluated;
             _parentForm = parentForm;
             _value = value;
-            _type = type;
+
+            Id = id;
+            Description = description;
+            IsEvaluated = isEvaluated;            
+            QLType = type;
 
             this.ObservableForProperty(x => x.Value)
                 .Subscribe(x => parentForm.QuestionValueAssignedCommand.Execute(this));
-        }       
+        }
 
-        public string Description => _description;
+        public string Description { get; }
 
-        public string Id => _id;
+        public string Id { get; }
 
         public object Value
         {
@@ -39,8 +36,8 @@ namespace Presentation.ViewModels
 
         public WidgetType WidgetType { get; set; } = WidgetType.Textbox;
 
-        public QLType QLType => _type;
+        public QLType QLType { get; }
 
-        public bool IsEvaluated => _isEvaluated;
+        public bool IsEvaluated { get; }
     }
 }

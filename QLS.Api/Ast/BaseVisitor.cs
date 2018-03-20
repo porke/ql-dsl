@@ -13,5 +13,6 @@ namespace QLS.Api.Ast
         public virtual T Visit(WidgetNode node) { return VisitChildren(node); }
         public virtual T Visit(PropertyNode node) { return VisitChildren(node); }
         public virtual T Visit(StyleNode node) { return VisitChildren(node); }
+        public virtual T Visit(WidgetOptionNode node) { return VisitChildren(node); }
     }
 }

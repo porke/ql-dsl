@@ -10,11 +10,15 @@ widget: WIDGET widget_type;
 section_contents: question
 				| style;
 
-widget_type: WIDGETRADIO
-		|	 WIDGETDROPDOWN
-		|	WIDGETCHECKBOX
+widget_type: option_widget LEFTBRACKET option COMMA option RIGHTBRACKET		
 		|	WIDGETSPINBOX
 		|	WIDGETTEXTBOX;
+
+option_widget: WIDGETRADIO 
+			   | WIDGETDROPDOWN
+			   | WIDGETCHECKBOX;
+
+option: STRING;
 
 type: TYPEBOOLEAN
 	| TYPEINTEGER
@@ -40,7 +44,10 @@ DEFAULT: 'default';
 
 LEFTCURLY:		'{';
 RIGHTCURLY:		'}';
+LEFTBRACKET:	'(';
+RIGHTBRACKET:	')';
 COLON:			':';
+COMMA:			',';
 
 // Widgets
 WIDGETRADIO:		'radio';

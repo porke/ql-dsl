@@ -67,9 +67,36 @@ namespace QLS.Core.Parsing
             return questionNode;
         }
 
+        public override Node VisitWidget_type([NotNull] Widget_typeContext context)
+        {
+            if (context.option_widget() != null)
+            {
+                var widgetNode = new WidgetNode(context.Start, QLSWidgetTypeConverter.FromTokenToWidgetType(context.Start));
+                if (context.option().Length != 2)
+                {
+                    widgetNode.AddChild(new WidgetOptionNode(context.Start, "Yes"));
+                    widgetNode.AddChild(new WidgetOptionNode(context.Start, "No"));
+                }
+                else
+                {
+                    widgetNode.AddChild(Visit(context.option(0)));
+                    widgetNode.AddChild(Visit(context.option(1)));
+                }
+
+                return widgetNode;
+            }
+
+            return new WidgetNode(context.Start, QLSWidgetTypeConverter.FromTokenToWidgetType(context.Start));
+        }
+
+        public override Node VisitOption([NotNull] OptionContext context)
+        {
+            return new WidgetOptionNode(context.Start, context.STRING().GetText().Trim('\"'));
+        }
+
         public override Node VisitWidget([NotNull] WidgetContext context)
         {
-            return new WidgetNode(context.Start, QLSWidgetTypeConverter.FromTokenToWidgetType(context.widget_type().Start));
+            return Visit(context.widget_type());
         }
 
         public override Node VisitStyle([NotNull] StyleContext context)

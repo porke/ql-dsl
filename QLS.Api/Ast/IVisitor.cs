@@ -9,5 +9,6 @@
         T Visit(WidgetNode node);
         T Visit(PropertyNode node);
         T Visit(StyleNode node);
+        T Visit(WidgetOptionNode node);
     }
 }

@@ -179,5 +179,27 @@ namespace QLS.Core.Test.Parsing
             ast.Accept(_assertVisitor);
             _assertVisitor.VerifyAll();
         }
+
+        [TestMethod]
+        public void ParseOptionWidgetWithCustomText_WillSucceed()
+        {
+            var stylesheetTask = new StylesheetTask(TestDataResolver.LoadTestFile("optionWidgetTest.qls"), new List<string>());
+            Node ast = _parsingService.Process(stylesheetTask).Ast;
+
+            _assertVisitor.EnqueueWidgetNodeCallback(w =>
+            {
+                Assert.AreEqual(WidgetType.Radio, w.WidgetType);
+            });
+            _assertVisitor.EnqueueWidgetOptionNodeCallback(o =>
+            {
+                Assert.AreEqual("Good", o.Label);
+            });
+            _assertVisitor.EnqueueWidgetOptionNodeCallback(o =>
+            {
+                Assert.AreEqual("Evil", o.Label);
+            });
+            ast.Accept(_assertVisitor);
+            _assertVisitor.VerifyAll();
+        }
     }
 }

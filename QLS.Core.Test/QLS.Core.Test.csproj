@@ -82,6 +82,9 @@
     <EmbeddedResource Include="CorrectStylesheets\stylesheetWithOneQuestionAndDefaultStyle.qls" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="CorrectStylesheets\optionWidgetTest.qls" />
+  </ItemGroup>
+  <ItemGroup>
     <EmbeddedResource Include="CorrectStylesheets\stylesheetWithOneQuestionAndLocalStyle.qls" />
   </ItemGroup>
   <Choose>

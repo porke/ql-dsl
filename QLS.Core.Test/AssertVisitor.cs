@@ -14,10 +14,16 @@ namespace QLS.Core.Test
         private Queue<Action<WidgetNode>> _widgetNodeExpectations = new Queue<Action<WidgetNode>>();
         private Queue<Action<StyleNode>> _styleNodeExpectations = new Queue<Action<StyleNode>>();
         private Queue<Action<PropertyNode>> _propertyNodeExpectations = new Queue<Action<PropertyNode>>();
+        private Queue<Action<WidgetOptionNode>> _widgetOptionNodeExpectations = new Queue<Action<WidgetOptionNode>>();
 
         public void EnqueueStylesheetNodeCallback(Action<StylesheetNode> assertionAction)
         {
             _stylesheetNodeExpectations.Enqueue(assertionAction);
+        }
+
+        public void EnqueueWidgetOptionNodeCallback(Action<WidgetOptionNode> assertionAction)
+        {
+            _widgetOptionNodeExpectations.Enqueue(assertionAction);
         }
 
         public void EnqueuePageNodeCallback(Action<PageNode> assertionAction)
@@ -59,6 +65,7 @@ namespace QLS.Core.Test
             Assert.AreEqual(0, _widgetNodeExpectations.Count, "Unmet expectations for widget nodes.");
             Assert.AreEqual(0, _styleNodeExpectations.Count, "Unmet expectations for style nodes.");
             Assert.AreEqual(0, _propertyNodeExpectations.Count, "Unmet expectations for property nodes.");
+            Assert.AreEqual(0, _widgetOptionNodeExpectations.Count, "Unmet expectations for widget option nodes.");
         }
 
         public override Node Visit(PropertyNode node)
@@ -66,6 +73,16 @@ namespace QLS.Core.Test
             if (_propertyNodeExpectations.Count > 0)
             {
                 _propertyNodeExpectations.Dequeue().Invoke(node);
+            }
+
+            return VisitChildren(node);
+        }
+
+        public override Node Visit(WidgetOptionNode node)
+        {
+            if (_widgetOptionNodeExpectations.Count > 0)
+            {
+                _widgetOptionNodeExpectations.Dequeue().Invoke(node);
             }
 
             return VisitChildren(node);

@@ -39,6 +39,8 @@ namespace Presentation.Visitors
                 {
                     sectionViewModel.Questions.Add(questionViewModel);
                 }
+
+                // TODO: Include default styles
             }
 
             return sectionViewModel;
@@ -52,13 +54,17 @@ namespace Presentation.Visitors
                 var widgetNode = question.ChildNodes[0];
                 var widgetType = (WidgetType)widgetNode.Accept(this);
                 questionVm.WidgetType = widgetType;
+
+                // TODO: Include overriden styles
             }
 
             return questionVm;
         }
 
         public override object Visit(WidgetNode node)
-        {            
+        {
+            // TODO: Extract widget options
+            // return a triplet type, options (2)
             return node.WidgetType;
         }
     }
