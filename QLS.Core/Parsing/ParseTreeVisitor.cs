@@ -55,6 +55,15 @@ namespace QLS.Core.Parsing
             {
                 questionNode.AddChild(Visit(context.widget()));
             }
+
+            if (context.property() != null)
+            {
+                foreach (PropertyContext property in context.property())
+                {
+                    questionNode.AddChild(Visit(property));
+                }
+            }
+
             return questionNode;
         }
 

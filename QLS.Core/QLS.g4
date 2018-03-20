@@ -3,7 +3,8 @@ grammar QLS;
 stylesheet: STYLESHEET LABEL LEFTCURLY (page)* RIGHTCURLY;
 page: PAGE LABEL LEFTCURLY (section)* RIGHTCURLY;
 section: SECTION STRING LEFTCURLY (section_contents)* RIGHTCURLY;
-question: QUESTION LABEL (widget)?;
+question: QUESTION LABEL (widget)?
+		| QUESTION LABEL LEFTCURLY (property)* RIGHTCURLY;
 widget: WIDGET widget_type;
 
 section_contents: question

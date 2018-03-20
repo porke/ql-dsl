@@ -105,7 +105,7 @@ namespace QLS.Core.Test.Parsing
         }
 
         [TestMethod]
-        public void ParseStylesheetWithAStyleAndAllProperties_WillSucceed()
+        public void ParseStylesheetWithADefaultStyleAndAllProperties_WillSucceed()
         {
             var stylesheetTask = new StylesheetTask(TestDataResolver.LoadTestFile("stylesheetWithOneQuestionAndDefaultStyle.qls"), new List<string>());
             Node ast = _parsingService.Process(stylesheetTask).Ast;
@@ -113,6 +113,44 @@ namespace QLS.Core.Test.Parsing
             _assertVisitor.EnqueueStyleNodeCallback(s =>
             {
                 Assert.AreEqual("integer", s.TargetType);
+            });
+            _assertVisitor.EnqueuePropertyNodeCallback(p =>
+            {
+                Assert.AreEqual("width", p.Name);
+                Assert.AreEqual("400", p.Value);
+            });
+            _assertVisitor.EnqueuePropertyNodeCallback(p =>
+            {
+                Assert.AreEqual("font", p.Name);
+                Assert.AreEqual("Arial", p.Value);
+            });
+            _assertVisitor.EnqueuePropertyNodeCallback(p =>
+            {
+                Assert.AreEqual("fontsize", p.Name);
+                Assert.AreEqual("14", p.Value);
+            });
+            _assertVisitor.EnqueuePropertyNodeCallback(p =>
+            {
+                Assert.AreEqual("color", p.Name);
+                Assert.AreEqual("#999999", p.Value);
+            });
+            _assertVisitor.EnqueueWidgetNodeCallback(p =>
+            {
+                Assert.AreEqual(WidgetType.Spinbox, p.WidgetType);
+            });
+            ast.Accept(_assertVisitor);
+            _assertVisitor.VerifyAll();
+        }
+
+        [TestMethod]
+        public void ParseStylesheetWithALocalStyleAndAllProperties_WillSucceed()
+        {
+            var stylesheetTask = new StylesheetTask(TestDataResolver.LoadTestFile("stylesheetWithOneQuestionAndLocalStyle.qls"), new List<string>());
+            Node ast = _parsingService.Process(stylesheetTask).Ast;
+
+            _assertVisitor.EnqueueQuestionNodeCallback(q =>
+            {
+                Assert.AreEqual("questionOne", q.Label);
             });
             _assertVisitor.EnqueuePropertyNodeCallback(p =>
             {
