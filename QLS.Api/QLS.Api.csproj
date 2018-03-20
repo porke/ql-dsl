@@ -48,8 +48,10 @@
     <Compile Include="Ast\IVisitor.cs" />
     <Compile Include="Ast\Node.cs" />
     <Compile Include="Ast\PageNode.cs" />
+    <Compile Include="Ast\PropertyNode.cs" />
     <Compile Include="Ast\QuestionNode.cs" />
     <Compile Include="Ast\SectionNode.cs" />
+    <Compile Include="Ast\StyleNode.cs" />
     <Compile Include="Ast\StylesheetNode.cs" />
     <Compile Include="Ast\WidgetNode.cs" />
     <Compile Include="Entities\WidgetType.cs" />

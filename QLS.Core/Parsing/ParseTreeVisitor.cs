@@ -32,10 +32,18 @@ namespace QLS.Core.Parsing
         public override Node VisitSection([NotNull] SectionContext context)
         {
             var section = new SectionNode(context.Start, context.STRING().ToString().Trim('"'));
-            foreach (QuestionContext question in context.question())
+            foreach (Section_contentsContext section_content in context.section_contents())
             {
-                section.AddChild(Visit(question));
-            }
+                if (section_content.question() != null)
+                {
+                    section.AddChild(Visit(section_content.question()));
+                }
+
+                if (section_content.style() != null)
+                {
+                    section.AddChild(Visit(section_content.style()));
+                }
+            }            
 
             return section;
         }
@@ -52,20 +60,38 @@ namespace QLS.Core.Parsing
 
         public override Node VisitWidget([NotNull] WidgetContext context)
         {
-            WidgetType widgetType = WidgetType.Textbox;
-            switch (context.widget_type().Start.Type)
+            return new WidgetNode(context.Start, QLSWidgetTypeConverter.FromTokenToWidgetType(context.widget_type().Start));
+        }
+
+        public override Node VisitStyle([NotNull] StyleContext context)
+        {
+            var styleNode = new StyleNode(context.Start, context.type().GetText());
+            foreach (PropertyContext property in context.property())
             {
-                case WIDGETDROPDOWN:
-                    widgetType = WidgetType.Dropdown;
-                    break;
-                case WIDGETCHECKBOX:
-                    widgetType = WidgetType.Checkbox;
-                    break;
-                case WIDGETRADIO:
-                    widgetType = WidgetType.Radio;
-                    break;
+                styleNode.AddChild(Visit(property));
             }
-            return new WidgetNode(context.Start, widgetType);
+
+            return styleNode;
+        }
+
+        public override Node VisitWidget_property([NotNull] Widget_propertyContext context)
+        {
+            return Visit(context.widget());
+        }
+
+        public override Node VisitColor_property([NotNull] Color_propertyContext context)
+        {
+            return new PropertyNode(context.start, context.LABEL().GetText(), context.COLOR().GetText());
+        }
+
+        public override Node VisitString_property([NotNull] String_propertyContext context)
+        {
+            return new PropertyNode(context.start, context.LABEL().GetText(), context.STRING().GetText().Trim('\"'));
+        }
+
+        public override Node VisitInteger_property([NotNull] Integer_propertyContext context)
+        {
+            return new PropertyNode(context.start, context.LABEL().GetText(), context.INTEGER().GetText());
         }
     }
 }
