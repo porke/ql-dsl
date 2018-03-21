@@ -105,8 +105,10 @@
     <Compile Include="Converters\BooleanToIndexConverter.cs" />
     <Compile Include="Converters\ObjectToDoubleConverter.cs" />
     <Compile Include="Converters\ObjectToIntegerConverter.cs" />
+    <Compile Include="DataTemplates\FormDataTemplateSelector.cs" />
     <Compile Include="DataTemplates\QuestionDataTemplateSelector.cs" />
     <Compile Include="RelayCommand.cs" />
+    <Compile Include="ViewModels\FormViewModel.cs" />
     <Compile Include="ViewModels\SectionsViewModel.cs" />
     <Compile Include="ViewModels\StyleViewModel.cs" />
     <Compile Include="Views\Questions\DecimalQuestionView.xaml.cs">
@@ -126,21 +128,21 @@
     </Compile>
     <Compile Include="Visitors\DataTransferObjects\PropertyData.cs" />
     <Compile Include="Visitors\QuestionnaireVisitor.cs" />
-    <Compile Include="ViewModels\FormViewModel.cs" />
-    <Compile Include="ViewModels\PagesViewModel.cs" />
+    <Compile Include="ViewModels\SinglePageFormViewModel.cs" />
+    <Compile Include="ViewModels\MultiPageFormViewModel.cs" />
     <Compile Include="ViewModels\PageViewModel.cs" />
     <Compile Include="ViewModels\QuestionViewModel.cs" />
     <Compile Include="ViewModels\SectionViewModel.cs" />
     <Compile Include="Visitors\DataTransferObjects\StyleData.cs" />
     <Compile Include="Visitors\StylesheetVisitor.cs" />
-    <Compile Include="Views\FormView.xaml.cs">
-      <DependentUpon>FormView.xaml</DependentUpon>
+    <Compile Include="Views\SinglePageFormView.xaml.cs">
+      <DependentUpon>SinglePageFormView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Questions\CheckboxQuestionView.xaml.cs">
       <DependentUpon>CheckboxQuestionView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\PagesView.xaml.cs">
-      <DependentUpon>PagesView.xaml</DependentUpon>
+    <Compile Include="Views\MultiPageFormView.xaml.cs">
+      <DependentUpon>MultiPageFormView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\PageView.xaml.cs">
       <DependentUpon>PageView.xaml</DependentUpon>
@@ -161,7 +163,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\FormView.xaml">
+    <Page Include="Views\SinglePageFormView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -186,7 +188,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\PagesView.xaml">
+    <Page Include="Views\MultiPageFormView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

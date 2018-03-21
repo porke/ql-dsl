@@ -2,9 +2,9 @@
 
 namespace Presentation.Views
 {
-    public partial class PagesView : UserControl
+    public partial class SinglePageFormView : UserControl
     {
-        public PagesView()
+        public SinglePageFormView()
         {
             InitializeComponent();
         }

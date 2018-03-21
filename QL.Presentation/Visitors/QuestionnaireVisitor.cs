@@ -6,11 +6,11 @@ namespace Presentation.Visitors
 {
     internal class QuestionnaireVisitor : BaseVisitor<object>
     {
-        public FormViewModel Form { get; private set; }
+        public SinglePageFormViewModel Form { get; private set; }
 
         public override object Visit(FormNode node)
         {
-            Form = new FormViewModel(node.Label);
+            Form = new SinglePageFormViewModel(node.Label);
             VisitChildren(node);
 
             return Form;

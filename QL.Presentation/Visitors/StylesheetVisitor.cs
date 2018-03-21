@@ -12,7 +12,7 @@ namespace Presentation.Visitors
     {
         private IReadOnlyList<QuestionViewModel> _questions;
 
-        public PagesViewModel PagesViewModel { get; private set; } = new PagesViewModel();
+        public List<PageViewModel> PageViewModels { get; private set; } = new List<PageViewModel>();
 
         public StylesheetVisitor(IReadOnlyList<QuestionViewModel> questions)
         {
@@ -22,7 +22,7 @@ namespace Presentation.Visitors
         public override object Visit(PageNode page)
         {
             var pageViewModel = new PageViewModel(page.Label);
-            PagesViewModel.Pages.Add(pageViewModel);
+            PageViewModels.Add(pageViewModel);
             foreach (var sectionNode in page.ChildNodes)
             {
                 pageViewModel.Sections.Sections.Add(sectionNode.Accept(this) as SectionViewModel);

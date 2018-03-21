@@ -9,6 +9,7 @@ using System.Linq;
 using Presentation.Visitors;
 using Infrastructure;
 using QL.Api.Factories;
+using ReactiveUI;
 
 namespace Presentation.Controllers
 {
@@ -72,35 +73,50 @@ namespace Presentation.Controllers
 
         private void RebuildQuestionnaire(Node evaluatedAst)
         {
-            int selectedPage = _mainViewModel.Form.Pages?.SelectedPage ?? 0;
-
-            _mainViewModel.Form = CreateFormViewModelFromQL(evaluatedAst);            
-            _mainViewModel.Form.Pages = CreatePagesFromStylesheet(selectedPage);            
+            SinglePageFormViewModel singlePageViewModel = CreateSinglePageFormFromQL(evaluatedAst);
+            if (!string.IsNullOrEmpty(_mainViewModel.StylesheetInput))
+            {
+                List<PageViewModel> pageList = CreatePaginatedFormFromStylesheet(singlePageViewModel.Questions.ToList());
+                if (_mainViewModel.Form is MultiPageFormViewModel)
+                {
+                    var multiPageViewModel = ((MultiPageFormViewModel)_mainViewModel.Form);
+                    int selectedPage = multiPageViewModel.SelectedPage;
+                    multiPageViewModel.Pages.Clear();
+                    pageList.ForEach(x => multiPageViewModel.Pages.Add(x));
+                    multiPageViewModel.SelectedPage = selectedPage;
+                }
+                else
+                {
+                    _mainViewModel.Form = new MultiPageFormViewModel(singlePageViewModel.Name, new ReactiveList<PageViewModel>(pageList));
+                }                
+            }
+            else
+            {
+                _mainViewModel.Form = singlePageViewModel;
+            }
         }
 
-        private FormViewModel CreateFormViewModelFromQL(Node ast)
+        private SinglePageFormViewModel CreateSinglePageFormFromQL(Node ast)
         {
             var interpretingTask = _interpretingPipeline.Process(new InterpretingTask(ast, _memory, _symbols));
 
             var formBuildingVisitor = new QuestionnaireVisitor();
             interpretingTask.InterpretedAst.Accept(formBuildingVisitor);
 
-            FormViewModel form = formBuildingVisitor.Form;
+            SinglePageFormViewModel form = formBuildingVisitor.Form;
             form.QuestionValueAssignedCommand = new RelayCommand<QuestionViewModel>(QuestionValueAssignedCommand_Execute);
             return form;
         }
 
-        private PagesViewModel CreatePagesFromStylesheet(int selectedPage)
+        private List<PageViewModel> CreatePaginatedFormFromStylesheet(IReadOnlyList<QuestionViewModel> questions)
         {
-            IReadOnlyList<QuestionViewModel> questionViewModels = _mainViewModel.Form.Questions.ToList();
-            var stylesheetTask = new StylesheetTask(_mainViewModel.StylesheetInput, questionViewModels.Select(x => x.Id).ToList());
+            var stylesheetTask = new StylesheetTask(_mainViewModel.StylesheetInput, questions.Select(x => x.Id).ToList());
             var processedStylesheet = _stylesheetPipeline.Process(stylesheetTask);
 
-            var stylesheetVisitor = new StylesheetVisitor(questionViewModels);
+            var stylesheetVisitor = new StylesheetVisitor(questions);
             processedStylesheet.Ast.Accept(stylesheetVisitor);
-            stylesheetVisitor.PagesViewModel.SelectedPage = selectedPage;
 
-            return stylesheetVisitor.PagesViewModel;
+            return stylesheetVisitor.PageViewModels;
         }
     }
 }
