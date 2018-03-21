@@ -4,7 +4,7 @@ using System.Linq;
 using System.Collections.Generic;
 using QLS.Api.Entities;
 using Presentation.Properties;
-using System.Windows.Media;
+using Presentation.Visitors.DataTransferObjects;
 
 namespace Presentation.Visitors
 {
@@ -66,6 +66,8 @@ namespace Presentation.Visitors
                 var styleData = styleNode.Accept(this) as StyleData;                
                 questionVm.Style = StyleViewModelFactory.CreateViewModel(styleData.Properties);
                 questionVm.WidgetType = styleData.Widget.WidgetType;
+                questionVm.YesOption = styleData.Widget.YesOption;
+                questionVm.NoOption = styleData.Widget.NoOption;
             }
 
             return questionVm;

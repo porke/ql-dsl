@@ -124,14 +124,14 @@
     <Compile Include="Views\SectionsView.xaml.cs">
       <DependentUpon>SectionsView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Visitors\PropertyData.cs" />
+    <Compile Include="Visitors\DataTransferObjects\PropertyData.cs" />
     <Compile Include="Visitors\QuestionnaireVisitor.cs" />
     <Compile Include="ViewModels\FormViewModel.cs" />
     <Compile Include="ViewModels\PagesViewModel.cs" />
     <Compile Include="ViewModels\PageViewModel.cs" />
     <Compile Include="ViewModels\QuestionViewModel.cs" />
     <Compile Include="ViewModels\SectionViewModel.cs" />
-    <Compile Include="Visitors\StyleData.cs" />
+    <Compile Include="Visitors\DataTransferObjects\StyleData.cs" />
     <Compile Include="Visitors\StylesheetVisitor.cs" />
     <Compile Include="Views\FormView.xaml.cs">
       <DependentUpon>FormView.xaml</DependentUpon>
@@ -152,7 +152,7 @@
       <DependentUpon>TextQuestionView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Visitors\StyleViewModelFactory.cs" />
-    <Compile Include="Visitors\WidgetData.cs" />
+    <Compile Include="Visitors\DataTransferObjects\WidgetData.cs" />
     <Page Include="Views\Questions\DecimalQuestionView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

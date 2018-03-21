@@ -1,6 +1,5 @@
 ﻿using Antlr4.Runtime.Misc;
 using QLS.Api.Ast;
-using QLS.Api.Entities;
 using static QLS.Core.QLSParser;
 
 namespace QLS.Core.Parsing

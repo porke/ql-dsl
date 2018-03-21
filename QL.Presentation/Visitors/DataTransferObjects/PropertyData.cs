@@ -1,4 +1,4 @@
-﻿namespace Presentation.Visitors
+﻿namespace Presentation.Visitors.DataTransferObjects
 {
     internal class PropertyData
     {
