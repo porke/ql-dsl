@@ -110,9 +110,15 @@ namespace Presentation.Controllers
 
         private List<PageViewModel> CreatePaginatedFormFromStylesheet(IReadOnlyList<QuestionViewModel> questions)
         {
-            IReadOnlyList<QuestionViewModel> questionViewModels = _mainViewModel.Form.Questions.ToList();
             var stylesheetTask = new StylesheetTask(_mainViewModel.StylesheetInput, _symbols);
-            var processedStylesheet = _stylesheetPipeline.Process(stylesheetTask);
+            StylesheetTask processedStylesheet = _stylesheetPipeline.Process(stylesheetTask);
+            if (processedStylesheet.Errors.Any())
+            {
+                _mainViewModel.QuestionnaireValidation = processedStylesheet.Errors.Aggregate(
+                $"Validation failed! There are {processedStylesheet.Errors.Count} error(s) in your questionnaire stylesheet.",
+                (err, acc) => err + Environment.NewLine + acc);
+                return new List<PageViewModel>();
+            }
 
             var stylesheetVisitor = new StylesheetVisitor(questions);
             processedStylesheet.Ast.Accept(stylesheetVisitor);
