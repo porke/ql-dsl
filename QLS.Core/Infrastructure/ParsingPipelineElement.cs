@@ -1,8 +1,9 @@
 ﻿using Antlr4.Runtime;
 using Infrastructure;
 using QLS.Api.Infrastructure;
+using QLS.Core.Parsing;
 
-namespace QLS.Core.Parsing
+namespace QLS.Core.Infrastructure
 {
     internal class ParsingPipelineElement : IPipelineElement<StylesheetTask>
     {

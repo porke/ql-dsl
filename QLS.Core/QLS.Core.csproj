@@ -47,9 +47,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Infrastructure\DefinitionCheckingPipelineElement.cs" />
+    <Compile Include="Infrastructure\ReferenceCheckingPipelineElement.cs" />
+    <Compile Include="Infrastructure\DuplicationCheckingPipelineElement.cs" />
     <Compile Include="Module.cs" />
     <Compile Include="Parsing\ParseTreeVisitor.cs" />
-    <Compile Include="Parsing\ParsingPipelineElement.cs" />
+    <Compile Include="Infrastructure\ParsingPipelineElement.cs" />
     <Compile Include="Parsing\QLSWidgetTypeConverter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="QLS.g4.lexer.cs">
@@ -58,6 +61,16 @@
     <Compile Include="QLS.g4.parser.cs">
       <DependentUpon>QLS.g4</DependentUpon>
     </Compile>
+    <Compile Include="Validation\DefinitionChecking.cs" />
+    <Compile Include="Validation\ReferenceChecking.cs" />
+    <Compile Include="Validation\Errors\Error.cs" />
+    <Compile Include="Validation\Errors\DuplicateReference.cs" />
+    <Compile Include="Validation\Errors\WidgetNotCompatible.cs" />
+    <Compile Include="Validation\Errors\QuestionNotReferenced.cs" />
+    <Compile Include="Validation\Errors\DefinitionNotFound.cs" />
+    <Compile Include="Validation\DuplicationChecking.cs" />
+    <Compile Include="Validation\ReferenceGatheringVisitor.cs" />
+    <Compile Include="Validation\TypeCheckingVisitor.cs" />
   </ItemGroup>
   <ItemGroup>
     <Antlr4 Include="QLS.g4">
@@ -73,11 +86,16 @@
       <Project>{8F6E14C8-558D-4BDE-AC55-C4A614DCE343}</Project>
       <Name>Infrastructure</Name>
     </ProjectReference>
+    <ProjectReference Include="..\QL.Api\QL.Api.csproj">
+      <Project>{E314ABD5-8189-4707-B201-A82933957F51}</Project>
+      <Name>QL.Api</Name>
+    </ProjectReference>
     <ProjectReference Include="..\QLS.Api\QLS.Api.csproj">
       <Project>{8A83E46F-CF59-4810-AB92-3E1191DE17B1}</Project>
       <Name>QLS.Api</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

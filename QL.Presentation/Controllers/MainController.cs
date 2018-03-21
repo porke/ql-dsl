@@ -110,7 +110,8 @@ namespace Presentation.Controllers
 
         private List<PageViewModel> CreatePaginatedFormFromStylesheet(IReadOnlyList<QuestionViewModel> questions)
         {
-            var stylesheetTask = new StylesheetTask(_mainViewModel.StylesheetInput, questions.Select(x => x.Id).ToList());
+            IReadOnlyList<QuestionViewModel> questionViewModels = _mainViewModel.Form.Questions.ToList();
+            var stylesheetTask = new StylesheetTask(_mainViewModel.StylesheetInput, _symbols);
             var processedStylesheet = _stylesheetPipeline.Process(stylesheetTask);
 
             var stylesheetVisitor = new StylesheetVisitor(questions);
