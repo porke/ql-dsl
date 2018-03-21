@@ -1,6 +1,6 @@
 ﻿using Infrastructure;
 using QLS.Api.Infrastructure;
-using QLS.Core.Parsing;
+using QLS.Core.Infrastructure;
 
 namespace QLS.Core
 {
@@ -12,6 +12,9 @@ namespace QLS.Core
         {
             var pipeline = new Pipeline<StylesheetTask>();
             pipeline.ConnectElement(new ParsingPipelineElement());
+            pipeline.ConnectElement(new DuplicationCheckingPipelineElement());
+            pipeline.ConnectElement(new ReferenceCheckingPipelineElement());
+            pipeline.ConnectElement(new DefinitionCheckingPipelineElement());
 
             return pipeline;
         }

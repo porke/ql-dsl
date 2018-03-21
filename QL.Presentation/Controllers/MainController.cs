@@ -93,7 +93,7 @@ namespace Presentation.Controllers
         private PagesViewModel CreatePagesFromStylesheet(int selectedPage)
         {
             IReadOnlyList<QuestionViewModel> questionViewModels = _mainViewModel.Form.Questions.ToList();
-            var stylesheetTask = new StylesheetTask(_mainViewModel.StylesheetInput, questionViewModels.Select(x => x.Id).ToList());
+            var stylesheetTask = new StylesheetTask(_mainViewModel.StylesheetInput, _symbols);
             var processedStylesheet = _stylesheetPipeline.Process(stylesheetTask);
 
             var stylesheetVisitor = new StylesheetVisitor(questionViewModels);

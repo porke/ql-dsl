@@ -16,7 +16,7 @@
 
         public override string ToString()
         {
-            return $"Type error in line {ErrorLine}: The type of {_questionName} ({_questionType}) is not compatible with the type of the widget ({_widgetType}).";
+            return $"Type error in line {ErrorLine}: The type of \"{_questionName}\" ({_questionType}) is not compatible with the type of the widget ({_widgetType}).";
         }
     }
 }

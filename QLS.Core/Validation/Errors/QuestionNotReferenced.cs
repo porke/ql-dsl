@@ -12,7 +12,7 @@
 
         public override string ToString()
         {
-            return $"Reference error in line {ErrorLine}: No style was defined for {_questionName} in QLS.";
+            return $"Reference error in line {ErrorLine} of the QL file: No style was defined for \"{_questionName}\" in QLS.";
         }
     }
 }
