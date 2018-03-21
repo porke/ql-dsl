@@ -26,6 +26,8 @@ namespace Presentation.DataTemplates
                     return DropdownDataTemplate;
                 case WidgetType.Radio:
                     return RadioDataTemplate;
+                case WidgetType.Textbox:
+                    return TextDataTemplate;
             }
 
             if (question.QLType == QLType.Integer)

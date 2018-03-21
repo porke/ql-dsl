@@ -39,9 +39,9 @@ namespace QLS.Core.Parsing
                     section.AddChild(Visit(section_content.question()));
                 }
 
-                if (section_content.style() != null)
+                if (section_content.default_style() != null)
                 {
-                    section.AddChild(Visit(section_content.style()));
+                    section.AddChild(Visit(section_content.default_style()));
                 }
             }            
 
@@ -51,17 +51,9 @@ namespace QLS.Core.Parsing
         public override Node VisitQuestion([NotNull] QuestionContext context)
         {
             var questionNode = new QuestionNode(context.Start, context.LABEL().ToString());
-            if (context.widget() != null)
+            if (context.style() != null)
             {
-                questionNode.AddChild(Visit(context.widget()));
-            }
-
-            if (context.property() != null)
-            {
-                foreach (PropertyContext property in context.property())
-                {
-                    questionNode.AddChild(Visit(property));
-                }
+                questionNode.AddChild(Visit(context.style()));
             }
 
             return questionNode;
@@ -72,17 +64,11 @@ namespace QLS.Core.Parsing
             if (context.option_widget() != null)
             {
                 var widgetNode = new WidgetNode(context.Start, QLSWidgetTypeConverter.FromTokenToWidgetType(context.Start));
-                if (context.option().Length != 2)
-                {
-                    widgetNode.AddChild(new WidgetOptionNode(context.Start, "Yes"));
-                    widgetNode.AddChild(new WidgetOptionNode(context.Start, "No"));
-                }
-                else
+                if (context.option().Length == 2)
                 {
                     widgetNode.AddChild(Visit(context.option(0)));
                     widgetNode.AddChild(Visit(context.option(1)));
                 }
-
                 return widgetNode;
             }
 
@@ -100,14 +86,26 @@ namespace QLS.Core.Parsing
         }
 
         public override Node VisitStyle([NotNull] StyleContext context)
-        {
-            var styleNode = new StyleNode(context.Start, context.type().GetText());
+        {            
+            var styleNode = new StyleNode(context.Start, string.Empty);
             foreach (PropertyContext property in context.property())
             {
                 styleNode.AddChild(Visit(property));
             }
 
+            if (context.widget() != null)
+            {
+                styleNode.AddChild(Visit(context.widget()));
+            }
+
             return styleNode;
+        }
+
+        public override Node VisitDefault_style([NotNull] Default_styleContext context)
+        {
+            var defaultStyle = new StyleNode(context.Start, context.type().GetText());
+            defaultStyle.AddChild(Visit(context.style()));
+            return defaultStyle;
         }
 
         public override Node VisitWidget_property([NotNull] Widget_propertyContext context)

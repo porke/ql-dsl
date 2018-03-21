@@ -9,6 +9,13 @@
              d:DesignHeight="300" d:DesignWidth="300">
     <UserControl.Resources>
         <converters:BooleanNegationConverter x:Key="BooleanNegationConverter"/>
+        <Style x:Key="QLSStyle" TargetType="CheckBox">
+            <Setter Property="Foreground" Value="{Binding Style.Foreground}"/>
+            <Setter Property="FontSize" Value="{Binding Style.FontSize}"/>
+            <Setter Property="FontFamily" Value="{Binding Style.FontFamily}"/>
+            <Setter Property="Width" Value="{Binding Style.Width}"/>
+        </Style>
     </UserControl.Resources>
-    <CheckBox IsChecked="{Binding Value}" IsEnabled="{Binding Path=IsEvaluated, Converter={StaticResource BooleanNegationConverter}}" Content="{Binding Description}"/>
+    <CheckBox IsChecked="{Binding Value}" Style="{StaticResource QLSStyle}" IsEnabled="{Binding Path=IsEvaluated, Converter={StaticResource BooleanNegationConverter}}" Content="{Binding Description}"/>
+
 </UserControl>

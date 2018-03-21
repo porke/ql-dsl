@@ -2,6 +2,7 @@
 using ReactiveUI;
 using QLS.Api.Entities;
 using QL.Api.Entities;
+using Presentation.Properties;
 
 namespace Presentation.ViewModels
 {
@@ -32,9 +33,16 @@ namespace Presentation.ViewModels
         {
             get { return _value; }
             set { this.RaiseAndSetIfChanged(ref _value, value); }
-        }
+        }        
+
+        public StyleViewModel Style { get; set; }
 
         public WidgetType WidgetType { get; set; } = WidgetType.Textbox;
+
+        public string YesOption { get; set; } = Resources.Yes;
+
+        public string NoOption { get; set; } = Resources.No;
+        
 
         public QLType QLType { get; }
 

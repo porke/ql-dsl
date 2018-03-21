@@ -3,20 +3,19 @@ grammar QLS;
 stylesheet: STYLESHEET LABEL LEFTCURLY (page)* RIGHTCURLY;
 page: PAGE LABEL LEFTCURLY (section)* RIGHTCURLY;
 section: SECTION STRING LEFTCURLY (section_contents)* RIGHTCURLY;
-question: QUESTION LABEL (widget)?
-		| QUESTION LABEL LEFTCURLY (property)* RIGHTCURLY;
+question: QUESTION LABEL (style)?;		
 widget: WIDGET widget_type;
 
 section_contents: question
-				| style;
+				| default_style;
 
 widget_type: option_widget LEFTBRACKET option COMMA option RIGHTBRACKET		
 		|	WIDGETSPINBOX
-		|	WIDGETTEXTBOX;
+		|	WIDGETTEXTBOX
+		| WIDGETCHECKBOX;
 
 option_widget: WIDGETRADIO 
-			   | WIDGETDROPDOWN
-			   | WIDGETCHECKBOX;
+			   | WIDGETDROPDOWN;
 
 option: STRING;
 
@@ -26,8 +25,10 @@ type: TYPEBOOLEAN
 	| TYPESTRING
 	| TYPEDATE;
 
-style: DEFAULT type LEFTCURLY (property)* RIGHTCURLY
-	 | DEFAULT type widget;
+style: LEFTCURLY (property)* RIGHTCURLY
+	  | widget;
+
+default_style: DEFAULT type style;	 
 
 property: LABEL COLON INTEGER	#integer_property
 		 | LABEL COLON STRING	#string_property
@@ -67,11 +68,12 @@ TYPEDATE:		'date';
 fragment UPPERCASE: ('A'..'Z');
 fragment LOWERCASE: ('a'..'z');
 fragment NUMBER:	('0'..'9');
+fragment HEX_DIGIT:	('a'..'f');
 
 LABEL:	(LOWERCASE|UPPERCASE)(LOWERCASE|UPPERCASE|NUMBER|'_')*;
 STRING:		'"' .*? '"';
 INTEGER:	NUMBER+;
-COLOR:	'#'NUMBER NUMBER NUMBER NUMBER NUMBER NUMBER;
+COLOR:	'#'(HEX_DIGIT|NUMBER) (HEX_DIGIT|NUMBER) (HEX_DIGIT|NUMBER) (HEX_DIGIT|NUMBER) (HEX_DIGIT|NUMBER) (HEX_DIGIT|NUMBER);
 
 // Hidden
 WHITESPACE:	    (' ' | '\t' | '\n' | '\r') -> skip;

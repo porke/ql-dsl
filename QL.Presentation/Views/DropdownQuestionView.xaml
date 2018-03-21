@@ -16,8 +16,8 @@
         <TextBlock Text="{Binding Description}"/>
         <ComboBox SelectedIndex="{Binding Path=Value, Converter={StaticResource BooleanToIndexConverter}}"
                   IsEnabled="{Binding Path=IsEvaluated, Converter={StaticResource BooleanNegationConverter}}">
-            <ComboBoxItem Content="{x:Static resx:Resources.No}"/>
-            <ComboBoxItem Content="{x:Static resx:Resources.Yes}"/>
+            <ComboBoxItem Content="{Binding NoOption}"/>
+            <ComboBoxItem Content="{Binding YesOption}"/>
         </ComboBox>
     </StackPanel>
 </UserControl>

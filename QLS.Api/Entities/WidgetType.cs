@@ -6,6 +6,7 @@
         Checkbox,
         Dropdown,
         Radio,
-        Spinbox
+        Spinbox,
+        Undefined
     }
 }

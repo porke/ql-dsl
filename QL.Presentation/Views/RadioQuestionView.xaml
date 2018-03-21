@@ -15,9 +15,9 @@
         <TextBlock Text="{Binding Description}"/>
         <RadioButton GroupName="Question" IsEnabled="{Binding Path=IsEvaluated, Converter={StaticResource BooleanNegationConverter}}" 
                                           IsChecked="{Binding Value}"
-                                          Content="{x:Static resx:Resources.Yes}"/>
+                                          Content="{Binding YesOption}"/>
         <RadioButton GroupName="Question" IsEnabled="{Binding Path=IsEvaluated, Converter={StaticResource BooleanNegationConverter}}"
                                           IsChecked="{Binding Path=Value, Converter={StaticResource BooleanNegationConverter}}"
-                                          Content="{x:Static resx:Resources.No}"/>
+                                          Content="{Binding NoOption}"/>
     </StackPanel>
 </UserControl>
