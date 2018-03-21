@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Presentation.Views
+namespace Presentation.Views.Questions
 {
     /// <summary>
-    /// Interaction logic for RadioQuestionView.xaml
+    /// Interaction logic for DropdownQuestionView.xaml
     /// </summary>
-    public partial class RadioQuestionView : UserControl
+    public partial class DropdownQuestionView : UserControl
     {
-        public RadioQuestionView()
+        public DropdownQuestionView()
         {
             InitializeComponent();
         }

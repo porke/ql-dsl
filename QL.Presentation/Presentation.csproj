@@ -109,16 +109,16 @@
     <Compile Include="RelayCommand.cs" />
     <Compile Include="ViewModels\SectionsViewModel.cs" />
     <Compile Include="ViewModels\StyleViewModel.cs" />
-    <Compile Include="Views\DecimalQuestionView.xaml.cs">
+    <Compile Include="Views\Questions\DecimalQuestionView.xaml.cs">
       <DependentUpon>DecimalQuestionView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\DropdownQuestionView.xaml.cs">
+    <Compile Include="Views\Questions\DropdownQuestionView.xaml.cs">
       <DependentUpon>DropdownQuestionView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\IntegerQuestionView.xaml.cs">
+    <Compile Include="Views\Questions\IntegerQuestionView.xaml.cs">
       <DependentUpon>IntegerQuestionView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\RadioQuestionView.xaml.cs">
+    <Compile Include="Views\Questions\RadioQuestionView.xaml.cs">
       <DependentUpon>RadioQuestionView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\SectionsView.xaml.cs">
@@ -136,7 +136,7 @@
     <Compile Include="Views\FormView.xaml.cs">
       <DependentUpon>FormView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\CheckboxQuestionView.xaml.cs">
+    <Compile Include="Views\Questions\CheckboxQuestionView.xaml.cs">
       <DependentUpon>CheckboxQuestionView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\PagesView.xaml.cs">
@@ -148,16 +148,16 @@
     <Compile Include="Views\SectionView.xaml.cs">
       <DependentUpon>SectionView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\TextQuestionView.xaml.cs">
+    <Compile Include="Views\Questions\TextQuestionView.xaml.cs">
       <DependentUpon>TextQuestionView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Visitors\StyleViewModelFactory.cs" />
     <Compile Include="Visitors\WidgetData.cs" />
-    <Page Include="Views\DecimalQuestionView.xaml">
+    <Page Include="Views\Questions\DecimalQuestionView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\DropdownQuestionView.xaml">
+    <Page Include="Views\Questions\DropdownQuestionView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -165,7 +165,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\IntegerQuestionView.xaml">
+    <Page Include="Views\Questions\IntegerQuestionView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -182,7 +182,7 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Views\CheckboxQuestionView.xaml">
+    <Page Include="Views\Questions\CheckboxQuestionView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -194,7 +194,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\RadioQuestionView.xaml">
+    <Page Include="Views\Questions\RadioQuestionView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Questions\Styles.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -206,7 +210,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\TextQuestionView.xaml">
+    <Page Include="Views\Questions\TextQuestionView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

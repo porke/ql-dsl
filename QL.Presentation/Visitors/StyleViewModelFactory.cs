@@ -7,7 +7,7 @@ namespace Presentation.Visitors
 {
     internal static class StyleViewModelFactory
     {
-        private static readonly StyleViewModel Defaults = new StyleViewModel(13, 400, "Segoe UI", Color.FromRgb(0, 0, 0));
+        private static readonly StyleViewModel Defaults = new StyleViewModel(13, 300, "Segoe UI", Color.FromRgb(0, 0, 0));
 
         public static StyleViewModel CreateViewModel(IReadOnlyList<PropertyData> properties)
         {

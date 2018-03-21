@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Presentation.Views
+namespace Presentation.Views.Questions
 {
     /// <summary>
-    /// Interaction logic for IntegerQuestionView.xaml
+    /// Interaction logic for DecimalQuestionView.xaml
     /// </summary>
-    public partial class IntegerQuestionView : UserControl
+    public partial class DecimalQuestionView : UserControl
     {
-        public IntegerQuestionView()
+        public DecimalQuestionView()
         {
             InitializeComponent();
         }

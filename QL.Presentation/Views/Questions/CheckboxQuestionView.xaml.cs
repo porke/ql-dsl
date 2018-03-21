@@ -1,6 +1,6 @@
 ﻿using System.Windows.Controls;
 
-namespace Presentation.Views
+namespace Presentation.Views.Questions
 {
     public partial class CheckboxQuestionView : UserControl
     {
