@@ -10,46 +10,6 @@ namespace Presentation.Visitors
 {
     internal class StylesheetVisitor : BaseVisitor<object>
     {
-        private class WidgetData
-        {
-            public WidgetData(WidgetType type, string yesOption, string noOption)
-            {
-                WidgetType = type;
-                YesOption = yesOption;
-                NoOption = noOption;
-            }
-
-            public WidgetType WidgetType { get; }
-            public string YesOption { get; }
-            public string NoOption { get; }
-        }
-
-        private class PropertyData
-        {
-            public PropertyData(string name, string value)
-            {
-                Name = name;
-                Value = value;
-            }
-               
-            public string Name { get; }
-            public string Value { get; }
-        }
-
-        private class StyleData
-        {
-            public StyleData(IReadOnlyList<PropertyData> properties, WidgetData widget, string targetType)
-            {
-                Properties = properties;
-                Widget = widget;
-                TargetType = targetType;
-            }
-
-            public string TargetType { get; }
-            public IReadOnlyList<PropertyData> Properties { get; }
-            public WidgetData Widget { get; }
-        }
-
         private IReadOnlyList<QuestionViewModel> _questions;
 
         public PagesViewModel PagesViewModel { get; private set; } = new PagesViewModel();
@@ -103,15 +63,8 @@ namespace Presentation.Visitors
             var styleNode = question.ChildNodes.OfType<StyleNode>().FirstOrDefault();
             if (styleNode != null)
             {
-                var styleData = styleNode.Accept(this) as StyleData;
-                // TODO: decorate the question
-                // Convert style data to view model
-                //int widthProperty = int.Parse(styleData.Properties.First(x => x.Name == "width").Value);
-                //int fontSize = int.Parse(styleData.Properties.First(x => x.Name == "fontsize").Value);
-                Color color = (Color)ColorConverter.ConvertFromString(styleData.Properties.First(x => x.Name == "color").Value);
-                //string font = styleData.Properties.First(x => x.Name == "font").Value;
-                questionVm.Style = new StyleViewModel(11, 400, "Arial", color);
-
+                var styleData = styleNode.Accept(this) as StyleData;                
+                questionVm.Style = StyleViewModelFactory.CreateViewModel(styleData.Properties);
                 questionVm.WidgetType = styleData.Widget.WidgetType;
             }
 
