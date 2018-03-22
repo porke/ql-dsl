@@ -1,5 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using QLS.Api.Ast;
+using QLS.Api.Entities;
 using System;
 using System.Collections.Generic;
 
@@ -86,6 +87,11 @@ namespace QLS.Core.Test
             }
 
             return VisitChildren(node);
+        }
+
+        internal void EnqueueWidgetNodeCallback(Action<IWidgetType> p)
+        {
+            throw new NotImplementedException();
         }
 
         public override Node Visit(SectionNode node)

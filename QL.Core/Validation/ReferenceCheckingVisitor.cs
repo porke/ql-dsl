@@ -5,6 +5,7 @@ using System.Collections.Generic;
 
 namespace QL.Core.Validation
 {
+    // TODO: try to seprate gathering and analysing of data.
     internal class ReferenceCheckingVisitor : BaseVisitor<Scope>
     {
         public List<Error> ReferencingErrors = new List<Error>();

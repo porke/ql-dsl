@@ -1,27 +1,28 @@
 ﻿using Antlr4.Runtime;
 using QLS.Api.Entities;
+using QLS.Core.Validation.WidgetTypes;
 
 namespace QLS.Core.Parsing
 {
-    internal static class QLSWidgetTypeConverter
+    internal static class WidgetFactory
     {
-        public static WidgetType FromTokenToWidgetType(IToken token)
+        public static IWidgetType FromTokenToWidgetType(IToken token)
         {
             switch (token.Type)
             {
                 case QLSParser.WIDGETDROPDOWN:
-                    return WidgetType.Dropdown;
+                    return new Dropdown();
                 case QLSParser.WIDGETCHECKBOX:
-                    return WidgetType.Checkbox;
+                    return new Checkbox();
                 case QLSParser.WIDGETRADIO:
-                    return WidgetType.Radio;
+                    return new Radio();
                 case QLSParser.WIDGETTEXTBOX:
-                    return WidgetType.Textbox;
+                    return new Textbox();
                 case QLSParser.WIDGETSPINBOX:
-                    return WidgetType.Spinbox;
+                    return new Spinbox();
             }
 
-            return WidgetType.Textbox;
+            return new Textbox();
         }
     }
 }

@@ -15,6 +15,7 @@ namespace QLS.Core
             pipeline.ConnectElement(new DuplicationCheckingPipelineElement());
             pipeline.ConnectElement(new ReferenceCheckingPipelineElement());
             pipeline.ConnectElement(new DefinitionCheckingPipelineElement());
+            pipeline.ConnectElement(new TypeCheckingPipelineElement());
 
             return pipeline;
         }

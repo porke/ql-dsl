@@ -3,6 +3,7 @@ using ReactiveUI;
 using QLS.Api.Entities;
 using QL.Api.Entities;
 using Presentation.Properties;
+using QLS.Core.Validation.WidgetTypes;
 
 namespace Presentation.ViewModels
 {
@@ -37,7 +38,7 @@ namespace Presentation.ViewModels
 
         public StyleViewModel Style { get; set; }
 
-        public WidgetType WidgetType { get; set; } = WidgetType.Textbox;
+        public IWidgetType WidgetType { get; set; } = new Textbox();
 
         public string YesOption { get; set; } = Resources.Yes;
 

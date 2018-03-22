@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using QLS.Api.Entities;
 using Presentation.Properties;
 using Presentation.Visitors.DataTransferObjects;
+using QLS.Core.Validation.WidgetTypes;
 
 namespace Presentation.Visitors
 {
@@ -103,7 +104,7 @@ namespace Presentation.Visitors
             }
 
             var widgetNode = node.ChildNodes.OfType<WidgetNode>().FirstOrDefault();
-            WidgetData widgetData = new WidgetData(WidgetType.Undefined, Resources.Yes, Resources.No);
+            WidgetData widgetData = new WidgetData(new Undefined(), Resources.Yes, Resources.No);
             if (widgetNode != null)
             {
                 widgetData = widgetNode.Accept(this) as WidgetData;

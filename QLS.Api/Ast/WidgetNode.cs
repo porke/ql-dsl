@@ -5,7 +5,7 @@ namespace QLS.Api.Ast
 {
     public sealed class WidgetNode : Node
     {
-        public WidgetNode(IToken token, WidgetType widgetType) : base(token)
+        public WidgetNode(IToken token, IWidgetType widgetType) : base(token)
         {
             WidgetType = widgetType;
         }
@@ -15,6 +15,6 @@ namespace QLS.Api.Ast
             return visitor.Visit(this);
         }
 
-        public WidgetType WidgetType { get; private set; }
+        public IWidgetType WidgetType { get; private set; }
     }
 }

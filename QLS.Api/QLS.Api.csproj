@@ -34,6 +34,7 @@
       <HintPath>..\packages\Antlr4.Runtime.4.6.4\lib\net45\Antlr4.Runtime.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -55,7 +56,7 @@
     <Compile Include="Ast\StylesheetNode.cs" />
     <Compile Include="Ast\WidgetNode.cs" />
     <Compile Include="Ast\WidgetOptionNode.cs" />
-    <Compile Include="Entities\WidgetType.cs" />
+    <Compile Include="Entities\IWidgetType.cs" />
     <Compile Include="Infrastructure\StylesheetTask.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

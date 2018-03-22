@@ -47,13 +47,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Infrastructure\TypeCheckingPipelineElement.cs" />
     <Compile Include="Infrastructure\DefinitionCheckingPipelineElement.cs" />
     <Compile Include="Infrastructure\ReferenceCheckingPipelineElement.cs" />
     <Compile Include="Infrastructure\DuplicationCheckingPipelineElement.cs" />
     <Compile Include="Module.cs" />
     <Compile Include="Parsing\ParseTreeVisitor.cs" />
     <Compile Include="Infrastructure\ParsingPipelineElement.cs" />
-    <Compile Include="Parsing\QLSWidgetTypeConverter.cs" />
+    <Compile Include="Parsing\WidgetFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="QLS.g4.lexer.cs">
       <DependentUpon>QLS.g4</DependentUpon>
@@ -69,8 +70,14 @@
     <Compile Include="Validation\Errors\QuestionNotReferenced.cs" />
     <Compile Include="Validation\Errors\DefinitionNotFound.cs" />
     <Compile Include="Validation\DuplicationChecking.cs" />
-    <Compile Include="Validation\ReferenceGatheringVisitor.cs" />
     <Compile Include="Validation\TypeCheckingVisitor.cs" />
+    <Compile Include="Validation\ReferenceGatheringVisitor.cs" />
+    <Compile Include="Validation\WidgetTypes\Dropdown.cs" />
+    <Compile Include="Validation\WidgetTypes\Radio.cs" />
+    <Compile Include="Validation\WidgetTypes\Spinbox.cs" />
+    <Compile Include="Validation\WidgetTypes\Checkbox.cs" />
+    <Compile Include="Validation\WidgetTypes\Textbox.cs" />
+    <Compile Include="Validation\WidgetTypes\Undefined.cs" />
   </ItemGroup>
   <ItemGroup>
     <Antlr4 Include="QLS.g4">

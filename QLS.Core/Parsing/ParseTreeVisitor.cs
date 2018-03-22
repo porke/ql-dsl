@@ -62,7 +62,7 @@ namespace QLS.Core.Parsing
         {
             if (context.option_widget() != null)
             {
-                var widgetNode = new WidgetNode(context.Start, QLSWidgetTypeConverter.FromTokenToWidgetType(context.Start));
+                var widgetNode = new WidgetNode(context.Start, WidgetFactory.FromTokenToWidgetType(context.Start));
                 if (context.option().Length == 2)
                 {
                     widgetNode.AddChild(Visit(context.option(0)));
@@ -71,7 +71,7 @@ namespace QLS.Core.Parsing
                 return widgetNode;
             }
 
-            return new WidgetNode(context.Start, QLSWidgetTypeConverter.FromTokenToWidgetType(context.Start));
+            return new WidgetNode(context.Start, WidgetFactory.FromTokenToWidgetType(context.Start));
         }
 
         public override Node VisitOption([NotNull] OptionContext context)
