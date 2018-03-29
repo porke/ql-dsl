@@ -2,7 +2,7 @@
 using QL.Api.Factories;
 using QL.Api.Infrastructure;
 using QL.Core.Infrastructure;
-using static QL.Api.Entities.Value;
+using static QL.Core.Interpreting.Value;
 
 namespace QL.Core
 {

@@ -3,7 +3,7 @@ using QL.Api.Infrastructure;
 using Antlr4.Runtime;
 using QL.Core.Parsing;
 using Infrastructure;
-using static QL.Api.Entities.Value;
+using static QL.Core.Interpreting.Value;
 
 namespace QL.Core.Infrastructure
 {

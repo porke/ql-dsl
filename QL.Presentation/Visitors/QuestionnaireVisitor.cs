@@ -1,6 +1,5 @@
 ﻿using Presentation.ViewModels;
 using QL.Api.Ast;
-using QL.Api.Entities;
 
 namespace Presentation.Visitors
 {
@@ -22,17 +21,9 @@ namespace Presentation.Visitors
             {
                 return null;
             }
-                        
-            if (node.Type == QLType.Boolean)
-            {
-                bool evaluatedValue = node.ChildNodes.Count > 0 ? bool.Parse(node.ChildNodes[0].Accept(this).ToString()) : false;
-                Form.Questions.Add(new QuestionViewModel(node.Description, node.Label, node.IsEvaluated, evaluatedValue, node.Type, parentForm: Form));
-            }
-            else
-            {
-                string evaluatedValue = node.ChildNodes.Count > 0 ? node.ChildNodes[0].Accept(this).ToString() : string.Empty;
-                Form.Questions.Add(new QuestionViewModel(node.Description, node.Label, node.IsEvaluated, evaluatedValue, node.Type, parentForm: Form));
-            }
+
+            string evaluatedValue = node.ChildNodes.Count > 0 ? node.ChildNodes[0].Accept(this).ToString() : string.Empty;
+            Form.Questions.Add(new QuestionViewModel(node.Description, node.Label, node.IsEvaluated, evaluatedValue, node.Type, parentForm: Form));
 
             return null;
         }

@@ -1,8 +1,9 @@
-﻿using QL.Api.Factories;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using QL.Api.Entities;
+using QL.Api.Factories;
 
-namespace QL.Api.Entities
+namespace QL.Core.Interpreting
 {
     public class Value : IValue
     {
@@ -15,25 +16,18 @@ namespace QL.Api.Entities
             { QLType.Date, DateTime.MinValue } };
 
         private object _value;
-        private QLType _type;
 
         private Value(object value, QLType type)
         {
             _value = value;
-            _type = type;
+            Type = type;
         }
 
-        /// <summary>
-        /// Default value constructor
-        /// </summary>
         private Value(QLType type) : this(_defaultValues[type], type)
         {
         }
 
-        public QLType GetType()//TODO: change name.
-        {
-            return _type;
-        }
+        public QLType Type { get; }
 
         public bool ToBoolean()
         {

@@ -113,7 +113,7 @@ namespace QL.Core.Interpreting
             {
                 memoryValue = _valueFactory.CreateDefaultValue(_symbols[variable.Label].Type);
             }
-            return new LiteralNode(variable.Token, memoryValue.ToString(), memoryValue.GetType());
+            return new LiteralNode(variable.Token, memoryValue.ToString(), memoryValue.Type);
         }
 
         private Node EvaluateBinaryExpression(Node leftOperandNode, Node rightOperandNode, IOperator @operator, IToken token)

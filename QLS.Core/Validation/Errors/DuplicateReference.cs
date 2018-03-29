@@ -1,6 +1,6 @@
 ﻿namespace QLS.Core.Validation.Errors
 {
-    class DuplicateReference : Error
+    internal class DuplicateReference : Error
     {
         private string _questionName;
 

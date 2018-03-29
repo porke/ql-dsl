@@ -2,7 +2,6 @@
 using QLS.Api.Ast;
 using System.Linq;
 using System.Collections.Generic;
-using QLS.Api.Entities;
 using Presentation.Properties;
 using Presentation.Visitors.DataTransferObjects;
 using QLS.Core.Validation.WidgetTypes;
@@ -66,7 +65,7 @@ namespace Presentation.Visitors
             {
                 var styleData = styleNode.Accept(this) as StyleData;                
                 questionVm.Style = StyleViewModelFactory.CreateViewModel(styleData.Properties);
-                questionVm.WidgetType = styleData.Widget.WidgetType;
+                questionVm.Widget = styleData.Widget.Widget.Type;
                 questionVm.YesOption = styleData.Widget.YesOption;
                 questionVm.NoOption = styleData.Widget.NoOption;
             }
@@ -87,7 +86,7 @@ namespace Presentation.Visitors
                 options.Add(option.Accept(this).ToString());
             }
 
-            return new WidgetData(node.WidgetType, options.FirstOrDefault() ?? Resources.Yes, options.Skip(1).FirstOrDefault() ?? Resources.No);
+            return new WidgetData(node.Widget, options.FirstOrDefault() ?? Resources.Yes, options.Skip(1).FirstOrDefault() ?? Resources.No);
         }
 
         public override object Visit(WidgetOptionNode node)

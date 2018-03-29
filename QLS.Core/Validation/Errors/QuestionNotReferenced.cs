@@ -1,6 +1,6 @@
 ﻿namespace QLS.Core.Validation.Errors
 {
-    class QuestionNotReferenced : Error
+    internal class QuestionNotReferenced : Error
     {
         private string _questionName;
 

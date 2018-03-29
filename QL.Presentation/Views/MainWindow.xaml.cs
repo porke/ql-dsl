@@ -1,10 +1,9 @@
 ﻿using Presentation.Controllers;
 using Presentation.ViewModels;
-using System.Windows;
 
-namespace Presentation
+namespace Presentation.Views
 {
-    public partial class MainWindow : Window
+    public partial class MainWindow
     {
         private MainController _controller;
 
@@ -14,7 +13,11 @@ namespace Presentation
 
             var viewModel = new MainViewModel();
             DataContext = viewModel;
-            _controller = new MainController(viewModel, QL.Core.Module.ParsingPipeline, QL.Core.Module.InterpretingPipeline, QLS.Core.Module.ParsingPipeline, QL.Core.Module.ValueFactory);
+            _controller = new MainController(viewModel,
+                                             QL.Core.Module.ParsingPipeline,
+                                             QL.Core.Module.InterpretingPipeline,
+                                             QLS.Core.Module.ParsingPipeline,
+                                             QL.Core.Module.ValueFactory);
         }
     }
 }

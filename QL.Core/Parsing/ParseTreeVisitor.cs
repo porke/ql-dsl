@@ -1,7 +1,6 @@
 ﻿using static QL.Core.QLParser;
 using Antlr4.Runtime.Tree;
 using QL.Api.Ast;
-using QL.Api.Entities;
 using QL.Api.Factories;
 
 namespace QL.Core.Parsing
@@ -9,6 +8,7 @@ namespace QL.Core.Parsing
     internal class ParseTreeVisitor : QLBaseVisitor<Node>
     {
         private readonly IOperatorFactory _operatorFactory;
+        private int _blockDepth;
 
         internal ParseTreeVisitor(IOperatorFactory operatorFactory)
         {
@@ -33,8 +33,7 @@ namespace QL.Core.Parsing
 
             return form;
         }
-
-        private int _blockDepth = 0;
+        
         public override Node VisitBlock(BlockContext context)
         {
             _blockDepth++;
@@ -53,14 +52,7 @@ namespace QL.Core.Parsing
         {
             QuestionContext question = context.question();
             ConditionalContext conditional = context.conditional();
-            if (question != null)
-            {
-                return Visit(question);
-            }
-            else
-            {
-                return Visit(conditional);
-            }
+            return question != null ? Visit(question) : Visit(conditional);
         }
 
         public override Node VisitQuestion(QuestionContext context)
@@ -103,8 +95,7 @@ namespace QL.Core.Parsing
 
         public override Node VisitLiteralExpression(LiteralExpressionContext context)
         {
-            QLType type = QLTypeConverter.FromTokenTypeToQLType(context.Start);
-            return new LiteralNode(context.Start, context.literal().GetText(), type);
+            return new LiteralNode(context.Start, context.literal().GetText(), QLTypeConverter.FromTokenTypeToQLType(context.Start));
         }
 
         public override Node VisitUnaryExpression(UnaryExpressionContext context)

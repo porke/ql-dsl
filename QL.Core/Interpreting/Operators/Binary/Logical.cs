@@ -2,7 +2,7 @@
 using QL.Api.Factories;
 using QL.Api.Operators;
 
-namespace QL.Core.Interpreting.Operators
+namespace QL.Core.Interpreting.Operators.Binary
 {
     internal class Logical : IOperator
     {

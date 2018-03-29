@@ -1,6 +1,6 @@
 ﻿namespace QLS.Core.Validation.Errors
 {
-    class DefinitionNotFound : Error
+    internal class DefinitionNotFound : Error
     {
         private string _questionName;
 

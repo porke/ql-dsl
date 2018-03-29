@@ -1,8 +1,8 @@
 ﻿using Presentation.ViewModels;
 using QL.Api.Entities;
-using QLS.Core.Validation.WidgetTypes;
 using System.Windows;
 using System.Windows.Controls;
+using QLS.Api.Entities;
 
 namespace Presentation.DataTemplates
 {
@@ -18,24 +18,29 @@ namespace Presentation.DataTemplates
         public override DataTemplate SelectTemplate(object item, DependencyObject container)
         {
             var question = item as QuestionViewModel;
-            if (question.WidgetType is Checkbox)
+            if (question.Widget == WidgetType.Checkbox)
             {
                 return CheckboxDataTemplate;
-            } else if (question.WidgetType is Dropdown)
+            }
+            if (question.Widget == WidgetType.Dropdown)
             {
                 return DropdownDataTemplate;
-            } else if (question.WidgetType is Radio)
+            }
+            if (question.Widget == WidgetType.Radio)
             {
                 return RadioDataTemplate;
-            } else if (question.WidgetType is Textbox)
+            }
+
+            if (question.Widget == WidgetType.Spinbox)
             {
-                return TextDataTemplate;
-            } else if (question.QLType == QLType.Integer)
-            {
-                return IntegerDataTemplate;
-            } else if (question.QLType == QLType.Decimal)
-            {
-                return DecimalDataTemplate;
+                if (question.QLType == QLType.Integer)
+                {
+                    return IntegerDataTemplate;
+                }                    
+                if (question.QLType == QLType.Decimal)
+                {
+                    return DecimalDataTemplate;
+                }
             }
 
             return TextDataTemplate;

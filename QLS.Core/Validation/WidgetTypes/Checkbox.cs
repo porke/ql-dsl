@@ -3,16 +3,18 @@ using QLS.Api.Entities;
 
 namespace QLS.Core.Validation.WidgetTypes
 {
-    public class Checkbox : IWidgetType
+    public class Checkbox : IWidget
     {
-        public bool Compatible(QLType questionType)
+        public WidgetType Type => WidgetType.Checkbox;
+
+        public bool IsCompatibleWith(QLType questionType)
         {
             return questionType == QLType.Boolean;
         }
 
         public override string ToString()
         {
-            return GetType().Name;
+            return WidgetType.Checkbox.ToString();
         }
     }
 }

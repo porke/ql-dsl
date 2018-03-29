@@ -3,18 +3,20 @@ using QLS.Api.Entities;
 
 namespace QLS.Core.Validation.WidgetTypes
 {
-    public class Textbox : IWidgetType
+    public class Textbox : IWidget
     {
-        public bool Compatible(QLType questionType)
+        public WidgetType Type => WidgetType.Textbox;
+
+        public bool IsCompatibleWith(QLType questionType)
         {
-            return (questionType == QLType.Integer)
-                || (questionType == QLType.Decimal)
-                || (questionType == QLType.String);
+            return questionType == QLType.Integer
+                || questionType == QLType.Decimal
+                || questionType == QLType.String;
         }
 
         public override string ToString()
         {
-            return GetType().Name;
+            return WidgetType.Textbox.ToString();
         }
     }
 }

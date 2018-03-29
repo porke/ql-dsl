@@ -1,10 +1,8 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using QL.Api.Entities;
 using QLS.Api.Ast;
-using QLS.Api.Entities;
 using QLS.Api.Infrastructure;
 using QLS.Core.Infrastructure;
-using QLS.Core.Validation.WidgetTypes;
 
 namespace QLS.Core.Test.Parsing
 {
@@ -99,7 +97,7 @@ namespace QLS.Core.Test.Parsing
 
             _assertVisitor.EnqueueWidgetNodeCallback(w =>
             {
-                Assert.AreEqual("Radio", w.WidgetType.ToString());
+                Assert.AreEqual("Radio", w.Widget.ToString());
             });
             ast.Accept(_assertVisitor);
             _assertVisitor.VerifyAll();
@@ -137,7 +135,7 @@ namespace QLS.Core.Test.Parsing
             });
             _assertVisitor.EnqueueWidgetNodeCallback(p =>
             {
-                Assert.AreEqual("Spinbox", p.WidgetType.ToString());
+                Assert.AreEqual("Spinbox", p.Widget.ToString());
             });
             ast.Accept(_assertVisitor);
             _assertVisitor.VerifyAll();
@@ -175,7 +173,7 @@ namespace QLS.Core.Test.Parsing
             });
             _assertVisitor.EnqueueWidgetNodeCallback(p =>
             {
-                Assert.AreEqual("Spinbox", p.WidgetType.ToString());
+                Assert.AreEqual("Spinbox", p.Widget.ToString());
             });
             ast.Accept(_assertVisitor);
             _assertVisitor.VerifyAll();
@@ -189,7 +187,7 @@ namespace QLS.Core.Test.Parsing
 
             _assertVisitor.EnqueueWidgetNodeCallback(w =>
             {
-                Assert.AreEqual("Radio", w.WidgetType.ToString());
+                Assert.AreEqual("Radio", w.Widget.ToString());
             });
             _assertVisitor.EnqueueWidgetOptionNodeCallback(o =>
             {

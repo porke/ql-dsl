@@ -3,16 +3,18 @@ using QLS.Api.Entities;
 
 namespace QLS.Core.Validation.WidgetTypes
 {
-    public class Spinbox : IWidgetType
+    public class Spinbox : IWidget
     {
-        public bool Compatible(QLType questionType)
+        public WidgetType Type => WidgetType.Spinbox;
+
+        public bool IsCompatibleWith(QLType questionType)
         {
-            return (questionType == QLType.Integer) || (questionType == QLType.Decimal);
+            return questionType == QLType.Integer || questionType == QLType.Decimal;
         }
 
         public override string ToString()
         {
-            return GetType().Name;
+            return WidgetType.Spinbox.ToString();
         }
     }
 }

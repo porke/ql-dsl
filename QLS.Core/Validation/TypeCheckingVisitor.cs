@@ -28,10 +28,10 @@ namespace QLS.Core.Validation
         {
             var question = _questionTypes.Peek();
             var matchingQLSymbol = _symbolTable[question.Label];
-            if (!node.WidgetType.Compatible(matchingQLSymbol.Type))
+            if (!node.Widget.IsCompatibleWith(matchingQLSymbol.Type))
             {
                 TypeErrors.Add(new WidgetNotCompatible(question.Label, 
-                    matchingQLSymbol.Type.ToString(), node.WidgetType.ToString(), node.Token.Line));
+                    matchingQLSymbol.Type.ToString(), node.Widget.ToString(), node.Token.Line));
             }
             return VisitChildren(node);
         }

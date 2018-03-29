@@ -6,7 +6,7 @@ namespace QLS.Core.Parsing
 {
     internal static class WidgetFactory
     {
-        public static IWidgetType FromTokenToWidgetType(IToken token)
+        public static IWidget FromTokenToWidgetType(IToken token)
         {
             switch (token.Type)
             {

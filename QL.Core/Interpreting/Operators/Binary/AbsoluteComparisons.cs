@@ -1,20 +1,20 @@
-﻿using QL.Api.Entities;
+﻿using System;
+using QL.Api.Entities;
 using QL.Api.Factories;
 using QL.Api.Operators;
-using System;
 
-namespace QL.Core.Interpreting.Operators
+namespace QL.Core.Interpreting.Operators.Binary
 {
     internal class AbsoluteComparison : IOperator
     {
-        public delegate bool Opperator(string i, string j);
-        private Opperator _opperator;
+        public delegate bool Operator(string i, string j);
+        private Operator _operator;
         private string _asString;
         private readonly IValueFactory _valueFactory;
 
-        internal AbsoluteComparison(Opperator opperator, string asString, IValueFactory valueFactor)
+        internal AbsoluteComparison(Operator @operator, string asString, IValueFactory valueFactor)
         {
-            _opperator = opperator;
+            _operator = @operator;
             _asString = asString;
             _valueFactory = valueFactor;
         }
@@ -31,7 +31,7 @@ namespace QL.Core.Interpreting.Operators
             {
                 return true;
             }
-            return (leftHand == rightHand);
+            return leftHand == rightHand;
         }
 
         public IValue Evaluate(IValue leftHand, IValue rightHand)
@@ -39,9 +39,9 @@ namespace QL.Core.Interpreting.Operators
             return _valueFactory.CreateValue(string.Equals(leftHand.ToString(), rightHand.ToString(), StringComparison.Ordinal), QLType.Boolean);
         }
 
-        public QLType ResultingType(QLType leftType, QLType rightType) {
+        public QLType ResultingType(QLType leftType, QLType rightType)
+        {
             return QLType.Boolean;
         }
-
     }
 }

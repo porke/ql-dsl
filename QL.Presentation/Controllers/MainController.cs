@@ -54,46 +54,41 @@ namespace Presentation.Controllers
             _qlAst = parsingTask.Ast;
             _memory = new MemorySystem();
             _mainViewModel.QuestionnaireValidation = "Validation succeeded! Enjoy your questionnaire.";
-            
-            RebuildQuestionnaire(parsingTask.Ast);
+
+            _mainViewModel.Form = RebuildQuestionnaire(parsingTask.Ast);
         }
 
-        private void QuestionValueAssignedCommand_Execute(object target)
+        private void QuestionValueAssignedCommand_Execute(QuestionViewModel target)
         {
-            var questionViewModel = target as QuestionViewModel;
-
             IValue memoryValue;
-            if(!_memory.TryRetrieveValue(questionViewModel.Id, out memoryValue))
+            if(!_memory.TryRetrieveValue(target.Id, out memoryValue))
             {
-                memoryValue = _valueFactory.CreateDefaultValue(_symbols[questionViewModel.Id].Type);
+                memoryValue = _valueFactory.CreateDefaultValue(_symbols[target.Id].Type);
             }
-            _memory.AssignValue(questionViewModel.Id, _valueFactory.CreateValue(questionViewModel.Value, memoryValue.GetType()));                        
-            RebuildQuestionnaire(_qlAst);
+            _memory.AssignValue(target.Id, _valueFactory.CreateValue(target.Value, memoryValue.Type));
+            _mainViewModel.Form = RebuildQuestionnaire(_qlAst);
         }
 
-        private void RebuildQuestionnaire(Node evaluatedAst)
+        private FormViewModel RebuildQuestionnaire(Node evaluatedAst)
         {
             SinglePageFormViewModel singlePageViewModel = CreateSinglePageFormFromQL(evaluatedAst);
-            if (!string.IsNullOrEmpty(_mainViewModel.StylesheetInput))
+            if (string.IsNullOrEmpty(_mainViewModel.StylesheetInput))
             {
-                List<PageViewModel> pageList = CreatePaginatedFormFromStylesheet(singlePageViewModel.Questions.ToList());
-                if (_mainViewModel.Form is MultiPageFormViewModel)
-                {
-                    var multiPageViewModel = ((MultiPageFormViewModel)_mainViewModel.Form);
-                    int selectedPage = multiPageViewModel.SelectedPage;
-                    multiPageViewModel.Pages.Clear();
-                    pageList.ForEach(x => multiPageViewModel.Pages.Add(x));
-                    multiPageViewModel.SelectedPage = selectedPage;
-                }
-                else
-                {
-                    _mainViewModel.Form = new MultiPageFormViewModel(singlePageViewModel.Name, new ReactiveList<PageViewModel>(pageList));
-                }                
+                return singlePageViewModel;
             }
-            else
+            
+            List<PageViewModel> pageList = CreatePaginatedFormFromStylesheet(singlePageViewModel.Questions.ToList());
+            var multiPageViewModel = _mainViewModel.Form as MultiPageFormViewModel;
+            if (multiPageViewModel == null)
             {
-                _mainViewModel.Form = singlePageViewModel;
+                return new MultiPageFormViewModel(singlePageViewModel.Name, new ReactiveList<PageViewModel>(pageList));
             }
+
+            int selectedPage = multiPageViewModel.SelectedPage;
+            multiPageViewModel.Pages.Clear();
+            pageList.ForEach(x => multiPageViewModel.Pages.Add(x));
+            multiPageViewModel.SelectedPage = selectedPage;
+            return multiPageViewModel;
         }
 
         private SinglePageFormViewModel CreateSinglePageFormFromQL(Node ast)

@@ -13,7 +13,7 @@ namespace QL.Api.Ast
 
         protected override T VisitNode<T>(IVisitor<T> visitor)
         {
-            return visitor.Visit(this); ;
+            return visitor.Visit(this);
         }
     }
 }

@@ -89,7 +89,7 @@ namespace QLS.Core.Test
             return VisitChildren(node);
         }
 
-        internal void EnqueueWidgetNodeCallback(Action<IWidgetType> p)
+        internal void EnqueueWidgetNodeCallback(Action<IWidget> p)
         {
             throw new NotImplementedException();
         }

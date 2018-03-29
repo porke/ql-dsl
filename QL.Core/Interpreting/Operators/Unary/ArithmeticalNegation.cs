@@ -1,9 +1,9 @@
-﻿using QL.Api.Entities;
+﻿using System;
+using QL.Api.Entities;
 using QL.Api.Factories;
 using QL.Api.Operators;
-using System;
 
-namespace QL.Core.Interpreting.Operators
+namespace QL.Core.Interpreting.Operators.Unary
 {
     internal class ArithmeticalNegation : IOperator
     {
@@ -23,16 +23,16 @@ namespace QL.Core.Interpreting.Operators
 
         public IValue Evaluate(IValue input, IValue empty = null)
         {
-            if (input.GetType() == QLType.Integer)
+            if (input.Type == QLType.Integer)
             {
-                return _valueFactory.CreateValue(-input.ToInt(), input.GetType());
+                return _valueFactory.CreateValue(-input.ToInt(), input.Type);
             }
-            else if (input.GetType() == QLType.Decimal)
+            else if (input.Type == QLType.Decimal)
             {
-                return _valueFactory.CreateValue(-input.ToDecimal(), input.GetType());
+                return _valueFactory.CreateValue(-input.ToDecimal(), input.Type);
             }
 
-            throw new NotSupportedException($"{input.GetType()} is not supported by the '-' operator.");
+            throw new NotSupportedException($"{input.Type} is not supported by the '-' operator.");
         }
 
         public bool AcceptTypes(QLType value, QLType empty = QLType.Undefined)

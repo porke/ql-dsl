@@ -1,8 +1,9 @@
 ﻿using QL.Api.Operators;
-using QL.Core.Interpreting.Operators;
 using QL.Api.Factories;
 using System;
 using Antlr4.Runtime;
+using QL.Core.Interpreting.Operators.Binary;
+using QL.Core.Interpreting.Operators.Unary;
 
 namespace QL.Core.Parsing
 {

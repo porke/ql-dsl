@@ -2,7 +2,8 @@
 {
     public interface IValue
     {
-        QLType GetType();
+        QLType Type { get; }
+
         bool ToBoolean();
         int ToInt();
         double ToDecimal();

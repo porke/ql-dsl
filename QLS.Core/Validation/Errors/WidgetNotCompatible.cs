@@ -1,6 +1,6 @@
 ﻿namespace QLS.Core.Validation.Errors
 {
-    class WidgetNotCompatible : Error
+    internal class WidgetNotCompatible : Error
     {
         private string _questionName;
         private string _questionType;

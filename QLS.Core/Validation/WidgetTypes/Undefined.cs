@@ -3,16 +3,18 @@ using QLS.Api.Entities;
 
 namespace QLS.Core.Validation.WidgetTypes
 {
-    public class Undefined : IWidgetType
+    public class Undefined : IWidget
     {
-        public bool Compatible(QLType questionType)
+        public WidgetType Type => WidgetType.Undefined;
+
+        public bool IsCompatibleWith(QLType questionType)
         {
             return true;
         }
 
         public override string ToString()
         {
-            return GetType().Name;
+            return WidgetType.Undefined.ToString();
         }
     }
 }

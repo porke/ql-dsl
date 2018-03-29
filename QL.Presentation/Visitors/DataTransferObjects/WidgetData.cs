@@ -4,14 +4,14 @@ namespace Presentation.Visitors.DataTransferObjects
 {
     internal class WidgetData
     {
-        public WidgetData(IWidgetType type, string yesOption, string noOption)
+        public WidgetData(IWidget type, string yesOption, string noOption)
         {
-            WidgetType = type;
+            Widget = type;
             YesOption = yesOption;
             NoOption = noOption;
         }
 
-        public IWidgetType WidgetType { get; }
+        public IWidget Widget { get; }
         public string YesOption { get; }
         public string NoOption { get; }
     }
